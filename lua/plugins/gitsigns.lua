@@ -3,7 +3,7 @@ return {
 
 	config = function()
 		require("gitsigns").setup({
-			--_extmark_signs = false
+			_extmark_signs = false
 		})
 	end,
 }
