@@ -1,11 +1,10 @@
 return {
 	"lewis6991/gitsigns.nvim",
 
-	opts = {
-	},
-
 	config = function()
-		require("gitsigns").setup()
+		require("gitsigns").setup({
+			--_extmark_signs = false
+		})
 	end,
 }
 
