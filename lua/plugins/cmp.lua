@@ -7,15 +7,29 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
+		{
+			"L3MON4D3/LuaSnip",
+			config = function()
+        require("luasnip").setup()
+      end,
+		},
 	},
 
 	config = function()
 		local cmp = require("cmp")
 		cmp.setup({
-		 window = {
-			 completion = cmp.config.window.bordered({ border = "single", winhighlight = "" }),
-			 documentation = cmp.config.window.bordered({ border = "single", winhighlight = "" }),
+		  snippet = {
+				expand = function(args)
+					require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+				end,
+		  },
+
+		  window = {
+			  completion = cmp.config.window.bordered({ border = "single", winhighlight = "" }),
+			  documentation = cmp.config.window.bordered({ border = "single", winhighlight = "" }),
 			},
+
+			-- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#intellij-like-mapping
 			mapping = {
 				["<Tab>"] = cmp.mapping(function(fallback)
 				-- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item

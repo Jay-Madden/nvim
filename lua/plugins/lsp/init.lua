@@ -7,12 +7,17 @@ return {
 		 "williamboman/mason.nvim",
 		 "williamboman/mason-lspconfig.nvim",
 		 "WhoIsSethDaniel/mason-tool-installer.nvim",
+		  "folke/neoconf.nvim",
+			"folke/neodev.nvim",
 	 },
 
 	 config = function()
 		 local tools = {
 			 "lua-language-server",
 		 }
+
+		 require("neoconf").setup()
+		 require("neodev").setup()
 
 		 require("mason").setup()
 		 require("mason-lspconfig").setup()
