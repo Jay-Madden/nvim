@@ -1,3 +1,9 @@
+local setup_lsp = function(server_name, opts)
+	require("lspconfig")[server_name].setup({
+		capabilities = options.capabilities
+	})
+end
+
 return {
 	"neovim/nvim-lspconfig",
 	event = { "InsertEnter", "CmdlineEnter" },
@@ -36,26 +42,42 @@ return {
       start_delay = 3000,
     })
 
+		local lspconfig = require("lspconfig")
+
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-		require('lspconfig')["lua_ls"].setup({
-			capabilities = capabilities,
-		})
+		require("mason-lspconfig").setup_handlers({
+		  function(server_name) -- default handler (optional)
+			  lspconfig[server_name].setup({
+					capabilities = capabilities
+				})
+		  end,
 
-		require("lspconfig")["yamlls"].setup({
-			capabilities = capabilities
-		})
+			lua_ls = function(server_name)
+				lspconfig[server_name].setup({
+					capabilities = capabilities
+				})
+			end,
 
-		require("lspconfig")["pyright"].setup({
-			capabilities = capabilities
-		})
+			yamlls = function(server_name)
+				lspconfig[server_name].setup({
+					capabilities = capabilities
+				})
+			end,
 
-		require("lspconfig")["gopls"].setup({
-			capabilities = capabilities
+			gopls = function(server_name)
+				lspconfig[server_name].setup({
+					capabilities = capabilities
+				})
+			end,
+
 		})
 
 		require("lspconfig.ui.windows").default_options.border = "single"
+
+		-- Bootstrap lsp keymappings
+		require("plugins.lsp.keymaps")
 
 		end,
 }
