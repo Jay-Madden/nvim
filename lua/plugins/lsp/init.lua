@@ -11,6 +11,10 @@ return {
 			"folke/neodev.nvim",
 	 },
 
+	 keys = {
+		 { "<Leader>li", "<CMD>LspInfo<CR>", desc = "LSP info" }, 
+	 },
+
 	 config = function()
 		 local tools = {
 			 "lua-language-server",
