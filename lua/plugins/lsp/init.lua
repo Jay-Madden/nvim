@@ -1,6 +1,6 @@
 return {
 	"neovim/nvim-lspconfig",
-	event = { "VeryLazy" },
+	event = { "InsertEnter", "CmdlineEnter" },
 	cmd = { "MasonToolsUpdate" },
 
 	 dependencies = {
