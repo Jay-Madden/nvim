@@ -15,6 +15,7 @@ return {
 			"c", 
 			"lua",
 			"yaml",
+			"vimdoc",
 		}
 	},
 
