@@ -1,5 +1,4 @@
 return {
-  -- add gruvbox
  "shaunsingh/nord.nvim",
 
   -- Configure LazyVim to load colorscheme
