@@ -68,7 +68,20 @@ return {
 
 			gopls = function(server_name)
 				lspconfig[server_name].setup({
-					capabilities = capabilities
+					capabilities = capabilities,
+					settings = {
+						gopls = {
+							experimentalPostfixCompletions = true,
+							analyses = {
+								unusedparams = true,
+								shadow = true,
+							},
+							staticcheck = true,
+						},
+					},
+					init_options = {
+						usePlaceholders = true,
+					},
 				})
 			end,
 

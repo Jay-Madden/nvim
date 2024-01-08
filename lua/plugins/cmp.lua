@@ -29,22 +29,14 @@ return {
 			  documentation = cmp.config.window.bordered({ border = "rounded" }),
 			},
 
-			-- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#intellij-like-mapping
-			mapping = {
-				["<Tab>"] = cmp.mapping(function(fallback)
-				-- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
-				if cmp.visible() then
-					local entry = cmp.get_selected_entry()
-					if not entry then
-						cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-					else
-						cmp.confirm()
-					end
-				else
-					fallback()
-				end
-			end, {"i","s","c",}),
-			},
+      mapping = cmp.mapping.preset.insert({
+				["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+				["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      }),
 
 			sources = cmp.config.sources({
         { name = "nvim_lsp", keyword_length = 1 },
