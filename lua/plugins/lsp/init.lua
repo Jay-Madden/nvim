@@ -14,6 +14,7 @@ return {
 	 config = function()
 		 local tools = {
 			 "lua-language-server",
+			 "yaml-language-server"
 		 }
 
 		 require("neoconf").setup()
@@ -34,6 +35,10 @@ return {
 
 		require('lspconfig')["lua_ls"].setup({
 			capabilities = capabilities,
+		})
+
+		require("lspconfig")["yamlls"].setup({
+			capabilities = capabilities
 		})
 
 		require("lspconfig.ui.windows").default_options.border = "single"

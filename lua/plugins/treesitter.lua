@@ -12,11 +12,16 @@ return {
 
 	opts = {
 		ensure_installed = {
-			"c", 
+			"c",
 			"lua",
 			"yaml",
 			"vimdoc",
-		}
+			"vim",
+			"regex",
+			"bash",
+			"markdown",
+			"markdown_inline",
+		},
 	},
 
 	highlight = {

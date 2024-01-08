@@ -25,8 +25,8 @@ return {
 		  },
 
 		  window = {
-			  completion = cmp.config.window.bordered({ border = "single", winhighlight = "" }),
-			  documentation = cmp.config.window.bordered({ border = "single", winhighlight = "" }),
+			  completion = cmp.config.window.bordered({ border = "rounded" }),
+			  documentation = cmp.config.window.bordered({ border = "rounded" }),
 			},
 
 			-- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#intellij-like-mapping
