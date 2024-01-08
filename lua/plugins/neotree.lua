@@ -12,6 +12,9 @@ return {
     popup_border_style = "single",
     use_popups_for_input = false,
 
+		-- Refresh the window when files change
+		use_libuv_file_watcher=true,
+
     window = {
       mappings = {
         ["Z"] = "expand_all_nodes",
