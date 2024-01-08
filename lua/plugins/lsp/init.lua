@@ -18,7 +18,8 @@ return {
 	 config = function()
 		 local tools = {
 			 "lua-language-server",
-			 "yaml-language-server"
+			 "yaml-language-server",
+			 "pyright",
 		 }
 
 		 require("neoconf").setup()
@@ -42,6 +43,10 @@ return {
 		})
 
 		require("lspconfig")["yamlls"].setup({
+			capabilities = capabilities
+		})
+
+		require("lspconfig")["pyright"].setup({
 			capabilities = capabilities
 		})
 
