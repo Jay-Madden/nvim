@@ -3,7 +3,7 @@ return {
 	event = { "VeryLazy" },
 	cmd = { "MasonToolsUpdate" },
 
-	 dependencies = { 
+	 dependencies = {
 		 "williamboman/mason.nvim",
 		 "williamboman/mason-lspconfig.nvim",
 		 "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -24,6 +24,14 @@ return {
       start_delay = 3000,
     })
 
-		require("lspconfig").lua_ls.setup({})
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+		require('lspconfig')["lua_ls"].setup({
+			capabilities = capabilities,
+		})
+
+		require("lspconfig.ui.windows").default_options.border = "single"
+
 		end,
 }
