@@ -12,7 +12,7 @@ return {
 	 },
 
 	 keys = {
-		 { "<Leader>li", "<CMD>LspInfo<CR>", desc = "LSP info" }, 
+		 { "<Leader>li", "<CMD>LspInfo<CR>", desc = "LSP info" },
 	 },
 
 	 config = function()
@@ -20,6 +20,7 @@ return {
 			 "lua-language-server",
 			 "yaml-language-server",
 			 "pyright",
+			 "gopls",
 		 }
 
 		 require("neoconf").setup()
@@ -47,6 +48,10 @@ return {
 		})
 
 		require("lspconfig")["pyright"].setup({
+			capabilities = capabilities
+		})
+
+		require("lspconfig")["gopls"].setup({
 			capabilities = capabilities
 		})
 
