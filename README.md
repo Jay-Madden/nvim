@@ -8,4 +8,7 @@
     ```
     and that go/bin is added to PATH
 
+### debugging
+1. If you are running into weird errors remove your session and restart nvim
+
 
