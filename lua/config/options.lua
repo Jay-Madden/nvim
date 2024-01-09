@@ -11,4 +11,4 @@ vim.opt.shiftwidth = 2
 -- vim.opt.statuscolumn = '%=%{v:relnum?v:lnum:v:lnum}%s'
 
 -- Start up neotree when vim starts up
---vim.api.nvim_create_autocmd("VimEnter", { callback = function() vim.cmd("Neotree") end, })
+vim.api.nvim_create_autocmd("VimEnter", { callback = function() vim.cmd("Neotree") end, })
