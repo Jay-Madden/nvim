@@ -10,6 +10,7 @@ return {
 	config = function(_, opts)
 		local dap = require("dap")
     local dapui = require("dapui")
+		local neotree = require("neo-tree")
 
 		require('dap-go').setup()
 
@@ -18,9 +19,25 @@ return {
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
     vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 
-		dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
-    dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
-    dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
+		-- Configure the dap event handlers
+		-- make sure we close neotree before we start debugging as neotree takes up 
+		-- screen space
+		dap.listeners.after.event_initialized["dapui_config"] = function()
+			neotree.close_all()
+			dapui.open()
+		end
+
+		-- Reopen neotree when debugger ui exits
+    dap.listeners.before.event_terminated["dapui_config"] = function()
+			dapui.close()
+			vim.cmd("Neotree")
+		end
+
+    dap.listeners.before.event_exited["dapui_config"] = function()
+			dapui.close()
+			vim.cmd("Neotree")
+		end
+		----
 
 		require('dap-go').setup {
 			-- Additional dap configurations can be added.
@@ -31,9 +48,9 @@ return {
 				{
 					-- Must be "go" or it will be ignored by the plugin
 					type = "go",
-					name = "Attach remote",
-					mode = "remote",
-					request = "attach",
+					name = "Debug Operator",
+					request = "launch",
+					program = "./cmd/main.go"
 				},
 			},
 			-- delve configurations
