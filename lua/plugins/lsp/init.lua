@@ -76,6 +76,7 @@ return {
 								shadow = true,
 							},
 							staticcheck = true,
+							semanticTokens = true,
 						},
 					},
 					init_options = {
