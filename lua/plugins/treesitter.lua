@@ -1,7 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  event = "VeryLazy",
   cmd = { "TSUpdateSync" },
 
 	auto_install = true,
