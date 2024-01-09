@@ -24,7 +24,6 @@ return {
 	 config = function()
 		 local tools = {
 			 "lua-language-server",
-			 "yaml-language-server",
 			 "pyright",
 			 "gopls",
 		 }
@@ -60,11 +59,11 @@ return {
 				})
 			end,
 
-			yamlls = function(server_name)
-				lspconfig[server_name].setup({
-					capabilities = capabilities
-				})
-			end,
+			--yamlls = function(server_name)
+			--	lspconfig[server_name].setup({
+			--		capabilities = capabilities
+			--	})
+			--end,
 
 			gopls = function(server_name)
 				lspconfig[server_name].setup({
