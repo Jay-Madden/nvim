@@ -5,6 +5,8 @@ function M.map(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+-- The following code for status lines was taken from here
+-- https://github.com/LazyVim/LazyVim/blob/879e29504d43e9f178d967ecc34d482f902e5a91/lua/lazyvim/util/ui.lua#L94C10-L94C10
 ---@return Sign?
 ---@param buf number
 ---@param lnum number
@@ -93,7 +95,6 @@ function M.foldtext()
   return ret
 end
 
--- https://github.com/LazyVim/LazyVim/blob/879e29504d43e9f178d967ecc34d482f902e5a91/lua/lazyvim/util/ui.lua#L94C10-L94C10
 function M.statuscolumn()
   local win = vim.g.statusline_winid
   local buf = vim.api.nvim_win_get_buf(win)
@@ -141,6 +142,7 @@ function M.statuscolumn()
 
   return table.concat(components, "")
 end
+-------------------------------------
 
 
 return M
