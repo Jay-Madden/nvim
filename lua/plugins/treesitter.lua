@@ -17,6 +17,7 @@ return {
 				"go",
 				"lua",
 				"yaml",
+				"rust",
 				"vimdoc",
 				"vim",
 				"regex",

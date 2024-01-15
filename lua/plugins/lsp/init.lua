@@ -24,6 +24,7 @@ return {
 	 config = function()
 		 local tools = {
 			 "lua-language-server",
+			 "rust-analyzer",
 			 "pyright",
 			 "gopls",
 		 }
@@ -64,6 +65,13 @@ return {
 			--		capabilities = capabilities
 			--	})
 			--end,
+
+			rust_analyzer = function(server_name)
+				lspconfig[server_name].setup({
+					capabilities = capabilities
+				})
+			end,
+
 
 			gopls = function(server_name)
 				lspconfig[server_name].setup({
