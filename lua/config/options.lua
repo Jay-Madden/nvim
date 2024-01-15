@@ -24,6 +24,13 @@ vim.opt.laststatus = 3
 -- Command-line completion mode
 vim.opt.wildmode = "longest:full,full"
 
+-- Automatically reload files when then change externally
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = { "*" },
+})
+
 -- Enable smooth scrolling
 if vim.fn.has("nvim-0.10") == 1 then
   vim.opt.smoothscroll = true
@@ -32,14 +39,6 @@ end
 if vim.fn.has("nvim-0.9.0") == 1 then
   vim.opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn()]]
 end
-
--- Start up neotree when vim starts up
-vim.api.nvim_create_autocmd({ 'User' }, {
-  pattern = "SessionLoadPost",
-  callback = function()
-		vim.cmd("Neotree")
-  end,
-})
 
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {

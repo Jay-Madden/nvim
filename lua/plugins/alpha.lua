@@ -1,4 +1,4 @@
-return {
+local M = {
   "goolord/alpha-nvim",
   enabled = true,
   branch = "main",
@@ -20,7 +20,7 @@ return {
     -- stylua: ignore
     dashboard.section.buttons.val = {
       dashboard.button("f", " " .. " Find file",       [[<cmd> lua require("telescope.builtin").find_files() <cr>]]),
-      dashboard.button("s", " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
+      dashboard.button("s", " " .. " Restore Session", [[<cmd> lua require("plugins.alpha").restore() <cr>]]),
       dashboard.button("n", " " .. " New file",        "<cmd> ene <BAR> startinsert <cr>"),
       dashboard.button("r", " " .. " Recent files",    [[<cmd> lua require("telescope.builtin").oldfiles() <cr>]]),
       dashboard.button("g", " " .. " Find text",       [[<cmd> lua require("telescope.builtin").live_grep() <cr>]]),
@@ -42,3 +42,24 @@ return {
   end,
 }
 
+-- Function to restore the neotree window from the persistence session without messing up state
+function M.restore()
+  -- Restore the last session
+  require("persistence").load()
+
+  -- Toggle neotree
+  vim.cmd("Neotree")
+
+  -- Go back to the previous buffer after we load the session which is the active window
+  local buffers = vim.api.nvim_list_bufs()
+  local current_buffer = vim.api.nvim_get_current_buf()
+
+  for i, buffer in ipairs(buffers) do
+    if buffer == current_buffer and i > 1 then
+      vim.api.nvim_set_current_buf(buffers[i - 1])
+      break
+    end
+  end
+end
+
+return M

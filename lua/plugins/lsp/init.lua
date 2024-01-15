@@ -13,8 +13,8 @@ return {
 		 "williamboman/mason.nvim",
 		 "williamboman/mason-lspconfig.nvim",
 		 "WhoIsSethDaniel/mason-tool-installer.nvim",
-		  "folke/neoconf.nvim",
-			"folke/neodev.nvim",
+		 "folke/neoconf.nvim",
+		 "folke/neodev.nvim",
 	 },
 
 	 keys = {

@@ -9,6 +9,7 @@ return {
 
 	keys = {
 		{ "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find files" },
+		{ "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Live grep" },
 		{ "<Leader>fb", function() require("telescope").extensions.file_browser.file_browser() end, desc = "Browse files" },
 	},
 
