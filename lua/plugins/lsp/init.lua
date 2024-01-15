@@ -6,8 +6,9 @@ end
 
 return {
 	"neovim/nvim-lspconfig",
-	event = { "InsertEnter", "CmdlineEnter" },
-	cmd = { "MasonToolsUpdate" },
+
+	cmd = { "MasonToolsUpdate", 'LspInfo', 'LspStart', 'LspStop', 'LspRestart', 'LspLog' },
+	event = 'BufReadPost',
 
 	 dependencies = {
 		 "williamboman/mason.nvim",
