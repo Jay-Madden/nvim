@@ -3,37 +3,51 @@ return {
 
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
 	},
 
-  opts = {
-    close_if_last_window = true,
-    popup_border_style = "single",
-    use_popups_for_input = false,
+	config = function()
+		-- If you want icons for diagnostic errors, you'll need to define them somewhere:
+		vim.fn.sign_define("DiagnosticSignError",
+			{text = " ", texthl = "DiagnosticSignError"})
+		vim.fn.sign_define("DiagnosticSignWarn",
+			{text = " ", texthl = "DiagnosticSignWarn"})
+		vim.fn.sign_define("DiagnosticSignInfo",
+			{text = " ", texthl = "DiagnosticSignInfo"})
+		vim.fn.sign_define("DiagnosticSignHint",
+			{text = "󰌵", texthl = "DiagnosticSignHint"})
 
-		-- Refresh the window when files change
-		use_libuv_file_watcher=true,
+		require("neo-tree").setup({
+			close_if_last_window = true,
+			popup_border_style = "single",
+			use_popups_for_input = false,
+			enable_diagnostics = true,
+			enable_git_status = true,
 
-    window = {
-      mappings = {
-        ["Z"] = "expand_all_nodes",
-      },
-      width = 30,
-		},
+			-- Refresh the window when files change
+			use_libuv_file_watcher=true,
 
-		filesystem = {
-			filtered_items = {
-				visible = true,
-				hide_gitignored = false,
-				hide_hidden = false,
-				hide_dotfiles = false,
+			window = {
+				mappings = {
+					["Z"] = "expand_all_nodes",
+				},
+				width = 30,
 			},
 
-			follow_current_file = {
-				enabled = true
+			filesystem = {
+				filtered_items = {
+					visible = true,
+					hide_gitignored = false,
+					hide_hidden = false,
+					hide_dotfiles = false,
+				},
+
+				follow_current_file = {
+					enabled = true
+				},
 			},
-		},
-	},
+		})
+	end,
 }
 
