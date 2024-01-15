@@ -1,10 +1,6 @@
 return {
 	"Shatur/neovim-session-manager",
-
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter"
-	},
-
+	enabled = false,
 
 	config = function()
 		local session_manager = require("session_manager")
