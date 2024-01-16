@@ -43,10 +43,26 @@ return {
       start_delay = 3000,
     })
 
+		-- Define the virtual text diagnostic signs
+		local signs = {
+			Error = '',
+			Warn = '',
+			Hint = '󰌵',
+			Info = '',
+		}
+
+		vim.diagnostic.config({
+			virtual_text = {
+				prefix = function(diagnostic) return signs[vim.diagnostic.severity[diagnostic.severity]] end,
+			},
+		})
+		-----------
+
 		local lspconfig = require("lspconfig")
 
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
 
 		require("mason-lspconfig").setup_handlers({
 		  function(server_name) -- default handler (optional)
@@ -106,6 +122,5 @@ return {
 
 		-- Bootstrap lsp keymappings
 		require("plugins.lsp.keymaps")
-
-		end,
+	end,
 }

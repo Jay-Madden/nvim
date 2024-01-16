@@ -6,6 +6,7 @@ vim.g.mapleader = ";"
 
 vim.opt.termguicolors = true
 
+
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 
@@ -51,6 +52,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
+
 
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {

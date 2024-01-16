@@ -13,7 +13,7 @@ return {
 			lsp = {
 				hover = {
 					-- Disable navigator hover as we use noices hover effect instead
-					enable =true,
+					enable = true,
 				},
 			},
 		})
