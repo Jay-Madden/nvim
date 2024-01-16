@@ -15,6 +15,12 @@ utils.map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, sile
 utils.map("v", "<", "<gv", { desc = "Better indenting" })
 utils.map("v", ">", ">gv", { desc = "Better indenting" })
 
+-- Move Lines
+utils.map("n", "<leader>mj", "<cmd>m .+1<cr>==", { desc = "Move down" })
+utils.map("n", "<leader>mk", "<cmd>m .-2<cr>==", { desc = "Move up" })
+utils.map("v", "<leader>mj", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+utils.map("v", "<leader>mk", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+
 -- Window mappings
 
 -- Move to window using the <ctrl> hjkl keys

@@ -5,7 +5,7 @@ return {
 		"nvim-tree/nvim-web-devicons"
 	},
 
-	config = function ()
+	config = function()
 		require("bufferline").setup({
 			options = {
 				separator_style = "slant",
