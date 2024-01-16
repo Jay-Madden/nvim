@@ -67,6 +67,12 @@ return {
 			--	})
 			--end,
 
+			pyright = function(server_name)
+				lspconfig[server_name].setup({
+					capabilities = capabilities
+				})
+			end,
+
 			rust_analyzer = function(server_name)
 				lspconfig[server_name].setup({
 					capabilities = capabilities
