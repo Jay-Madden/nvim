@@ -20,9 +20,9 @@ local M = {
     -- stylua: ignore
     dashboard.section.buttons.val = {
       dashboard.button("f", " " .. " Find file",       [[<cmd> lua require("telescope.builtin").find_files() <cr>]]),
-      dashboard.button("s", " " .. " Restore Session", [[<cmd> lua require("plugins.alpha").restore() <cr>]]),
+      dashboard.button("r", " " .. " Restore Session", [[<cmd> lua require("plugins.alpha").restore() <cr>]]),
       dashboard.button("n", " " .. " New file",        "<cmd> ene <BAR> startinsert <cr>"),
-      dashboard.button("r", " " .. " Recent files",    [[<cmd> lua require("telescope.builtin").oldfiles() <cr>]]),
+      dashboard.button("s", " " .. " Recent files",    [[<cmd> lua require("telescope.builtin").oldfiles() <cr>]]),
       dashboard.button("g", " " .. " Find text",       [[<cmd> lua require("telescope.builtin").live_grep() <cr>]]),
       dashboard.button("q", " " .. " Quit",            "<cmd> qa <cr>"),
     }
