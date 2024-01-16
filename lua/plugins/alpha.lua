@@ -61,8 +61,6 @@ function M.restore()
       break
     end
   end
-  
-  vim.cmd("LspStart")
 end
 
 return M
