@@ -7,6 +7,12 @@ return {
 		"leoluz/nvim-dap-go",
   },
 
+	 keys = {
+		 { "<Leader>b", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
+		 { "<Leader>d", function() require("dap").continue() end, desc = "Start Debugging" },
+		 { "<Leader>dc", function() require("dapui").close() end, desc = "Close debugging window" },
+	 },
+
 	config = function(_, opts)
 		local dap = require("dap")
     local dapui = require("dapui")
@@ -17,7 +23,7 @@ return {
 		dapui.setup(opts)
 
 		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
-    vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 
 		-- Configure the dap event handlers
 		-- make sure we close neotree before we start debugging as neotree takes up 

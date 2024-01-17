@@ -53,7 +53,17 @@ return {
 
 		vim.diagnostic.config({
 			virtual_text = {
-				prefix = function(diagnostic) return signs[vim.diagnostic.severity[diagnostic.severity]] end,
+				prefix = function(diagnostic)
+					if diagnostic.severity == vim.diagnostic.severity.ERROR then
+						return signs['Error']
+					elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+						return signs['Warning']
+					elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+						return signs['Hint']
+					else
+						return signs['Info']
+					end
+				end,
 			},
 		})
 		-----------
