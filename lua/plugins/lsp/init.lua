@@ -20,6 +20,7 @@ return {
 
 	 keys = {
 		 { "<Leader>li", "<CMD>LspInfo<CR>", desc = "LSP info" },
+		 { "<Leader>?", function() vim.diagnostic.open_float() end, desc = "Show line diagnostic"},
 	 },
 
 	 config = function()
@@ -71,7 +72,7 @@ return {
 		local lspconfig = require("lspconfig")
 
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+        capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 
 		require("mason-lspconfig").setup_handlers({
@@ -117,7 +118,9 @@ return {
 								shadow = true,
 							},
 							staticcheck = true,
+  						    gofumpt = true,
 							semanticTokens = true,
+							completeUnimported = true,
 						},
 					},
 					init_options = {
