@@ -59,7 +59,9 @@ function M.get_signs(buf, lnum)
   end
 
   -- Sort by priority
-  table.sort(signs, function(a, b) return (a.priority or 0) < (b.priority or 0) end)
+  table.sort(signs, function(a, b)
+    return (a.priority or 0) < (b.priority or 0)
+  end)
 
   return signs
 end
@@ -92,7 +94,9 @@ function M.statuscolumn()
         left = s
       end
     end
-    if vim.v.virtnum ~= 0 then left = nil end
+    if vim.v.virtnum ~= 0 then
+      left = nil
+    end
     vim.api.nvim_win_call(win, function()
       if vim.fn.foldclosed(vim.v.lnum) >= 0 then
         fold = { text = vim.opt.fillchars:get().foldclose or "", texthl = "Folded" }

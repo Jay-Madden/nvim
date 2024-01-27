@@ -20,7 +20,13 @@ return {
 
   keys = {
     { "<Leader>li", "<CMD>LspInfo<CR>", desc = "LSP info" },
-    { "<Leader>?", function() vim.diagnostic.open_float() end, desc = "Show line diagnostic" },
+    {
+      "<Leader>?",
+      function()
+        vim.diagnostic.open_float()
+      end,
+      desc = "Show line diagnostic",
+    },
   },
 
   config = function()

@@ -9,7 +9,9 @@ return {
     "hrsh7th/cmp-path",
     {
       "L3MON4D3/LuaSnip",
-      config = function() require("luasnip").setup() end,
+      config = function()
+        require("luasnip").setup()
+      end,
     },
   },
 

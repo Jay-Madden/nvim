@@ -2,7 +2,13 @@ return {
   "akinsho/toggleterm.nvim",
 
   keys = {
-    { "<Leader>t", function() TOGGLE_HORIZONTAL_TERMINAL() end, desc = "Open floating terminal" },
+    {
+      "<Leader>t",
+      function()
+        TOGGLE_HORIZONTAL_TERMINAL()
+      end,
+      desc = "Open floating terminal",
+    },
   },
 
   config = function()
@@ -17,7 +23,9 @@ return {
         terminal_horizontal = Terminal:new({
           direction = "horizontal",
           hidden = true,
-          on_exit = function() terminal_horizontal = nil end,
+          on_exit = function()
+            terminal_horizontal = nil
+          end,
         })
       end
       terminal_horizontal:toggle()

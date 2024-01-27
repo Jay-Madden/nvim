@@ -8,9 +8,27 @@ return {
   },
 
   keys = {
-    { "<Leader>b", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
-    { "<Leader>d", function() require("dap").continue() end, desc = "Start Debugging" },
-    { "<Leader>dc", function() require("dapui").close() end, desc = "Close debugging window" },
+    {
+      "<Leader>b",
+      function()
+        require("dap").toggle_breakpoint()
+      end,
+      desc = "Toggle breakpoint",
+    },
+    {
+      "<Leader>d",
+      function()
+        require("dap").continue()
+      end,
+      desc = "Start Debugging",
+    },
+    {
+      "<Leader>dc",
+      function()
+        require("dapui").close()
+      end,
+      desc = "Close debugging window",
+    },
   },
 
   config = function(_, opts)
