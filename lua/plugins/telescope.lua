@@ -29,6 +29,31 @@ return {
       end,
       desc = "Browse files",
     },
+    {
+      "<Leader>ft",
+      function()
+        local harpoon = require("harpoon")
+        local harpoon_files = harpoon:list()
+        local conf = require("telescope.config").values
+
+        local file_paths = {}
+        for _, item in ipairs(harpoon_files.items) do
+          table.insert(file_paths, item.value )
+        end
+        local picker = require("telescope.pickers")
+        picker
+          .new({}, {
+            prompt_title = "Harpoon",
+            finder = require("telescope.finders").new_table({
+              results = file_paths,
+            }),
+            previewer = conf.file_previewer({}),
+            sorter = conf.generic_sorter({}),
+          })
+          :find()
+      end,
+      desc = "Browse harpoon marks",
+    },
   },
 
   config = function()

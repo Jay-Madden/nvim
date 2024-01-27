@@ -33,6 +33,7 @@ return {
     local tools = {
       "lua-language-server",
       "rust-analyzer",
+      "terraform-ls",
       "pyright",
       "gopls",
     }
@@ -98,6 +99,12 @@ return {
       --		capabilities = capabilities
       --	})
       --end,
+
+      terraformls = function(server_name)
+        lspconfig[server_name].setup({
+          capabilities = capabilities,
+        })
+      end,
 
       pyright = function(server_name)
         lspconfig[server_name].setup({
