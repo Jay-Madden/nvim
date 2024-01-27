@@ -1,4 +1,3 @@
 return {
-	"towolf/vim-helm"
+  "towolf/vim-helm",
 }
-

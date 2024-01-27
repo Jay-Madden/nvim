@@ -6,12 +6,11 @@ vim.g.mapleader = ";"
 
 vim.opt.termguicolors = true
 
-
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
 -- Work with system clipboard
-vim.opt.clipboard = "unnamedplus"  -- Insert indents automatically
+vim.opt.clipboard = "unnamedplus" -- Insert indents automatically
 -- Indent smartly
 vim.opt.smartindent = true
 -- Put new windows right of current
@@ -33,9 +32,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 })
 
 -- Enable smooth scrolling
-if vim.fn.has("nvim-0.10") == 1 then
-  vim.opt.smoothscroll = true
-end
+if vim.fn.has("nvim-0.10") == 1 then vim.opt.smoothscroll = true end
 
 if vim.fn.has("nvim-0.9.0") == 1 then
   vim.opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn()]]
@@ -48,11 +45,8 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+  callback = function() vim.highlight.on_yank() end,
 })
-
 
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
@@ -65,8 +59,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     vim.b[buf].lazyvim_last_loc = true
     local mark = vim.api.nvim_buf_get_mark(buf, '"')
     local lcount = vim.api.nvim_buf_line_count(buf)
-    if mark[1] > 0 and mark[1] <= lcount then
-      pcall(vim.api.nvim_win_set_cursor, 0, mark)
-    end
+    if mark[1] > 0 and mark[1] <= lcount then pcall(vim.api.nvim_win_set_cursor, 0, mark) end
   end,
 })

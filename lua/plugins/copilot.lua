@@ -7,9 +7,8 @@ return {
         auto_trigger = true,
         keymap = {
           accept = "<leader>ca",
-        }
+        },
       },
     })
   end,
 }
-

@@ -38,9 +38,7 @@ local M = {
     return dashboard
   end,
 
-  config = function(_, dashboard)
-    require("alpha").setup(dashboard.opts)
-  end,
+  config = function(_, dashboard) require("alpha").setup(dashboard.opts) end,
 }
 
 -- Function to restore the neotree window from the persistence session without messing up state

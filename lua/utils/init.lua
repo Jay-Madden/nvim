@@ -1,8 +1,8 @@
 local M = {}
 
 function M.map(mode, lhs, rhs, opts)
-	vim.tbl_deep_extend("force", { buffer = buffer, silent = true, noremap = true }, opts)
-	vim.keymap.set(mode, lhs, rhs, opts)
+  vim.tbl_deep_extend("force", { buffer = buffer, silent = true, noremap = true }, opts)
+  vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 -- The following code for status lines was taken from here
@@ -59,9 +59,7 @@ function M.get_signs(buf, lnum)
   end
 
   -- Sort by priority
-  table.sort(signs, function(a, b)
-    return (a.priority or 0) < (b.priority or 0)
-  end)
+  table.sort(signs, function(a, b) return (a.priority or 0) < (b.priority or 0) end)
 
   return signs
 end
@@ -94,9 +92,7 @@ function M.statuscolumn()
         left = s
       end
     end
-    if vim.v.virtnum ~= 0 then
-      left = nil
-    end
+    if vim.v.virtnum ~= 0 then left = nil end
     vim.api.nvim_win_call(win, function()
       if vim.fn.foldclosed(vim.v.lnum) >= 0 then
         fold = { text = vim.opt.fillchars:get().foldclose or "", texthl = "Folded" }
@@ -125,6 +121,4 @@ function M.statuscolumn()
 end
 -------------------------------------
 
-
 return M
-
