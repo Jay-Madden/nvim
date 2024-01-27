@@ -30,7 +30,7 @@ utils.map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
 utils.map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
 -- Resize window using <ctrl> arrow keys
-utils.map("n", "<C-i>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-utils.map("n", "<C-u>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-utils.map("n", "<C-o>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-utils.map("n", "<C-y>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+utils.map("n", "<C-,>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+utils.map("n", "<C-m>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+utils.map("n", "<C-.>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+utils.map("n", "<C-n>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
