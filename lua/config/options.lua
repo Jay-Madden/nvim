@@ -12,6 +12,8 @@ vim.opt.clipboard = "unnamedplus" -- Insert indents automatically
 vim.opt.smartindent = true
 -- Put new windows right of current
 vim.opt.splitright = true
+-- Show tabs as 4 spaces
+vim.opt.tabstop = 4
 -- Allow cursor to move in virtual space in block mode
 vim.opt.virtualedit = "block"
 -- Always show the signcolumn so we dont shift text every time

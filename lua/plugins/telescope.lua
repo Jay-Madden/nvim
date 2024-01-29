@@ -16,6 +16,13 @@ return {
       desc = "Find files",
     },
     {
+      "<leader>fr",
+      function()
+        require("telescope.builtin").lsp_references()
+      end,
+      desc = "Find references",
+    },
+    {
       "<leader>fg",
       function()
         require("telescope.builtin").live_grep()

@@ -35,8 +35,7 @@ return {
     require("winshift").setup({
       keymaps = {
         disable_defauls = true,
-      }
+      },
     })
-  end
+  end,
 }
-
