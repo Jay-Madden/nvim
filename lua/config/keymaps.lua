@@ -23,11 +23,11 @@ utils.map("v", "<leader>mk", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- Window mappings
 
--- Move to window using the <ctrl> hjkl keys
-utils.map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
-utils.map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
-utils.map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
-utils.map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
+-- Move window focus using the <ctrl> hjkl keys
+utils.map("n", "<C-h>", "<C-w>h", { desc = "Move focus to left window", remap = true })
+utils.map("n", "<C-j>", "<C-w>j", { desc = "Move focus to lower window", remap = true })
+utils.map("n", "<C-k>", "<C-w>k", { desc = "Move focus to upper window", remap = true })
+utils.map("n", "<C-l>", "<C-w>l", { desc = "Move focus to right window", remap = true })
 
 -- Resize window using <ctrl> arrow keys
 utils.map("n", "<C-,>", "<cmd>resize +2<cr>", { desc = "Increase window height" })

@@ -37,8 +37,8 @@ return {
         local conf = require("telescope.config").values
 
         local file_paths = {}
-        for _, item in ipairs(harpoon_files.items) do
-          table.insert(file_paths, item.value )
+        for idx, item in ipairs(harpoon_files.items) do
+          table.insert(file_paths, { idx, item.value })
         end
         local picker = require("telescope.pickers")
         picker
@@ -46,6 +46,13 @@ return {
             prompt_title = "Harpoon",
             finder = require("telescope.finders").new_table({
               results = file_paths,
+              entry_maker = function(entry)
+                return {
+                  value = entry,
+                  display = "[" .. entry[1] .. "] " .. entry[2],
+                  ordinal = entry[2],
+                }
+              end,
             }),
             previewer = conf.file_previewer({}),
             sorter = conf.generic_sorter({}),

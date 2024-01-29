@@ -43,5 +43,6 @@
   "telescope-symbols.nvim": { "branch": "master", "commit": "a6d0127a53d39b9fc2af75bd169d288166118aec" },
   "telescope.nvim": { "branch": "master", "commit": "2f3857c25bbd00ed7ac593c9d4071906369e4d20" },
   "toggleterm.nvim": { "branch": "main", "commit": "b49df5cdce67a8964d1b027dae94bde212092b51" },
-  "vim-helm": { "branch": "master", "commit": "fc2259e1f8836304a0526853ddc3fe27045be39a" }
+  "vim-helm": { "branch": "master", "commit": "fc2259e1f8836304a0526853ddc3fe27045be39a" },
+  "winshift.nvim": { "branch": "main", "commit": "37468ed6f385dfb50402368669766504c0e15583" }
 }
