@@ -42,8 +42,17 @@ utils.map("n", "<leader>r", function()
     },
   }
 
+  local word = vim.fn.expand("<cword>")
+
+  if type(word) == "table" then
+    word = word[1]
+  end
+
+
   local input = Input(popup_options, {
     prompt = "> ",
+    -- default the prompt to the word under the cursor
+    default_value = word,
     on_submit = function(value)
       if value == "" then
         -- if we dont get a rename value bail out here

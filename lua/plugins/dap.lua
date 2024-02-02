@@ -9,14 +9,14 @@ return {
 
   keys = {
     {
-      "<Leader>b",
+      "<Leader>db",
       function()
         require("dap").toggle_breakpoint()
       end,
       desc = "Toggle breakpoint",
     },
     {
-      "<Leader>d",
+      "<Leader>ds",
       function()
         require("dap").continue()
       end,
@@ -52,19 +52,30 @@ return {
     -- Configure the dap event handlers
     -- make sure we close neotree before we start debugging as neotree takes up
     -- screen space
-    dap.listeners.after.event_initialized["dapui_config"] = function()
+    dap.listeners.before.attach.dapui_config = function()
       neotree.close_all()
       dapui.open()
     end
 
-    -- Reopen neotree when debugger ui exits
-    dap.listeners.before.event_terminated["dapui_config"] = function()
+    dap.listeners.before.launch.dapui_config = function()
+      neotree.close_all()
+      dapui.open()
+    end
+
+    dap.listeners.before.event_terminated.dapui_config = function()
       dapui.close()
+    end
+
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close()
+    end
+
+    -- Reopen neotree when debugger ui exits
+    dap.listeners.after.event_terminated.dapui_config = function()
       vim.cmd("Neotree")
     end
 
-    dap.listeners.before.event_exited["dapui_config"] = function()
-      dapui.close()
+    dap.listeners.after.event_exited.dapui_config = function()
       vim.cmd("Neotree")
     end
     ----
