@@ -30,26 +30,9 @@ return {
   },
 
   config = function()
-    local tools = {
-      "lua-language-server",
-      "rust-analyzer",
-      "terraform-ls",
-      "pyright",
-      "gopls",
-    }
 
     require("neoconf").setup()
     require("neodev").setup()
-
-    require("mason").setup()
-    require("mason-lspconfig").setup()
-
-    require("mason-tool-installer").setup({
-      ensure_installed = tools,
-      auto_update = true,
-      run_on_start = true,
-      start_delay = 3000,
-    })
 
     -- Define the virtual text diagnostic signs
     local signs = {
