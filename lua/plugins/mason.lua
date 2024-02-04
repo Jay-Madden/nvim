@@ -7,7 +7,6 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
 
-
   config = function()
     local tools = {
       "lua-language-server",
@@ -29,9 +28,5 @@ return {
       run_on_start = true,
       start_delay = 3000,
     })
-
   end,
-
-
 }
-

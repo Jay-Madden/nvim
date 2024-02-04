@@ -37,6 +37,13 @@ return {
           -- set their background accordingly if you wish to keep them dark and borderless
           LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
           MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+
+          -- Highlight rust string placeholders
+          ["@lsp.type.formatSpecifier.rust"] = { fg = theme.syn.keyword },
+
+          -- Highlight bufferline background as kanagawa theme
+          BufferlineFill = { bg = colors.palette.sumiInk0 },
+          BufferlineBackground = { bg = colors.palette.sumiInk0 },
         }
       end,
     })

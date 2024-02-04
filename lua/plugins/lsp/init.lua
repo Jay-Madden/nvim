@@ -30,7 +30,6 @@ return {
   },
 
   config = function()
-
     require("neoconf").setup()
     require("neodev").setup()
 

@@ -48,7 +48,6 @@ utils.map("n", "<leader>r", function()
     word = word[1]
   end
 
-
   local input = Input(popup_options, {
     prompt = "> ",
     -- default the prompt to the word under the cursor
