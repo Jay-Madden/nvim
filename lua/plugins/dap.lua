@@ -23,6 +23,42 @@ return {
       desc = "Start Debugging",
     },
     {
+      "<Leader>da",
+      function()
+        require("dapui").eval()
+      end,
+      desc = "show values under cursor",
+    },
+    {
+      "<Leader>di",
+      function()
+        require("dap").step_into()
+      end,
+      desc = "step into function",
+    },
+    {
+      "<leader>dn",
+      function()
+        require("dap").step_over()
+      end,
+      desc = "step over to next line",
+    },
+    {
+      "<leader>do",
+      function()
+        require("dap").step_out()
+      end,
+      desc = "step out to calling function",
+    },
+    {
+      "<leader>dq",
+      function()
+        require("dap").close()
+        require("dapui").close()
+      end,
+      desc = "step the debugger",
+    },
+    {
       "<Leader>dc",
       function()
         require("dapui").close()
