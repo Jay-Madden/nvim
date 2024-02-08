@@ -11,4 +11,3 @@
 ### debugging
 1. If you are running into weird errors remove your session and restart nvim
 
-
