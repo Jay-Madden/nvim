@@ -1,9 +1,3 @@
-local setup_lsp = function(server_name, opts)
-  require("lspconfig")[server_name].setup({
-    capabilities = options.capabilities,
-  })
-end
-
 return {
   "neovim/nvim-lspconfig",
 
@@ -62,6 +56,12 @@ return {
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+    -- Add folding capabilities for nvim-ufo
+    capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true
+    }
 
     require("mason-lspconfig").setup_handlers({
       function(server_name) -- default handler (optional)
