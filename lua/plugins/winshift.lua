@@ -6,28 +6,28 @@ return {
       function()
         require("winshift").cmd_winshift("left")
       end,
-      desc = "Close debugging window",
+      desc = "Move window left",
     },
     {
       "<C-S-J>",
       function()
         require("winshift").cmd_winshift("down")
       end,
-      desc = "Close debugging window",
+      desc = "Move window down",
     },
     {
       "<C-S-K>",
       function()
         require("winshift").cmd_winshift("up")
       end,
-      desc = "Close debugging window",
+      desc = "Move window up",
     },
     {
       "<C-S-L>",
       function()
         require("winshift").cmd_winshift("right")
       end,
-      desc = "Close debugging window",
+      desc = "Move window right",
     },
   },
 
