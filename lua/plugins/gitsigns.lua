@@ -1,5 +1,9 @@
 return {
   "lewis6991/gitsigns.nvim",
+  keys = {
+    { "<Leader>qr", "<CMD>Gitsigns reset_hunk<CR>", desc = "Reset git change at cursor position" },
+    { "<Leader>qt", "<CMD>Gitsigns preview_hunk<CR>", desc = "Reset git change at cursor position" },
+  },
 
   config = function()
     require("gitsigns").setup({
