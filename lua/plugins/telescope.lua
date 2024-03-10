@@ -32,6 +32,13 @@ return {
     {
       "<Leader>fb",
       function()
+        require("telescope.builtin").buffers()
+      end,
+      desc = "Browse files",
+    },
+    {
+      "<Leader>fv",
+      function()
         require("telescope").extensions.file_browser.file_browser()
       end,
       desc = "Browse files",
