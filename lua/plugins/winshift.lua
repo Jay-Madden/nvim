@@ -1,5 +1,6 @@
 return {
   "sindrets/winshift.nvim",
+  enabled = false,
   keys = {
     {
       "<C-S-H>",
