@@ -7,12 +7,23 @@ return {
   },
 
   keys = {
-    {"n", "zO", function() require("ufo").openAllFolds() end },
-    {"n", "zC", function() require("ufo").closeAllFolds() end },
+    {
+      "n",
+      "zO",
+      function()
+        require("ufo").openAllFolds()
+      end,
+    },
+    {
+      "n",
+      "zC",
+      function()
+        require("ufo").closeAllFolds()
+      end,
+    },
   },
 
   config = function()
     require("ufo").setup()
   end,
 }
-

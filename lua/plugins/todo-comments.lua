@@ -6,4 +6,3 @@ return {
     require("todo-comments").setup()
   end,
 }
-

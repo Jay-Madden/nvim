@@ -59,8 +59,8 @@ return {
 
     -- Add folding capabilities for nvim-ufo
     capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true
+      dynamicRegistration = false,
+      lineFoldingOnly = true,
     }
 
     require("mason-lspconfig").setup_handlers({
