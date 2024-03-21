@@ -30,11 +30,20 @@ return {
       desc = "Live grep",
     },
     {
+      "<Leader>fs",
+      function()
+        require("telescope.builtin").lsp_document_symbols({
+          symbol_width = 50,
+        })
+      end,
+      desc = "Find all symbols in current document",
+    },
+    {
       "<Leader>fb",
       function()
         require("telescope.builtin").buffers()
       end,
-      desc = "Browse files",
+      desc = "Browse buffers",
     },
     {
       "<Leader>fv",

@@ -40,10 +40,15 @@ return {
       }),
 
       sources = cmp.config.sources({
-        { name = "nvim_lsp", keyword_length = 1 },
-        { name = "luasnip" },
+        {
+          name = "nvim_lsp",
+          entry_filter = function(entry)
+            -- filter out useless text completion items we only want semantic entries
+            return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
+          end,
+          keyword_length = 1,
+        },
         { name = "nvim_lua" },
-        { name = "buffer" },
       }),
     })
   end,
