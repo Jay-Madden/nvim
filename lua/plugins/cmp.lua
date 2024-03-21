@@ -49,6 +49,7 @@ return {
           keyword_length = 1,
         },
         { name = "nvim_lua" },
+        { name = "luasnip" },
       }),
     })
   end,

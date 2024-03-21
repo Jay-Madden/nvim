@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 return {
   "nvim-neo-tree/neo-tree.nvim",
 
@@ -7,8 +9,12 @@ return {
     "MunifTanjim/nui.nvim",
   },
 
+
   config = function()
-    require("neo-tree").setup({
+    local neotree = require("neo-tree")
+    local neotree_command = require("neo-tree.command")
+
+    neotree.setup({
       close_if_last_window = true,
       popup_border_style = "single",
       use_popups_for_input = false,
@@ -43,5 +49,9 @@ return {
         },
       },
     })
+
+    utils.map("n", "<leader>nt", function()
+      neotree_command.execute({toggle = true})
+    end, { desc = "Toggle neotree" })
   end,
 }
