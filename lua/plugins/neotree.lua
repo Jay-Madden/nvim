@@ -9,7 +9,6 @@ return {
     "MunifTanjim/nui.nvim",
   },
 
-
   config = function()
     local neotree = require("neo-tree")
     local neotree_command = require("neo-tree.command")
@@ -51,7 +50,7 @@ return {
     })
 
     utils.map("n", "<leader>nt", function()
-      neotree_command.execute({toggle = true})
+      neotree_command.execute({ toggle = true })
     end, { desc = "Toggle neotree" })
   end,
 }

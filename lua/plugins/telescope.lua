@@ -84,6 +84,13 @@ return {
       end,
       desc = "Browse harpoon marks",
     },
+    {
+      "<Leader>fs",
+      function()
+        local trouble_telescope = require("trouble.sources.telescope")
+        trouble_telescope.open()
+      end,
+    }
   },
 
   config = function()
