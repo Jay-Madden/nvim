@@ -10,6 +10,8 @@ utils.map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent 
 utils.map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 utils.map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 utils.map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+utils.map({ "n", "x" }, "<C-d>", "<C-d>zz", { silent = true })
+utils.map({ "n", "x" }, "<C-u>", "<C-u>zz", { silent = true })
 
 -- Allow for multiple indents with a single selection
 utils.map("v", "<", "<gv", { desc = "Better indenting" })
