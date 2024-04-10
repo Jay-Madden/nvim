@@ -23,6 +23,9 @@ utils.map("n", "<leader>mk", "<cmd>m .-2<cr>==", { desc = "Move up" })
 utils.map("v", "<leader>mj", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 utils.map("v", "<leader>mk", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
+-- Better paste mappings
+utils.map("n", "p", '"0P', { desc = "Paste from system clipboard and do not overwrite register" })
+
 -- Window mappings
 
 -- Move window focus using the <ctrl> hjkl keys
