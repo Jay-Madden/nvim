@@ -23,6 +23,13 @@ return {
       desc = "Find references",
     },
     {
+      "<leader>fR",
+      function()
+        require("telescope.builtin").registers()
+      end,
+      desc = "View registers",
+    },
+    {
       "<leader>fg",
       function()
         require("telescope.builtin").live_grep()
