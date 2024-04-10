@@ -25,6 +25,10 @@ utils.map("v", "<leader>mk", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- Better paste mappings
 utils.map("n", "p", '"0P', { desc = "Paste from system clipboard and do not overwrite register" })
+utils.map("n", "D", 'd', { desc = "Cut into volatile register" })
+utils.map("n", "DD", 'dd', { desc = "Cut line into volatile register" })
+utils.map("n", "d", '_d', { desc = "Delete without cutting" })
+utils.map("n", "dd", '_dd', { desc = "Delete line without cutting" })
 
 -- Window mappings
 
