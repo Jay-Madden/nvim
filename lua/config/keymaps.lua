@@ -26,7 +26,6 @@ utils.map("v", "<leader>mk", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 -- Better paste mappings
 utils.map("v", "P", 'p', { desc = "Paste without overwriting buffer" })
 utils.map("v", "p", 'P', { desc = "Paste with overwriting buffer" })
-utils.map("n", "d", '_d', { desc = "Delete without cutting" })
 
 -- Window mappings
 

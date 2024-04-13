@@ -131,7 +131,7 @@ return {
             },
           },
           init_options = {
-            usePlaceholders = true,
+            usePlaceholders = false,
           },
         })
       end,
