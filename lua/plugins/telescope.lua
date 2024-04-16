@@ -46,6 +46,15 @@ return {
       desc = "Find all symbols in current document",
     },
     {
+      "<Leader>fS",
+      function()
+        require("telescope.builtin").lsp_workspace_symbols({
+          symbol_width = 50,
+        })
+      end,
+      desc = "Find all symbols in current document",
+    },
+    {
       "<Leader>fb",
       function()
         require("telescope.builtin").buffers()
