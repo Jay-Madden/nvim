@@ -22,6 +22,9 @@ vim.opt.signcolumn = "yes"
 vim.opt.laststatus = 3
 -- Command-line completion mode
 vim.opt.wildmode = "longest:full,full"
+-- Enable cursor line
+vim.opt.cursorline = true
+vim.o.cursorlineopt = "both"
 
 -- Default nvim-ufo fold settings
 vim.o.foldcolumn = "1" -- '0' is not bad
