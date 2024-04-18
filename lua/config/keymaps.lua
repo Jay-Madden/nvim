@@ -24,8 +24,8 @@ utils.map("v", "<leader>mj", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 utils.map("v", "<leader>mk", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- Better paste mappings
-utils.map("v", "P", 'p', { desc = "Paste without overwriting buffer" })
-utils.map("v", "p", 'P', { desc = "Paste with overwriting buffer" })
+utils.map("v", "P", "p", { desc = "Paste without overwriting buffer" })
+utils.map("v", "p", "P", { desc = "Paste with overwriting buffer" })
 
 -- Window mappings
 
@@ -34,6 +34,10 @@ utils.map("n", "<C-h>", "<C-w>h", { desc = "Move focus to left window", remap = 
 utils.map("n", "<C-j>", "<C-w>j", { desc = "Move focus to lower window", remap = true })
 utils.map("n", "<C-k>", "<C-w>k", { desc = "Move focus to upper window", remap = true })
 utils.map("n", "<C-l>", "<C-w>l", { desc = "Move focus to right window", remap = true })
+utils.map("t", "<C-h>", "[[<Cmd>wincmd h<CR>]]", { desc = "Move focus to left window in terminal mode", remap = true })
+utils.map("t", "<C-j>", "[[<Cmd>wincmd j<CR>]]", { desc = "Move focus to lower window in terminal mode", remap = true })
+utils.map("t", "<C-k>", "[[<Cmd>wincmd k<CR>]]", { desc = "Move focus to upper window in terminal mode", remap = true })
+utils.map("t", "<C-l>", "[[<Cmd>wincmd l<CR>]]", { desc = "Move focus to right window in terminal mode", remap = true })
 
 -- Resize window using <ctrl> arrow keys
 utils.map("n", "<C-,>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
