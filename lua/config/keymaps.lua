@@ -34,10 +34,10 @@ utils.map("n", "<C-h>", "<C-w>h", { desc = "Move focus to left window", remap = 
 utils.map("n", "<C-j>", "<C-w>j", { desc = "Move focus to lower window", remap = true })
 utils.map("n", "<C-k>", "<C-w>k", { desc = "Move focus to upper window", remap = true })
 utils.map("n", "<C-l>", "<C-w>l", { desc = "Move focus to right window", remap = true })
-utils.map("t", "<C-h>", "[[<Cmd>wincmd h<CR>]]", { desc = "Move focus to left window in terminal mode", remap = true })
-utils.map("t", "<C-j>", "[[<Cmd>wincmd j<CR>]]", { desc = "Move focus to lower window in terminal mode", remap = true })
-utils.map("t", "<C-k>", "[[<Cmd>wincmd k<CR>]]", { desc = "Move focus to upper window in terminal mode", remap = true })
-utils.map("t", "<C-l>", "[[<Cmd>wincmd l<CR>]]", { desc = "Move focus to right window in terminal mode", remap = true })
+utils.map("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Move focus to left window in terminal mode" })
+utils.map("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Move focus to lower window in terminal mode" })
+utils.map("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Move focus to upper window in terminal mode" })
+utils.map("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Move focus to right window in terminal mode" })
 
 -- Resize window using <ctrl> arrow keys
 utils.map("n", "<C-,>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
