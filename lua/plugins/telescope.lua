@@ -101,7 +101,7 @@ return {
       desc = "Browse harpoon marks",
     },
     {
-      "<Leader>fs",
+      "<Leader>fS",
       function()
         local trouble_telescope = require("trouble.sources.telescope")
         trouble_telescope.open()
