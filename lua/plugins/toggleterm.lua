@@ -1,10 +1,5 @@
-local utils = require("utils")
-
 ---@type Terminal|nil
 local active_terminal = nil
-
---- @type table<string>
-local command_history = {}
 
 return {
   "akinsho/toggleterm.nvim",
