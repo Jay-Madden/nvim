@@ -1,5 +1,5 @@
----@type Terminal|nil
-local active_terminal = nil
+---@type table<string, Terminal|nil>
+local active_terminals = {}
 
 return {
   "akinsho/toggleterm.nvim",
@@ -53,7 +53,11 @@ return {
               -- if we dont get a rename value bail out here
               return
             end
-            if active_terminal == nil then
+
+            -- Get the current working directory so we can send the command to the correct terminal
+            local cwd = vim.uv.cwd()
+
+            if active_terminals[cwd] == nil then
               -- If we dont have an active terminal then for now we bail out
               -- we can be smarter about this later
               return
@@ -62,7 +66,7 @@ return {
             -- We use zsh vim mode so we need to send our custom vim escape sequence to go to normal mode
             -- then back to insert mode before we send the command
             -- this handles the terminal in both normal and insert mode
-            active_terminal:send("jji" .. value, true)
+            active_terminals:send("jji" .. value, true)
           end,
         })
 
@@ -85,16 +89,20 @@ return {
 
     ---@diagnostic disable-next-line: missing-global-doc
     function TOGGLE_VERTICAL_TERMINAL()
-      if active_terminal == nil then
-        active_terminal = Terminal:new({
+      -- Add the terminal to the correct cwd path
+      local cwd = vim.uv.cwd()
+      if active_terminals[cwd] == nil then
+        active_terminals[cwd] = Terminal:new({
           direction = "vertical",
           hidden = true,
           on_exit = function()
-            active_terminal = nil
+            active_terminals[cwd] = nil
           end,
         })
       end
-      active_terminal:toggle()
+
+
+      active_terminals[cwd]:toggle()
     end
   end,
 }
