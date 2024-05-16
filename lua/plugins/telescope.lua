@@ -68,6 +68,43 @@ return {
       end,
       desc = "Browse files",
     },
+    -- Select directories containing .git in the specified search_dirs.
+    {
+      "<Leader>fp",
+      function()
+        require("telescope.builtin").find_files({
+          cwd = vim.env.HOME,
+          find_command = {
+            "fd",
+            "--prune",
+            "--hidden",
+            "--absolute-path",
+          },
+          file_ignore_patterns = { "%.cache", "%.cargo", "%node_modules" },
+          attach_mappings = function(prompt_bufnr, _map)
+            local actions = require("telescope.actions")
+            local action_state = require("telescope.actions.state")
+            actions.select_default:replace(function()
+              actions.close(prompt_bufnr)
+              local dir = action_state.get_selected_entry()[1]
+
+              vim.cmd("Neotree close")
+
+              -- Remove .git from the path so we can open the project root.
+              dir = string.gsub(dir, "(.*)/.git", "%1")
+              vim.cmd.cd(dir)
+
+              local alpha = require("alpha")
+              alpha.start(false, alpha.default_config)
+            end)
+            return true
+          end,
+          search_file = "^\\.git$",
+          search_dirs = { "~/programming", "~/.config" },
+        })
+      end,
+      desc = "Projects",
+    },
     {
       "<Leader>ft",
       function()

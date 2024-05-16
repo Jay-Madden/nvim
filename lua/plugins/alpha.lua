@@ -48,9 +48,6 @@ function M.restore()
   -- Restore the last session
   require("persistence").load()
 
-  -- Toggle neotree
-  vim.cmd("Neotree")
-
   -- Go back to the previous buffer after we load the session which is the active window
   local buffers = vim.api.nvim_list_bufs()
   local current_buffer = vim.api.nvim_get_current_buf()

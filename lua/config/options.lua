@@ -41,7 +41,6 @@ if vim.g.neovide then
   vim.g.neovide_scroll_animation_length = 0.2
 end
 
-
 -- Automatically reload files when then change externally
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
