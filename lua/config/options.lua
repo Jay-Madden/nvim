@@ -34,9 +34,14 @@ vim.o.foldenable = true
 
 -- Neovide configuration options
 if vim.g.neovide then
-  vim.g.neovide_cursor_vfx_mode = ""
+  -- Disable the annoying cursor jump animations when jumping around
   vim.g.neovide_cursor_animation_length = 0
-  vim.o.guifont = "JetbrainsMono Nerd Font Mono:h12.5" -- text below applies for VimScript
+
+  -- Make the smooth scrolling faster
+  vim.g.neovide_scroll_animation_length = 0.2
+
+  -- Neovide requires the font to be hardcoded here 
+  vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12.5" -- text below applies for VimScript
 end
 
 
