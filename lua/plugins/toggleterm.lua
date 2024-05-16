@@ -66,7 +66,7 @@ return {
             -- We use zsh vim mode so we need to send our custom vim escape sequence to go to normal mode
             -- then back to insert mode before we send the command
             -- this handles the terminal in both normal and insert mode
-            active_terminals:send("jji" .. value, true)
+            active_terminals[cwd]:send("jji" .. value, true)
           end,
         })
 
