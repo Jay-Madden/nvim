@@ -32,6 +32,14 @@ vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decr
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
+-- Neovide configuration options
+if vim.g.neovide then
+  vim.g.neovide_cursor_vfx_mode = ""
+  vim.g.neovide_cursor_animation_length = 0
+  vim.o.guifont = "JetbrainsMono Nerd Font Mono:h12.5" -- text below applies for VimScript
+end
+
+
 -- Automatically reload files when then change externally
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
