@@ -39,9 +39,6 @@ if vim.g.neovide then
 
   -- Make the smooth scrolling faster
   vim.g.neovide_scroll_animation_length = 0.2
-
-  -- Neovide requires the font to be hardcoded here 
-  vim.o.guifont = "JetBrainsMono Nerd Font Mono:h12.5" -- text below applies for VimScript
 end
 
 
