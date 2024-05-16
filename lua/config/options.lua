@@ -39,6 +39,13 @@ if vim.g.neovide then
 
   -- Make the smooth scrolling faster
   vim.g.neovide_scroll_animation_length = 0.2
+
+  vim.g.neovide_hide_mouse_when_typing = true
+
+  -- When launched from iterm neovide does not focus
+  vim.defer_fn(function()
+    vim.cmd("NeovideFocus")
+  end, 10)
 end
 
 -- Automatically reload files when then change externally

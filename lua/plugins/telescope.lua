@@ -80,7 +80,7 @@ return {
             "--hidden",
             "--absolute-path",
           },
-          file_ignore_patterns = { "%.cache", "%.cargo", "%node_modules" },
+          file_ignore_patterns = { "%node_modules" },
           attach_mappings = function(prompt_bufnr, _map)
             local actions = require("telescope.actions")
             local action_state = require("telescope.actions.state")
@@ -103,7 +103,7 @@ return {
           search_dirs = { "~/programming", "~/.config" },
         })
       end,
-      desc = "Projects",
+      desc = "Find Projects",
     },
     {
       "<Leader>ft",
