@@ -50,6 +50,7 @@ return {
       function()
         require("telescope.builtin").lsp_workspace_symbols({
           symbol_width = 50,
+          query = "all",
         })
       end,
       desc = "Find all symbols in current document",
@@ -138,7 +139,7 @@ return {
       desc = "Browse harpoon marks",
     },
     {
-      "<Leader>fS",
+      "<Leader>fw",
       function()
         local trouble_telescope = require("trouble.sources.telescope")
         trouble_telescope.open()
