@@ -48,6 +48,13 @@ return {
       end,
     })
 
+    ------- Manual Overrides -------
+
+    -- Disable semantic highlighting of keywords for go so the treesitter rule for return statements takes priority
+    vim.api.nvim_set_hl(0, '@lsp.type.keyword.go', {})
+
+    ------- 
+
     require("kanagawa").load("wave")
   end,
 }
