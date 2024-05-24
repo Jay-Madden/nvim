@@ -101,7 +101,6 @@ return {
         })
       end
 
-
       active_terminals[cwd]:toggle()
     end
   end,
