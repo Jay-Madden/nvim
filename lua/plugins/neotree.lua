@@ -9,9 +9,19 @@ return {
     "MunifTanjim/nui.nvim",
   },
 
+  keys = {
+    {
+      "<leader>nt",
+      function()
+        local neotree_command = require("neo-tree.command")
+        neotree_command.execute({ toggle = true })
+      end,
+      desc = "Move window left",
+    },
+  },
+
   config = function()
     local neotree = require("neo-tree")
-    local neotree_command = require("neo-tree.command")
 
     neotree.setup({
       close_if_last_window = true,
@@ -22,7 +32,11 @@ return {
 
       -- Refresh the window when files change
       use_libuv_file_watcher = true,
-
+      default_component_configs = {
+        indent = {
+          with_markers = false,
+        },
+      },
       window = {
         position = "left",
         mappings = {
@@ -48,9 +62,5 @@ return {
         },
       },
     })
-
-    utils.map("n", "<leader>nt", function()
-      neotree_command.execute({ toggle = true })
-    end, { desc = "Toggle neotree" })
   end,
 }
