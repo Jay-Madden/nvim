@@ -42,10 +42,12 @@ if vim.g.neovide then
 
   vim.g.neovide_hide_mouse_when_typing = true
 
+  vim.g.experimental_layer_grouping = false
+
   -- When launched from iterm neovide does not focus
   vim.defer_fn(function()
     vim.cmd("NeovideFocus")
-  end, 10)
+  end, 20)
 end
 
 -- Automatically reload files when then change externally
