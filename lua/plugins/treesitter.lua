@@ -45,6 +45,10 @@ return {
       },
     })
 
-    require("treesitter-context").setup({})
+    require("treesitter-context").setup({
+      mode = "topline",
+      -- Only show the definition name for a given context instead of everything
+      multiline_threshold = 1,
+    })
   end,
 }
