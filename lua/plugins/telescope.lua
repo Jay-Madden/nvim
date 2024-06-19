@@ -30,6 +30,13 @@ return {
       desc = "View registers",
     },
     {
+      "<leader>fm",
+      function()
+        require("telescope.builtin").marks()
+      end,
+      desc = "View marks",
+    },
+    {
       "<leader>fg",
       function()
         require("telescope.builtin").live_grep()
