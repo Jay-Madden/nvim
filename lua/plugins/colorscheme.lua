@@ -12,6 +12,9 @@ return {
         italic = false,
       },
       colors = {
+        palette = {
+          sumiInk3 = "#22222C",
+        },
         theme = {
           all = {
             ui = {

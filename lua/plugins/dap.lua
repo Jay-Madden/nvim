@@ -107,16 +107,6 @@ return {
       dapui.close()
     end
 
-    -- Reopen neotree when debugger ui exits
-    dap.listeners.after.event_terminated.dapui_config = function()
-      vim.cmd("Neotree")
-    end
-
-    dap.listeners.after.event_exited.dapui_config = function()
-      vim.cmd("Neotree")
-    end
-    ----
-
     -- Setup rust
     local codelldb_path = require("mason-registry").get_package("codelldb"):get_install_path()
       .. "/extension/adapter/codelldb"
