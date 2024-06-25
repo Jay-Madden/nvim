@@ -42,7 +42,7 @@ return {
         component_separators = "|",
         section_separators = { left = "", right = "" },
       },
-      disabled_filetypes = { 'Alpha', 'NVimTree' },
+      disabled_filetypes = { "Alpha", "NVimTree" },
       sections = {
         lualine_a = {
           { "mode", separator = { left = "" }, right_padding = 2 },

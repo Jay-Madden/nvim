@@ -6,11 +6,10 @@ return {
   config = function()
     require("hlchunk").setup({
       chunk = {
-          enable = true,
-          duration = 50,
-          delay = 50,
+        enable = true,
+        duration = 50,
+        delay = 50,
       },
     })
-  end
+  end,
 }
-

@@ -32,6 +32,23 @@ vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decr
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
+-- TODO: make this an actual plugin or something
+vim.api.nvim_create_user_command("GhLink", function()
+  local origin = vim.fn.system("git config --get remote.origin.url")
+  origin = origin:gsub("[\n\r]", "")
+
+  local current_rev = vim.fn.system("git rev-parse main")
+  current_rev = current_rev:gsub("[\n\r]", "")
+
+  local relative_path = vim.fn.expand("%:.")
+  local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+
+  local gh_permalink = origin .. "/blob/" .. current_rev .. "/" .. relative_path .. "#L" .. row
+
+  vim.fn.setreg("+", gh_permalink)
+  vim.print(gh_permalink .. " copied to system clipboard")
+end, {})
+
 -- Neovide configuration options
 if vim.g.neovide then
   -- Disable the annoying cursor jump animations when jumping around
