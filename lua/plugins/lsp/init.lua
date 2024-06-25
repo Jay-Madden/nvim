@@ -9,7 +9,6 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     "folke/neoconf.nvim",
-    "folke/neodev.nvim",
   },
 
   keys = {
@@ -25,7 +24,6 @@ return {
 
   config = function()
     require("neoconf").setup()
-    require("neodev").setup()
 
     -- Define the virtual text diagnostic signs
     local signs = {
