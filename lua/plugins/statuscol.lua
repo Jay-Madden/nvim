@@ -8,7 +8,7 @@ return {
       segments = {
         {
           sign = {
-            name = { "DapBreakpoint" },
+            name = { "[DapBreakpoint|Marks*]" },
             maxwidth = 1,
           },
           click = "v:lua.ScSa",
@@ -22,7 +22,6 @@ return {
         {
           sign = {
             namespace = { "gitsign" },
-            auto = true,
             maxwidth = 1,
           },
           click = "v:lua.ScSa",
