@@ -1,26 +1,42 @@
 return {
   "luukvbaal/statuscol.nvim",
 
-  dependencies = {
-    "lewis6991/gitsigns.nvim",
-  },
-
   config = function()
     local builtin = require("statuscol.builtin")
     require("statuscol").setup({
       relculright = true,
       segments = {
-        { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+        {
+          sign = {
+            name = { "DapBreakpoint" },
+            maxwidth = 1,
+          },
+          click = "v:lua.ScSa",
+        },
         {
           sign = { name = { "Diagnostic" }, maxwidth = 2, auto = true },
           click = "v:lua.ScSa",
         },
         { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+        { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
         {
-          sign = { name = { ".*" }, maxwidth = 2, colwidth = 1, wrap = true },
+          sign = {
+            namespace = { "gitsign" },
+            auto = true,
+            maxwidth = 1,
+          },
+          click = "v:lua.ScSa",
+        },
+        {
+          sign = {
+            name = { ".*" },
+            maxwidth = 1,
+            colwidth = 1,
+            wrap = true,
+          },
           click = "v:lua.ScSa",
         },
       },
-   })
+    })
   end,
 }

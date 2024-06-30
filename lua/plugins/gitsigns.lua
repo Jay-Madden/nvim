@@ -1,5 +1,9 @@
 return {
   "lewis6991/gitsigns.nvim",
+  enabled = true,
+  -- We have to load it actively or else it will only load on keybinding invoke
+  event = "VeryLazy",
+
   keys = {
     { "<Leader>qr", "<CMD>Gitsigns reset_hunk<CR>", desc = "Reset git change at cursor position" },
     {
@@ -11,8 +15,8 @@ return {
 
   config = function()
     require("gitsigns").setup({
-      debug_mode = true,
       signcolumn = true,
+      signs_staged_enable = true,
       signs = {
         add = { text = "│" },
         change = { text = "│" },
