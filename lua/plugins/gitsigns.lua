@@ -11,9 +11,8 @@ return {
 
   config = function()
     require("gitsigns").setup({
-      -- We need this temporarily so that statuscolumn will work correctly
-      _extmark_signs = false,
-
+      debug_mode = true,
+      signcolumn = true,
       signs = {
         add = { text = "│" },
         change = { text = "│" },

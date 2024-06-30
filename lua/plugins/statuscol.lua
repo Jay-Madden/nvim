@@ -21,6 +21,6 @@ return {
           click = "v:lua.ScSa",
         },
       },
-    })
+   })
   end,
 }
