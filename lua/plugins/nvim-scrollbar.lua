@@ -7,6 +7,8 @@ return {
   end,
 
   config = function()
-    require("scrollbar").setup()
+    require("scrollbar").setup({
+      performance_mode = true,
+    })
   end,
 }
