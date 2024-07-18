@@ -1,5 +1,5 @@
 return {
-  "karb92/neoscroll.nvim",
+  "karb94/neoscroll.nvim",
 
   -- Enable neoscroll only if not using neovide
   enabled = function()
