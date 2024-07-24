@@ -111,7 +111,7 @@ local function wrap_golang_multi_return(args)
   end))
 
   local anonymous_function = C(func_keyword * function_argument_list * repeat_whitespace)
-    * return_signature_capture
+    * return_signature_capture * C(repeat_whitespace * open_brace ^ 0 * repeat_whitespace)
   local named_function = C(
     func_keyword
       * repeat_whitespace
