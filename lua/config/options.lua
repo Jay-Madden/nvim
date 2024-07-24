@@ -32,6 +32,105 @@ vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decr
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
+local function wrap_golang_multi_return(args)
+
+  -- If its not a go buffer dont bother doing any more work
+  if vim.bo.filetype ~= "lua" then
+    return
+  end
+
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  local line_num = cursor_pos[1]
+
+  local line = vim.api.nvim_buf_get_lines(vim.api.nvim_get_current_buf(), line_num-1, line_num, false)[1]
+  vim.print(line.." foo")
+
+-- func foo() err {}
+  local P, R, S, C, Cs = vim.lpeg.P, vim.lpeg.R, vim.lpeg.S, vim.lpeg.C, vim.lpeg.Cs
+
+  local letter = R('az', 'AZ') + S("_")
+  local digit = R('09')
+
+
+  local whitespace = S(" \t\n")
+  local repeat_whitespace = whitespace^0
+
+  local alphanumeric = letter + digit
+  local identifier = alphanumeric^1
+  local symbol = S(", &*-[]|")
+
+  local wildcard = alphanumeric + symbol + whitespace + S("{}()[];")
+
+  local open_paren = P("(")
+  local close_paren = P(")")
+  local open_bracket = P("[")
+  local close_bracket = P("]")
+
+  local func_keyword = P("func")
+
+  local arguments = alphanumeric + symbol + whitespace
+
+  local function_argument_list = open_paren * arguments^0 * close_paren
+
+  -- We are just gonna ignore that nested generics happen
+  local generic_argument_list = open_bracket *  (arguments - close_bracket)^0 * close_bracket
+
+  local reciever = open_paren * alphanumeric^1 * repeat_whitespace * P("*")^-1 * identifier * repeat_whitespace * close_paren
+  --
+  -- The signature can be malformed, in fact it likely as this happens while we are typing
+  local return_signature = open_paren^0 * (identifier + symbol)^1 * close_paren^0
+
+  local return_signature_capture = vim.lpeg.Cs((return_signature / function(match)
+    if match == nil then
+      return
+    end
+    vim.print(match)
+
+    local function gsub (s, patt, repl)
+      patt = vim.lpeg.P(patt)
+      patt = vim.lpeg.Cs((patt / repl + 1)^0)
+      return vim.lpeg.match(patt, s)
+    end
+
+    -- Strip the parens off, we will add them back if we need to
+    local value = gsub(match, "(", "")
+    value = gsub(value, ")", "")
+
+    -- Disable the type error, lpeg match will work as a string
+    ---@diagnostic disable-next-line: param-type-mismatch
+    local returns = vim.split(value, ",")
+    if #returns == 1 then
+      return value
+    else
+      return "(".. value .. ")"
+    end
+  end))
+
+  local anonymous_function = C(func_keyword * function_argument_list * repeat_whitespace) * return_signature_capture
+  local named_function = C(func_keyword * repeat_whitespace * reciever^0 * repeat_whitespace *  identifier * generic_argument_list^0 * repeat_whitespace * function_argument_list * repeat_whitespace)* return_signature_capture
+  local full_function = anonymous_function + named_function
+
+  -- We want to ignore the start of the line incase it is a lambda
+  local full_line = Cs(((P(1) - func_keyword)^0 * full_function))
+
+  local match = vim.lpeg.match(full_line, args.args)
+
+  vim.print(match)
+
+    local function gsub (s, patt, repl)
+      patt = vim.lpeg.P(patt)
+      patt = vim.lpeg.Cs((patt / repl + 1)^0)
+      return vim.lpeg.match(patt, s)
+    end
+
+  vim.print(gsub("abc", "ll", "|"))
+end
+
+-- func foo() err, 
+
+-- vim.api.nvim_create_autocmd({"TextChanged","TextChangedI"},{callback= wrap_golang_multi_return})
+vim.api.nvim_create_user_command("TestG", wrap_golang_multi_return, {nargs="?"})
+
 -- TODO: make this an actual plugin or something
 vim.api.nvim_create_user_command("GhLink", function()
   local origin = vim.fn.system("git config --get remote.origin.url")
