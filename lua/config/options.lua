@@ -40,12 +40,11 @@ local function wrap_golang_multi_return(args)
   end
 
   local cursor_pos = vim.api.nvim_win_get_cursor(0)
-  local line_num = cursor_pos[1]
+  local line_num, line_col = cursor_pos[1], cursor_pos[2]
+  local curr_buf = vim.api.nvim_get_current_buf()
 
-  local line = vim.api.nvim_buf_get_lines(vim.api.nvim_get_current_buf(), line_num-1, line_num, false)[1]
-  vim.print(line.." foo")
+  local line = vim.api.nvim_buf_get_lines(curr_buf, line_num-1, line_num, false)[1]
 
--- func foo() err {}
   local P, R, S, C, Cs = vim.lpeg.P, vim.lpeg.R, vim.lpeg.S, vim.lpeg.C, vim.lpeg.Cs
 
   local letter = R('az', 'AZ') + S("_")
@@ -57,14 +56,14 @@ local function wrap_golang_multi_return(args)
 
   local alphanumeric = letter + digit
   local identifier = alphanumeric^1
-  local symbol = S(", &*-[]|")
-
-  local wildcard = alphanumeric + symbol + whitespace + S("{}()[];")
+  local symbol = S("., &*-[]|")
 
   local open_paren = P("(")
   local close_paren = P(")")
   local open_bracket = P("[")
   local close_bracket = P("]")
+  local open_brace = P("{")
+  local  close_brace = P("}")
 
   local func_keyword = P("func")
 
@@ -84,7 +83,6 @@ local function wrap_golang_multi_return(args)
     if match == nil then
       return
     end
-    vim.print(match)
 
     local function gsub (s, patt, repl)
       patt = vim.lpeg.P(patt)
@@ -102,34 +100,39 @@ local function wrap_golang_multi_return(args)
     if #returns == 1 then
       return value
     else
+      line_col = line_col + 1
       return "(".. value .. ")"
     end
   end))
 
   local anonymous_function = C(func_keyword * function_argument_list * repeat_whitespace) * return_signature_capture
-  local named_function = C(func_keyword * repeat_whitespace * reciever^0 * repeat_whitespace *  identifier * generic_argument_list^0 * repeat_whitespace * function_argument_list * repeat_whitespace)* return_signature_capture
+  local named_function = C(func_keyword * repeat_whitespace * reciever^0 * repeat_whitespace *  identifier * generic_argument_list^0 * repeat_whitespace * function_argument_list * repeat_whitespace)* return_signature_capture * C(repeat_whitespace * close_brace^0)
   local full_function = anonymous_function + named_function
 
   -- We want to ignore the start of the line incase it is a lambda
   local full_line = Cs(((P(1) - func_keyword)^0 * full_function))
 
-  local match = vim.lpeg.match(full_line, args.args)
+  local match = vim.lpeg.match(full_line, line)
 
-  vim.print(match)
+  if match == nil then
+    return
+  end
 
-    local function gsub (s, patt, repl)
-      patt = vim.lpeg.P(patt)
-      patt = vim.lpeg.Cs((patt / repl + 1)^0)
-      return vim.lpeg.match(patt, s)
-    end
+  -- Disable the type error, lpeg match will work as a string
+  ---@diagnostic disable-next-line: param-type-mismatch
+  vim.api.nvim_set_current_line(match)
 
-  vim.print(gsub("abc", "ll", "|"))
+  -- When we add parenthesis we need to bump the cursor one block to the right to account for the paren on the left. 
+  -- we bump the column number in the match handler and execute it here
+  vim.api.nvim_win_set_cursor(0, {line_num, line_col})
 end
 
--- func foo() err, 
+-- func foo() (error,)
+-- func foo() (err, )
+-- func shouldCreateHpaReplicas(region string, webapp v1alpha1.WebApp) (bool,) 
 
--- vim.api.nvim_create_autocmd({"TextChanged","TextChangedI"},{callback= wrap_golang_multi_return})
-vim.api.nvim_create_user_command("TestG", wrap_golang_multi_return, {nargs="?"})
+vim.api.nvim_create_autocmd({"TextChanged","TextChangedI"},{callback= wrap_golang_multi_return})
+-- vim.api.nvim_create_user_command("TestG", wrap_golang_multi_return, {nargs="?"})
 
 -- TODO: make this an actual plugin or something
 vim.api.nvim_create_user_command("GhLink", function()
