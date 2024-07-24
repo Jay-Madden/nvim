@@ -32,7 +32,7 @@ vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decr
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
-local function wrap_golang_multi_return(args)
+local function wrap_golang_multi_return()
   -- If its not a go buffer dont bother doing any more work
   if vim.bo.filetype ~= "go" then
     return
@@ -143,15 +143,10 @@ local function wrap_golang_multi_return(args)
   vim.api.nvim_win_set_cursor(0, { line_num, line_col })
 end
 
--- func foo() (error,)
--- func foo() err
--- func shouldCreateHpaReplicas(region string, webapp v1alpha1.WebApp) bool {
-
 vim.api.nvim_create_autocmd(
   { "TextChanged", "TextChangedI" },
   { callback = wrap_golang_multi_return }
 )
--- vim.api.nvim_create_user_command("TestG", wrap_golang_multi_return, {nargs="?"})
 
 -- TODO: make this an actual plugin or something
 vim.api.nvim_create_user_command("GhLink", function()
