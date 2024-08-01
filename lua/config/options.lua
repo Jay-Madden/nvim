@@ -102,10 +102,10 @@ local function wrap_golang_multi_return()
     ---@diagnostic disable-next-line: param-type-mismatch
     local returns = vim.split(value, ",")
     if #returns == 1 then
-      line_col = line_col - 1
+      --line_col = line_col - 1
       return value
     else
-      line_col = line_col + 1
+      --line_col = line_col + 1
       return "(" .. value .. ")"
     end
   end))
@@ -143,10 +143,11 @@ local function wrap_golang_multi_return()
   vim.api.nvim_win_set_cursor(0, { line_num, line_col })
 end
 
-vim.api.nvim_create_autocmd(
-  { "TextChanged", "TextChangedI" },
-  { callback = wrap_golang_multi_return }
-)
+
+-- vim.api.nvim_create_autocmd(
+--   { "TextChanged", "TextChangedI" },
+--   { callback = wrap_golang_multi_return }
+-- )
 
 -- TODO: make this an actual plugin or something
 vim.api.nvim_create_user_command("GhLink", function()
