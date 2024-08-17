@@ -32,122 +32,97 @@ vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decr
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
-local function wrap_golang_multi_return()
-  -- If its not a go buffer dont bother doing any more work
+local function wrap_golang_return()
   if vim.bo.filetype ~= "go" then
     return
   end
 
-  local cursor_pos = vim.api.nvim_win_get_cursor(0)
-  local line_num, line_col = cursor_pos[1], cursor_pos[2]
-  local curr_buf = vim.api.nvim_get_current_buf()
+  local query_str = [[
+    (_
+       result: (_) @result 
+       (ERROR)? @error 
+    ) 
+  ]]
 
-  local line = vim.api.nvim_buf_get_lines(curr_buf, line_num - 1, line_num, false)[1]
+  local query = vim.treesitter.query.parse("go", query_str)
+  local cursor_row, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
 
-  local P, R, S, C, Cs = vim.lpeg.P, vim.lpeg.R, vim.lpeg.S, vim.lpeg.C, vim.lpeg.Cs
+  local tree = vim.treesitter.get_node():tree()
 
-  local letter = R("az", "AZ") + S("_")
-  local digit = R("09")
+  local final_start_row, final_start_col, final_end_row, final_end_col = 0, 0, 0, 0
 
-  local whitespace = S(" \t\n")
-  local repeat_whitespace = whitespace ^ 0
+  for id, node, _, _ in query:iter_captures(tree:root(), 0) do
+    local start_row, _, end_row, end_col = node:range()
 
-  local alphanumeric = letter + digit
-  local identifier = alphanumeric ^ 1
-  local symbol = S("., &*-[]|")
-
-  local open_paren = P("(")
-  local close_paren = P(")")
-  local open_bracket = P("[")
-  local close_bracket = P("]")
-  local open_brace = P("{")
-  local close_brace = P("}")
-
-  local func_keyword = P("func")
-
-  local arguments = alphanumeric + symbol + whitespace
-
-  local function_argument_list = open_paren * arguments ^ 0 * close_paren
-
-  -- We are just gonna ignore that nested generics happen
-  local generic_argument_list = open_bracket * (arguments - close_bracket) ^ 0 * close_bracket
-
-  local reciever = open_paren
-    * alphanumeric ^ 1
-    * repeat_whitespace
-    * P("*") ^ -1
-    * identifier
-    * repeat_whitespace
-    * close_paren
-  --
-  -- The signature can be malformed, in fact it likely as this happens while we are typing
-  local return_signature = open_paren ^ 0 * (identifier + symbol) ^ 1 * close_paren ^ 0
-
-  local return_signature_capture = vim.lpeg.Cs((return_signature / function(match)
-    if match == nil then
-      return
+    if cursor_row < start_row + 1 or cursor_row > end_row + 1 then
+      goto continue
     end
 
-    local function gsub(s, patt, repl)
-      patt = vim.lpeg.P(patt)
-      patt = vim.lpeg.Cs((patt / repl + 1) ^ 0)
-      return vim.lpeg.match(patt, s)
+    local capture_name = query.captures[id]
+    if capture_name == "result" then
+      final_start_row, final_start_col, final_end_row, final_end_col = node:range()
+    end
+    if capture_name == "error" then
+      final_end_col = end_col
+      final_end_row = end_row
     end
 
-    -- Strip the parens off, we will add them back if we need to
-    local value = gsub(match, "(", "")
-    value = gsub(value, ")", "")
+    ::continue::
+  end
 
-    -- Disable the type error, lpeg match will work as a string
-    ---@diagnostic disable-next-line: param-type-mismatch
-    local returns = vim.split(value, ",")
-    if #returns == 1 then
-      --line_col = line_col - 1
-      return value
-    else
-      --line_col = line_col + 1
-      return "(" .. value .. ")"
-    end
-  end))
-
-  local anonymous_function = C(func_keyword * function_argument_list * repeat_whitespace)
-    * return_signature_capture * C(repeat_whitespace * open_brace ^ 0 * repeat_whitespace)
-  local named_function = C(
-    func_keyword
-      * repeat_whitespace
-      * reciever ^ 0
-      * repeat_whitespace
-      * identifier
-      * generic_argument_list ^ 0
-      * repeat_whitespace
-      * function_argument_list
-      * repeat_whitespace
-  ) * return_signature_capture * C(repeat_whitespace * open_brace ^ 0 * repeat_whitespace)
-  local full_function = anonymous_function + named_function
-
-  -- We want to ignore the start of the line incase it is a lambda
-  local full_line = Cs(((P(1) - func_keyword) ^ 0 * full_function))
-
-  local match = vim.lpeg.match(full_line, line)
-
-  if match == nil then
+  local line = vim.api.nvim_buf_get_text(
+    0,
+    final_start_row,
+    final_start_col,
+    final_end_row,
+    final_end_col,
+    {}
+  )[1]
+  if line == "" then
     return
   end
 
-  -- Disable the type error, lpeg match will work as a string
-  ---@diagnostic disable-next-line: param-type-mismatch
-  vim.api.nvim_set_current_line(match)
+  -- Here we rebuild the entire return statement to a syntactically correct version
+  -- splitting on commas to decide if there is a parameter list or a single value
+  -- Strip the parens off, we will add them back if we need to
+  local value = string.gsub(line, "%(", "")
+  value = string.gsub(value, "%)", "")
 
-  -- When we add parenthesis we need to bump the cursor one block to the right to account for the paren on the left.
-  -- we bump the column number in the match handler and execute it here
-  vim.api.nvim_win_set_cursor(0, { line_num, line_col })
+  -- We will need to move the cursor depending on the action that we take,
+  -- grab the current cusor position so we can adjust it below
+  local final_cursor_col = cursor_col
+
+  local returns = vim.split(value, ",")
+  local new_line = line
+  if #returns == 1 then
+    final_cursor_col = final_cursor_col - 1
+    new_line = value
+  else
+    final_cursor_col = final_cursor_col + 1
+    new_line = "(" .. value .. ")"
+  end
+
+  -- If the line hasnt changed or theres nothing to add then we just bail out here
+  if line == new_line then
+    return
+  end
+
+  vim.api.nvim_buf_set_text(
+    0,
+    final_start_row,
+    final_start_col,
+    final_end_row,
+    final_end_col,
+    { new_line }
+  )
+  vim.api.nvim_win_set_cursor(0, { final_end_row + 1, final_cursor_col })
 end
 
-
--- vim.api.nvim_create_autocmd(
---   { "TextChanged", "TextChangedI" },
---   { callback = wrap_golang_multi_return }
--- )
+vim.api.nvim_create_autocmd(
+  -- { "InsertLeave", "TextChanged" },
+  { "TextChangedI", "TextChanged" },
+  { callback = wrap_golang_return }
+)
 
 -- TODO: make this an actual plugin or something
 vim.api.nvim_create_user_command("GhLink", function()
