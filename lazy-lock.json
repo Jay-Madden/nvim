@@ -2,7 +2,7 @@
   "LuaSnip": { "branch": "master", "commit": "b84eeb3641b08324287587b426ec974b888390d9" },
   "actions-preview.nvim": { "branch": "master", "commit": "9f52a01c374318e91337697ebed51c6fae57f8a4" },
   "alpha-nvim": { "branch": "main", "commit": "355fbb81a59637a8963cf5847074f8c44dbef11f" },
-  "auto-fix-return.nvim": { "branch": "update-query-terminate-shortvar", "commit": "fb9adfe70448a3d573c9f0a7076cc1528d714b40" },
+  "auto-fix-return.nvim": { "branch": "master", "commit": "30361b962f7b80ad5e19fa41480d7b961c54d739" },
   "auto-save.nvim": { "branch": "main", "commit": "979b6c82f60cfa80f4cf437d77446d0ded0addf0" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-cmdline": { "branch": "main", "commit": "d250c63aa13ead745e3a40f61fdd3470efde3923" },
