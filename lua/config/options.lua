@@ -14,6 +14,8 @@ vim.opt.smartindent = true
 vim.opt.splitright = true
 -- Show tabs as 4 spaces
 vim.opt.tabstop = 4
+-- Set shiftwidth
+vim.o.shiftwidth = 4
 -- Allow cursor to move in virtual space in block mode
 vim.opt.virtualedit = "block"
 -- Always show the signcolumn so we dont shift text every time
