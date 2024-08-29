@@ -4,6 +4,5 @@ return {
     require("auto-fix-return").setup({
       enable_autocmds = true,
     })
-  end
+  end,
 }
-
