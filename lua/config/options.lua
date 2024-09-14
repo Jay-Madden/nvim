@@ -28,6 +28,11 @@ vim.opt.wildmode = "longest:full,full"
 vim.opt.cursorline = true
 vim.o.cursorlineopt = "both"
 
+-- sync buffers automatically
+vim.opt.autoread = true
+-- disable neovim generating a swapfile and showing the error
+vim.opt.swapfile = false
+
 -- Default nvim-ufo fold settings
 vim.o.foldcolumn = "1" -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
