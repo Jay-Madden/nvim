@@ -58,9 +58,3 @@ utils.map(
   "<C-\\><C-n><C-w>l",
   { desc = "Move focus to right window in terminal mode" }
 )
-
--- Resize window using <ctrl> arrow keys
-utils.map("n", "<C-,>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-utils.map("n", "<C-m>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-utils.map("n", "<C-.>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-utils.map("n", "<C-n>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
