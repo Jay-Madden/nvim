@@ -13,6 +13,11 @@ return {
 
   config = function()
     require("noice").setup({
+      cmdline = {
+        format = {
+          cmdline = {title=""},
+        },
+      },
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
