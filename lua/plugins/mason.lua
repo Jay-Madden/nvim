@@ -17,6 +17,7 @@ return {
       --------
       "pyright",
       "gopls",
+      "bashls",
     }
 
     require("mason").setup()
