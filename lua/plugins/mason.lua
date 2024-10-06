@@ -15,9 +15,12 @@ return {
       -- Rust debugger
       "codelldb",
       --------
+      "clangd",
       "pyright",
       "gopls",
       "bashls",
+      "ts_ls",
+      "html-lsp",
     }
 
     require("mason").setup()
