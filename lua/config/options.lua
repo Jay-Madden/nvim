@@ -90,6 +90,12 @@ if vim.fn.has("nvim-0.9.0") == 1 then
   --vim.opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn()]]
 end
 
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
+
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   command = "checktime",

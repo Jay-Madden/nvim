@@ -17,7 +17,10 @@ return {
       --------
       "clangd",
       "pyright",
+      -- Golang
       "gopls",
+      "golangci-lint",
+      --------
       "bashls",
       "ts_ls",
       "html-lsp",
