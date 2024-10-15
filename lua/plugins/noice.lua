@@ -15,7 +15,7 @@ return {
     require("noice").setup({
       cmdline = {
         format = {
-          cmdline = {title=""},
+          cmdline = { title = "" },
         },
       },
       lsp = {

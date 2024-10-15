@@ -4,6 +4,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-symbols.nvim",
+    "nvim-telescope/telescope-ui-select.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
   },
 
@@ -155,6 +156,15 @@ return {
   },
 
   config = function()
-    require("telescope").setup({})
+    require("telescope").setup({
+      extensions = {
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown({}),
+        },
+      },
+    })
+
+    require("telescope").load_extension("ui-select")
   end,
+
 }
