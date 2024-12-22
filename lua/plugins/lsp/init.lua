@@ -89,6 +89,11 @@ return {
       pyright = function(server_name)
         lspconfig[server_name].setup({
           capabilities = capabilities,
+          settings = {
+            pyright = {
+              venv = ".venv",
+            }
+          }
         })
       end,
 
