@@ -2,8 +2,10 @@ return {
   "karb94/neoscroll.nvim",
 
   -- Enable neoscroll only if not using neovide
+  -- Neoscroll disabled currently as we are testing snacks.nvim scrolling instead
   enabled = function()
-    return not vim.g.neovide
+    return false
+    -- return not vim.g.neovide
   end,
 
   config = function()
