@@ -111,7 +111,7 @@ return {
           cmd = "git status --short --branch --renames",
           height = 5,
           padding = 1,
-          ttl = 5 * 60,
+          ttl = 0,
           indent = 3,
         },
         {
@@ -119,6 +119,7 @@ return {
           icon = " ",
           title = "Git Diff",
           section = "terminal",
+          ttl = 0,
           enabled = function()
             return Snacks.git.get_root() ~= nil
           end,
