@@ -32,7 +32,7 @@ EOF
 ]]
 
 return {
-  "folke/snacks.nvim",
+  "jay-madden/snacks.nvim",
   priority = 1000,
   lazy = false,
   ---
@@ -76,7 +76,7 @@ return {
           section = "terminal",
           cmd = colorscript_square,
           -- Disable caching until https://github.com/folke/snacks.nvim/issues/379 allows for longer cached commands
-          ttl = 0,
+          -- ttl = 0,
           ----
           height = 5,
           padding = 1,
