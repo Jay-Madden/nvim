@@ -3,11 +3,17 @@ return {
   priority = 1000,
   lazy = false,
   ---
+  keys = {
+    { "<leader>lg", function() Snacks.lazygit.open() end, desc = "LazyGit" },
+  },
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
     indent = { enabled = false },
     input = { enabled = false },
+    lazygit = {
+      enabled = true,
+    },
     notifier = { enabled = false },
     quickfile = { enabled = true },
     scroll = {
