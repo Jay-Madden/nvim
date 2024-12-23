@@ -75,6 +75,9 @@ return {
           pane = 2,
           section = "terminal",
           cmd = colorscript_square,
+          -- Disable caching until https://github.com/folke/snacks.nvim/issues/379 allows for longer cached commands
+          ttl = 0,
+          ----
           height = 5,
           padding = 1,
         },
