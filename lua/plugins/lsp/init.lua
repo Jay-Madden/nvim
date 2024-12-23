@@ -92,8 +92,8 @@ return {
           settings = {
             pyright = {
               venv = ".venv",
-            }
-          }
+            },
+          },
         })
       end,
 

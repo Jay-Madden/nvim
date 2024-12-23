@@ -102,9 +102,6 @@ return {
               -- Remove .git from the path so we can open the project root.
               dir = string.gsub(dir, "(.*)/.git", "%1")
               vim.cmd.cd(dir)
-
-              local alpha = require("alpha")
-              alpha.start(false, alpha.default_config)
             end)
             return true
           end,
@@ -166,5 +163,4 @@ return {
 
     require("telescope").load_extension("ui-select")
   end,
-
 }
