@@ -37,7 +37,13 @@ return {
   lazy = false,
   ---
   keys = {
-    { "<leader>lg", function() Snacks.lazygit.open() end, desc = "LazyGit" },
+    {
+      "<leader>lg",
+      function()
+        Snacks.lazygit.open()
+      end,
+      desc = "LazyGit",
+    },
   },
   ---@type snacks.Config
   opts = {
