@@ -100,9 +100,6 @@ return {
       bashls = function(server_name)
         lspconfig[server_name].setup({
           capabilities = capabilities,
-          cmd = {
-            "/Users/jaymadden/.local/share/nvim/mason/packages/clangd/clangd_19.1.0/bin/clangd",
-          },
         })
       end,
 

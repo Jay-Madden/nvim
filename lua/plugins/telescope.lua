@@ -17,6 +17,13 @@ return {
       desc = "Find files",
     },
     {
+      "<leader>fc",
+      function()
+        require("telescope.builtin").find_files({cwd=require("telescope.utils").buffer_dir()})
+      end,
+      desc = "Find files in current buffer directory",
+    },
+    {
       "<leader>fr",
       function()
         require("telescope.builtin").lsp_references()
