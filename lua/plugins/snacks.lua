@@ -32,7 +32,7 @@ EOF
 ]]
 
 return {
-  "jay-madden/snacks.nvim",
+  "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
   ---
@@ -81,9 +81,6 @@ return {
           pane = 2,
           section = "terminal",
           cmd = colorscript_square,
-          -- Disable caching until https://github.com/folke/snacks.nvim/issues/379 allows for longer cached commands
-          -- ttl = 0,
-          ----
           height = 5,
           padding = 1,
         },
@@ -113,6 +110,7 @@ return {
           section = "terminal",
           indent = 2,
           ttl = 0,
+          padding = 1,
           enabled = function()
             return Snacks.git.get_root() ~= nil
           end,
@@ -123,7 +121,6 @@ return {
           icon = " ",
           title = "Git Status",
           section = "terminal",
-          indent = 2,
           enabled = function()
             return Snacks.git.get_root() ~= nil
           end,
