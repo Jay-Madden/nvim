@@ -6,7 +6,7 @@ return {
 
   dependencies = {
     "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "saghen/blink.cmp",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     "folke/neoconf.nvim",
   },
@@ -49,11 +49,12 @@ return {
       },
     })
     -----------
+    ---
 
     local lspconfig = require("lspconfig")
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+    capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
     -- Add folding capabilities for nvim-ufo
     capabilities.textDocument.foldingRange = {
