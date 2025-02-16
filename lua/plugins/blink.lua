@@ -25,7 +25,7 @@ return {
       -- ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
       -- ["<C-Space>"] = cmp.mapping.complete(),
-      ["<CR>"] = { function(cmp) cmp.select_and_accept() end },
+      -- ["<CR>"] = { function(cmp) cmp.select_and_accept() end },
       ["<Tab>"] = { function(cmp) cmp.select_and_accept() end },
       -- ["<Tab>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
     },
@@ -46,7 +46,7 @@ return {
         draw = {
           -- We don't need label_description now because label and label_description are already
           -- combined together in label by colorful-menu.nvim.
-          columns = { { "kind_icon" }, { "label", gap = 1 } },
+          columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
           components = {
             label = {
               width = { fill = true, max = 60 },
@@ -83,7 +83,9 @@ return {
         },
       },
     },
-    signature = { window = { border = "single" } },
+    signature = { enabled = true,
+      window = { border = "single" }
+    },
 
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
