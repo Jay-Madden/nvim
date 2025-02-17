@@ -7,6 +7,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
     "onsails/lspkind.nvim",
     {
       "L3MON4D3/LuaSnip",
@@ -39,8 +40,8 @@ return {
             -- better to fallback to use default `vim_item.abbr`. What this plugin
             -- offers is two fields: `vim_item.abbr_hl_group` and `vim_item.abbr`.
             if highlights_info ~= nil then
-                vim_item.abbr_hl_group = highlights_info.highlights
-                vim_item.abbr = highlights_info.text
+              vim_item.abbr_hl_group = highlights_info.highlights
+              vim_item.abbr = highlights_info.text
             end
 
             return vim_item
@@ -74,6 +75,20 @@ return {
         },
         { name = "nvim_lua" },
         { name = "luasnip" },
+      }),
+    })
+    -- `:` cmdline setup.
+    cmp.setup.cmdline(":", {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = "path" },
+      }, {
+        {
+          name = "cmdline",
+          option = {
+            ignore_cmds = { "Man", "!" },
+          },
+        },
       }),
     })
   end,

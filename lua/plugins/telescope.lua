@@ -20,7 +20,7 @@ return {
       {
         "<leader>fc",
         function()
-          require("telescope.builtin").find_files({cwd=require("telescope.utils").buffer_dir()})
+          require("telescope.builtin").find_files({ cwd = require("telescope.utils").buffer_dir() })
         end,
         desc = "Find files in current buffer directory",
       },
@@ -160,7 +160,7 @@ return {
       },
     }
 
-    -- Generate keymaps for opening a telescope picker that selects all files in 
+    -- Generate keymaps for opening a telescope picker that selects all files in
     -- N number of parent directories
     for i = 1, 9 do
       local backward_dir_nav = ""
