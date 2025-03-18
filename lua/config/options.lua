@@ -38,6 +38,8 @@ vim.o.foldcolumn = "1" -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
 
 -- TODO: make this an actual plugin or something
 vim.api.nvim_create_user_command("GhLink", function()
@@ -74,6 +76,13 @@ if vim.g.neovide then
   end, 20)
 end
 
+-- Add # as the comment string for terraform files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "terraform",
+  callback = function()
+    vim.bo.commentstring = "# %s"
+  end,
+})
 -- Automatically reload files when then change externally
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
