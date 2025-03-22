@@ -10,8 +10,20 @@ utils.map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent 
 utils.map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 utils.map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 utils.map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-utils.map({ "n", "x" }, "<C-d>", "<C-d>zz", { silent = true })
-utils.map({ "n", "x" }, "<C-u>", "<C-u>zz", { silent = true })
+
+-- https://www.reddit.com/r/neovim/comments/1707ppd/anybody_actually_use_ctrld_and_ctrlu_to_scroll/k3jo5oi/
+local function lazy(keys)
+  keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
+  return function()
+    local old = vim.o.lazyredraw
+    vim.o.lazyredraw = true
+    vim.api.nvim_feedkeys(keys, "nx", false)
+    vim.o.lazyredraw = old
+  end
+end
+
+vim.keymap.set("n", "<c-d>", lazy("<c-d>zz"), { desc = "Scroll down half screen" })
+vim.keymap.set("n", "<c-d>", lazy("<c-u>zz"), { desc = "Scroll down half screen" })
 
 -- Allow for multiple indents with a single selection
 utils.map("v", "<", "<gv", { desc = "Better indenting" })
