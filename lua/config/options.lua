@@ -91,9 +91,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 })
 
 -- Enable smooth scrolling
-if vim.fn.has("nvim-0.10") == 1 then
-  vim.opt.smoothscroll = true
-end
+vim.opt.smoothscroll = true
 
 if vim.fn.has("nvim-0.9.0") == 1 then
   --vim.opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn()]]

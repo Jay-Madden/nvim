@@ -6,6 +6,7 @@ return {
     "nvim-telescope/telescope-symbols.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
+    "nvim-telescope/telescope-frecency.nvim",
   },
 
   keys = function()
@@ -23,6 +24,15 @@ return {
           require("telescope.builtin").find_files({ cwd = require("telescope.utils").buffer_dir() })
         end,
         desc = "Find files in current buffer directory",
+      },
+      {
+        "<leader>fe",
+        function()
+          require("telescope").extensions.frecency.frecency({
+            workspace = "CWD",
+          })
+        end,
+        desc = "Find files with weighted frecency score",
       },
       {
         "<leader>fr",
@@ -189,9 +199,13 @@ return {
         ["ui-select"] = {
           require("telescope.themes").get_dropdown({}),
         },
+        frecency = {
+          path_display = { "smart" },
+          show_scores = true,
+        }
       },
     })
-
+    require("telescope").load_extension("frecency")
     require("telescope").load_extension("ui-select")
   end,
 }
