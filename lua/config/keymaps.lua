@@ -23,7 +23,7 @@ local function lazy(keys)
 end
 
 vim.keymap.set("n", "<c-d>", lazy("<c-d>zz"), { desc = "Scroll down half screen" })
-vim.keymap.set("n", "<c-d>", lazy("<c-u>zz"), { desc = "Scroll down half screen" })
+vim.keymap.set("n", "<c-u>", lazy("<c-u>zz"), { desc = "Scroll down half screen" })
 
 -- Allow for multiple indents with a single selection
 utils.map("v", "<", "<gv", { desc = "Better indenting" })
