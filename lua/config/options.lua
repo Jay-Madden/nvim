@@ -41,6 +41,14 @@ vim.o.foldenable = true
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
 
+-- Only show virtual text for current lines
+if vim.fn.has("nvim-0.11.0") == 1 then
+  vim.diagnostic.config({
+    virtual_text = { current_line = true, severity = { min = "INFO", max = "WARN" } },
+    virtual_lines = { current_line = true, severity = { min = "ERROR" } },
+  })
+end
+
 -- TODO: make this an actual plugin or something
 vim.api.nvim_create_user_command("GhLink", function()
   local origin = vim.fn.system("git config --get remote.origin.url")
