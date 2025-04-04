@@ -29,7 +29,7 @@ vim.keymap.set("n", "<c-u>", lazy("<c-u>zz"), { desc = "Scroll down half screen"
 utils.map("v", "<", "<gv", { desc = "Better indenting" })
 utils.map("v", ">", ">gv", { desc = "Better indenting" })
 
--- Goto definition in new window
+-- Goto definition in new split
 utils.map("n", "gv", ":vsplit<cr>gd:nohl<cr>", { desc = "Go to definition in new vertical split"})
 utils.map("n", "gh", ":split<cr>gd:nohl<cr>", { desc = "Go to definition in new horizontal split"})
 
