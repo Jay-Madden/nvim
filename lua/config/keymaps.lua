@@ -29,6 +29,10 @@ vim.keymap.set("n", "<c-u>", lazy("<c-u>zz"), { desc = "Scroll down half screen"
 utils.map("v", "<", "<gv", { desc = "Better indenting" })
 utils.map("v", ">", ">gv", { desc = "Better indenting" })
 
+-- Goto definition in new window
+utils.map("n", "gv", ":vsplit<cr>gd", { desc = "Go to definition in new vertical split"})
+utils.map("n", "gh", ":split<cr>gd", { desc = "Go to definition in new horizontal split"})
+
 -- Move Lines
 utils.map("n", "<leader>mj", "<cmd>m .+1<cr>==", { desc = "Move down" })
 utils.map("n", "<leader>mk", "<cmd>m .-2<cr>==", { desc = "Move up" })
