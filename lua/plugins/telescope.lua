@@ -63,6 +63,52 @@ return {
         desc = "Live grep",
       },
       {
+        "<leader>fj",
+        function()
+          -- Modified from here https://github.com/nvim-telescope/telescope.nvim/blob/a4ed82509cecc56df1c7138920a1aeaf246c0ac5/lua/telescope/builtin/__internal.lua#L1483
+          local pickers = require("telescope.pickers")
+          local finders = require("telescope.finders")
+          local conf = require("telescope.config").values
+          local make_entry = require("telescope.make_entry")
+
+          local jumplist = vim.fn.getjumplist()[1]
+
+          -- reverse the list
+          local sorted_jumplist = {}
+          local entries = {}
+          for i = #jumplist, 1, -1 do
+            if vim.api.nvim_buf_is_valid(jumplist[i].bufnr) then
+              local text = vim.api.nvim_buf_get_lines(
+                jumplist[i].bufnr,
+                jumplist[i].lnum - 1,
+                jumplist[i].lnum,
+                false
+              )[1] or ""
+              jumplist[i].text = text
+
+              local name = vim.api.nvim_buf_get_name(jumplist[i].bufnr)
+
+              if not name:find(vim.fn.getcwd(), 1, false) then
+                table.insert(sorted_jumplist, jumplist[i])
+              end
+            end
+          end
+
+          pickers
+            .new({}, {
+              prompt_title = "Jumplist",
+              finder = finders.new_table({
+                results = sorted_jumplist,
+                entry_maker = make_entry.gen_from_quickfix({}),
+              }),
+              previewer = conf.qflist_previewer({}),
+              sorter = conf.generic_sorter({}),
+            })
+            :find()
+        end,
+        desc = "View the jump list",
+      },
+      {
         "<Leader>fs",
         function()
           require("telescope.builtin").lsp_document_symbols({
@@ -202,7 +248,7 @@ return {
         frecency = {
           path_display = { "smart" },
           show_scores = true,
-        }
+        },
       },
     })
     require("telescope").load_extension("frecency")
