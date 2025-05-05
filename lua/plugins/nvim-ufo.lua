@@ -8,15 +8,13 @@ return {
 
   keys = {
     {
-      "n",
-      "zO",
+      "zR",
       function()
         require("ufo").openAllFolds()
       end,
     },
     {
-      "n",
-      "zC",
+      "zM",
       function()
         require("ufo").closeAllFolds()
       end,
@@ -24,6 +22,10 @@ return {
   },
 
   config = function()
-    require("ufo").setup()
+    require('ufo').setup({
+        provider_selector = function(bufnr, filetype, buftype)
+            return {'treesitter', 'indent'}
+        end
+    })
   end,
 }

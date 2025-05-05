@@ -38,8 +38,8 @@ vim.o.foldcolumn = "1" -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+-- vim.o.foldmethod = "manual"
+-- vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- Only show virtual text for current lines
 if vim.fn.has("nvim-0.11.0") == 1 then
