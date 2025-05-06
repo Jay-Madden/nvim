@@ -168,34 +168,51 @@ return {
       {
         "<Leader>ft",
         function()
-          local harpoon = require("harpoon")
-          local harpoon_files = harpoon:list()
-          local conf = require("telescope.config").values
-
-          local file_paths = {}
-          for idx, item in ipairs(harpoon_files.items) do
-            table.insert(file_paths, { idx, item.value })
+          if vim.bo.filetype ~= "go" then
+            vim.notify("Can not find ginkgo tests in non go file")
+            return
           end
-          local picker = require("telescope.pickers")
-          picker
-            .new({}, {
-              prompt_title = "Harpoon",
-              finder = require("telescope.finders").new_table({
-                results = file_paths,
-                entry_maker = function(entry)
-                  return {
-                    value = entry,
-                    display = "[" .. entry[1] .. "] " .. entry[2],
-                    ordinal = entry[2],
-                  }
-                end,
-              }),
-              previewer = conf.file_previewer({}),
-              sorter = conf.generic_sorter({}),
-            })
-            :find()
+
+          local pickers = require("telescope.pickers")
+          local finders = require("telescope.finders")
+          local actions = require("telescope.actions")
+          local action_state = require("telescope.actions.state")
+
+          local original_buffer = vim.api.nvim_win_get_buf(0)
+
+          local dap = require("plugins.dap")
+
+          local all_tests = dap.query_current_file_ginkgo_tests("test_name")
+
+          if #all_tests == 0 then
+            vim.notify("No matching ginkgo nodes found")
+            return
+          end
+
+          pickers.new({}, {
+            prompt_title = "Debug tests",
+            finder = finders.new_table {
+              results = all_tests,
+              entry_maker = function(entry)
+                return {
+                  value = entry,
+                  display = entry[1],
+                  ordinal = entry[1]
+                }
+              end,
+            },
+            attach_mappings = function()
+              actions.select_default:replace(function(bufnr)
+                local selected_entry = action_state.get_selected_entry()
+
+                dap.debug_ginkgo_test(original_buffer, selected_entry.value[2], selected_entry.value[3])
+                actions.close(bufnr)
+              end)
+              return true
+            end,
+          }):find()
         end,
-        desc = "Browse harpoon marks",
+        desc = "Debug ginkgo tests",
       },
       {
         "<Leader>fw",
