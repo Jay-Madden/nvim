@@ -6,7 +6,6 @@ return {
 
   dependencies = {
     "mason-org/mason.nvim",
-    "mason-org/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     "folke/neoconf.nvim",
   },
@@ -25,7 +24,6 @@ return {
   config = function()
     vim.opt.rtp:append(vim.fn.stdpath("config") .. "/nvim-lspconfig")
     vim.opt.rtp:append(vim.fn.stdpath("config") .. "/mason.nvim")
-    vim.opt.rtp:append(vim.fn.stdpath("config") .. "/mason-lspconfig.nvim")
 
     -- Add the same capabilities to ALL server configurations.
     -- Refer to :h vim.lsp.config() for more information.
