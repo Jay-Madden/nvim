@@ -5,8 +5,8 @@ return {
   event = "BufReadPost",
 
   dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     "folke/neoconf.nvim",
   },
@@ -23,6 +23,16 @@ return {
   },
 
   config = function()
+    vim.opt.rtp:append(vim.fn.stdpath("config") .. "/nvim-lspconfig")
+    vim.opt.rtp:append(vim.fn.stdpath("config") .. "/mason.nvim")
+    vim.opt.rtp:append(vim.fn.stdpath("config") .. "/mason-lspconfig.nvim")
+
+    -- Add the same capabilities to ALL server configurations.
+    -- Refer to :h vim.lsp.config() for more information.
+    vim.lsp.config("*", {
+      capabilities = vim.lsp.protocol.make_client_capabilities()
+    })
+
     require("neoconf").setup()
 
     -- Define the virtual text diagnostic signs
@@ -50,119 +60,61 @@ return {
     })
     -----------
 
-    local lspconfig = require("lspconfig")
+    vim.lsp.enable("lua_ls")
+    vim.lsp.enable("yamlls")
+    vim.lsp.enable("terraformls")
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
-    -- Add folding capabilities for nvim-ufo
-    capabilities.textDocument.foldingRange = {
-      dynamicRegistration = false,
-      lineFoldingOnly = true,
-    }
-
-    require("mason-lspconfig").setup_handlers({
-      function(server_name) -- default handler (optional)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-
-      lua_ls = function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-
-      --yamlls = function(server_name)
-      --	lspconfig[server_name].setup({
-      --		capabilities = capabilities
-      --	})
-      --end,
-
-      terraformls = function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-
-      pyright = function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-          settings = {
-            pyright = {
-              venv = ".venv",
-            },
-          },
-        })
-      end,
-
-      bashls = function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-
-      tsserver = function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-
-      html = function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-
-      clangd = function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-
-      rust_analyzer = function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-          settings = {
-            rust_analyzer = {
-              cargo = {
-                extraEnv = { CARGO_PROFILE_RUST_ANALYZER_INHERITS = "dev" },
-                extraArgs = { "--profile", "rust-analyzer" },
-              },
-              -- Add clippy lints for Rust.
-              checkOnSave = {
-                allFeatures = true,
-                command = "clippy",
-                extraArgs = { "--no-deps" },
-              },
-            },
-          },
-        })
-      end,
-
-      gopls = function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-          settings = {
-            gopls = {
-              experimentalPostfixCompletions = true,
-              analyses = {
-                unusedparams = true,
-                shadow = true,
-              },
-              staticcheck = true,
-              gofumpt = true,
-              semanticTokens = true,
-              completeUnimported = true,
-            },
-          },
-          init_options = {
-            usePlaceholders = false,
-          },
-        })
-      end,
+    vim.lsp.config("pyright", {
+      settings = {
+        pyright = {
+          venv = ".venv",
+        },
+      },
     })
+    vim.lsp.enable("pyright")
+
+    vim.lsp.enable("tsserver")
+    vim.lsp.enable("html")
+    vim.lsp.enable("clangd")
+    vim.lsp.enable("bashls")
+
+    vim.lsp.config("rust_analyzer", {
+      settings = {
+        rust_analyzer = {
+          cargo = {
+            extraEnv = { CARGO_PROFILE_RUST_ANALYZER_INHERITS = "dev" },
+            extraArgs = { "--profile", "rust-analyzer" },
+          },
+          -- Add clippy lints for Rust.
+          checkOnSave = {
+            allFeatures = true,
+            command = "clippy",
+            extraArgs = { "--no-deps" },
+          },
+        },
+      },
+    })
+    vim.lsp.enable("rust_analyzer")
+
+    vim.lsp.config("gopls", {
+      settings = {
+        gopls = {
+          experimentalPostfixCompletions = true,
+          analyses = {
+            unusedparams = true,
+            shadow = true,
+          },
+          staticcheck = true,
+          gofumpt = true,
+          semanticTokens = true,
+          completeUnimported = true,
+        },
+      },
+      init_options = {
+        usePlaceholders = false,
+      },
+    })
+    vim.lsp.enable("gopls")
 
     require("lspconfig.ui.windows").default_options.border = "single"
 

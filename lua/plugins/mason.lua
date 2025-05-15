@@ -1,9 +1,9 @@
 return {
-  "williamboman/mason.nvim",
+  "mason-org/mason.nvim",
   cmd = { "MasonToolsUpdate" },
 
   dependencies = {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
 
@@ -27,7 +27,6 @@ return {
     }
 
     require("mason").setup()
-    require("mason-lspconfig").setup()
 
     require("mason-tool-installer").setup({
       ensure_installed = tools,

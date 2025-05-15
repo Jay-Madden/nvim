@@ -186,34 +186,34 @@ M = {
     }
 
     -- Setup rust
-    local codelldb_path = require("mason-registry").get_package("codelldb"):get_install_path()
-      .. "/extension/adapter/codelldb"
-    dap.adapters.codelldb = {
-      type = "server",
-      host = "127.0.0.1",
-      port = "${port}",
-      executable = {
-        command = codelldb_path,
-        args = { "--port", "${port}" },
-      },
-    }
+    -- local codelldb_path = require("mason-registry").get_package("codelldb"):get_install_path()
+    --   .. "/extension/adapter/codelldb"
+    -- dap.adapters.codelldb = {
+    --   type = "server",
+    --   host = "127.0.0.1",
+    --   port = "${port}",
+    --   executable = {
+    --     command = codelldb_path,
+    --     args = { "--port", "${port}" },
+    --   },
+    -- }
 
-    dap.configurations.rust = {
-      {
-        name = "Debug with codelldb",
-        type = "codelldb",
-        request = "launch",
-        program = function()
-          return vim.fn.input({
-            prompt = "Path to executable: ",
-            default = vim.fn.getcwd() .. "/",
-            completion = "file",
-          })
-        end,
-        cwd = "${workspaceFolder}",
-        stopOnEntry = false,
-      },
-    }
+    -- dap.configurations.rust = {
+    --   {
+    --     name = "Debug with codelldb",
+    --     type = "codelldb",
+    --     request = "launch",
+    --     program = function()
+    --       return vim.fn.input({
+    --         prompt = "Path to executable: ",
+    --         default = vim.fn.getcwd() .. "/",
+    --         completion = "file",
+    --       })
+    --     end,
+    --     cwd = "${workspaceFolder}",
+    --     stopOnEntry = false,
+    --   },
+    -- }
   end,
 }
 
