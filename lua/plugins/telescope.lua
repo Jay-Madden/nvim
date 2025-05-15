@@ -189,28 +189,34 @@ return {
             return
           end
 
-          pickers.new({}, {
-            prompt_title = "Debug tests",
-            finder = finders.new_table {
-              results = all_tests,
-              entry_maker = function(entry)
-                return {
-                  value = entry,
-                  display = entry[1],
-                  ordinal = entry[1]
-                }
-              end,
-            },
-            attach_mappings = function()
-              actions.select_default:replace(function(bufnr)
-                local selected_entry = action_state.get_selected_entry()
+          pickers
+            .new({}, {
+              prompt_title = "Debug tests",
+              finder = finders.new_table({
+                results = all_tests,
+                entry_maker = function(entry)
+                  return {
+                    value = entry,
+                    display = entry[1],
+                    ordinal = entry[1],
+                  }
+                end,
+              }),
+              attach_mappings = function()
+                actions.select_default:replace(function(bufnr)
+                  local selected_entry = action_state.get_selected_entry()
 
-                dap.debug_ginkgo_test(original_buffer, selected_entry.value[2], selected_entry.value[3])
-                actions.close(bufnr)
-              end)
-              return true
-            end,
-          }):find()
+                  dap.debug_ginkgo_test(
+                    original_buffer,
+                    selected_entry.value[2],
+                    selected_entry.value[3]
+                  )
+                  actions.close(bufnr)
+                end)
+                return true
+              end,
+            })
+            :find()
         end,
         desc = "Debug ginkgo tests",
       },

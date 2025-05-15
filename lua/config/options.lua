@@ -28,6 +28,15 @@ vim.opt.wildmode = "longest:full,full"
 vim.opt.cursorline = true
 vim.o.cursorlineopt = "both"
 
+-- Set window border style globally
+-- HACK: We want to eventually set this to "rounded" but
+-- most plugins dont yet support this options
+-- E.G.
+-- https://github.com/nvim-telescope/telescope.nvim/issues/3436
+-- https://github.com/folke/lazy.nvim/issues/1951
+-- So for now we will disable it
+vim.o.winborder = "none"
+
 -- sync buffers automatically
 vim.opt.autoread = true
 -- disable neovim generating a swapfile and showing the error

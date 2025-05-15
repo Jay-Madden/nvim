@@ -1,6 +1,5 @@
 return {
   "lewis6991/gitsigns.nvim",
-  enabled = true,
   -- We have to load it actively or else it will only load on keybinding invoke
   event = "VeryLazy",
 
@@ -33,6 +32,9 @@ return {
         delay = 1000,
         ignore_whitespace = false,
         virt_text_priority = 100,
+      },
+      preview_config = {
+        border = "rounded",
       },
     })
   end,

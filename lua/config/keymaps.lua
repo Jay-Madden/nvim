@@ -30,8 +30,18 @@ utils.map("v", "<", "<gv", { desc = "Better indenting" })
 utils.map("v", ">", ">gv", { desc = "Better indenting" })
 
 -- Goto definition in new split
-utils.map("n", "gv", "<cmd>vsplit<CR><cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Go to definition in new vertical split" })
-utils.map("n", "gh", "<cmd>split<CR><cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Go to definition in new horizontal split" })
+utils.map(
+  "n",
+  "gv",
+  "<cmd>vsplit<CR><cmd>lua vim.lsp.buf.definition()<CR>",
+  { desc = "Go to definition in new vertical split" }
+)
+utils.map(
+  "n",
+  "gh",
+  "<cmd>split<CR><cmd>lua vim.lsp.buf.definition()<CR>",
+  { desc = "Go to definition in new horizontal split" }
+)
 
 -- Move Lines
 utils.map("n", "<leader>mj", "<cmd>m .+1<cr>==", { desc = "Move down" })
