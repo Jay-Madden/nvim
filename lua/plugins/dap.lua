@@ -103,12 +103,12 @@ M = {
     -- make sure we close neotree before we start debugging as neotree takes up
     -- screen space
     dap.listeners.before.attach.dapui_config = function()
-      neotree.close_all()
+      require("neo-tree.command").execute({ action = "close" })
       dapui.open()
     end
 
     dap.listeners.before.launch.dapui_config = function()
-      neotree.close_all()
+      require("neo-tree.command").execute({ action = "close" })
       dapui.open()
     end
 
