@@ -28,7 +28,8 @@ return {
     -- Add the same capabilities to ALL server configurations.
     -- Refer to :h vim.lsp.config() for more information.
     vim.lsp.config("*", {
-      capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = vim.lsp.protocol.make_client_capabilities(),
+      root_markers = { '.git' },
     })
 
     require("neoconf").setup()
@@ -57,7 +58,12 @@ return {
       },
     })
     -----------
-
+    vim.lsp.config("lua_ls", {
+      -- Command and arguments to start the server.
+      cmd = { 'lua-language-server' },
+      -- Filetypes to automatically attach to.
+      filetypes = { 'lua' },
+    })
     vim.lsp.enable("lua_ls")
     vim.lsp.enable("yamlls")
     vim.lsp.enable("terraformls")
@@ -95,6 +101,7 @@ return {
     vim.lsp.enable("rust_analyzer")
 
     vim.lsp.config("gopls", {
+      cmd = { 'gopls' },
       settings = {
         gopls = {
           experimentalPostfixCompletions = true,
