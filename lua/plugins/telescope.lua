@@ -227,21 +227,17 @@ return {
           trouble_telescope.open()
         end,
       },
+      {
+        "<Leader>fn",
+        function()
+          local builtin = require("telescope.builtin")
+          builtin.find_files({
+            find_command = {"find", ".", "-type", "f", "-not", "-path", "*/\\.git/*", "-name", "n*"},
+          })
+        end,
+        desc = "Find files starting with n",
+      },
     }
-
-    -- Picker for files starting with "n"
-    local n_files_keymap = {
-      "<Leader>fn",
-      function()
-        local builtin = require("telescope.builtin")
-        builtin.find_files({
-          find_command = {"find", ".", "-type", "f", "-not", "-path", "*/\\.git/*", "-name", "n*"},
-        })
-      end,
-      desc = "Find files starting with n",
-    }
-    
-    table.insert(keymaps, n_files_keymap)
 
     -- Generate keymaps for opening a telescope picker that selects all files in
     -- N number of parent directories
