@@ -125,23 +125,21 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   command = "checktime",
 })
 
--- Highlight on yank
+-- Highlight on yank and prevent whitespace-only yanks from going to clipboard
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
+    -- Highlight yanked text
     vim.highlight.on_yank()
-  end,
-})
-
--- Prevent whitespace-only yanks from going to clipboard
-vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function()
+    
     -- Get the yanked text from the unnamed register
     local yanked_text = vim.fn.getreg('"')
-    -- Check if it only contains whitespace
+    -- Check if it only contains whitespace (spaces, tabs, newlines)
     if yanked_text:match("^%s*$") then
-      -- Clear the clipboard registers
-      vim.fn.setreg('"', '')
-      vim.fn.setreg('+', '')
+      -- Clear all clipboard registers to prevent pasting whitespace
+      -- This will make `dd` on a blank line not overwrite your clipboard
+      vim.fn.setreg('"', '') -- Unnamed register
+      vim.fn.setreg('+', '') -- System clipboard
+      vim.fn.setreg('*', '') -- Primary selection (X11)
     end
   end,
 })
