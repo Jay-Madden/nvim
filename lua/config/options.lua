@@ -132,6 +132,20 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- Prevent whitespace-only yanks from going to clipboard
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    -- Get the yanked text from the unnamed register
+    local yanked_text = vim.fn.getreg('"')
+    -- Check if it only contains whitespace
+    if yanked_text:match("^%s*$") then
+      -- Clear the clipboard registers
+      vim.fn.setreg('"', '')
+      vim.fn.setreg('+', '')
+    end
+  end,
+})
+
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function(event)
