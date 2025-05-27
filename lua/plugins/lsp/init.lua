@@ -63,6 +63,7 @@ return {
       cmd = { 'lua-language-server' },
       -- Filetypes to automatically attach to.
       filetypes = { 'lua' },
+      root_markers = { '.git', '*.rockspec' },
     })
     vim.lsp.enable("lua_ls")
     vim.lsp.enable("yamlls")
