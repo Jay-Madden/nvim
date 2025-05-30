@@ -20,7 +20,7 @@ return {
       "gopls",
       "golangci-lint",
       --------
-      "bashls",
+      "bash-language-server",
       "ts_ls",
       "html-lsp",
     }
