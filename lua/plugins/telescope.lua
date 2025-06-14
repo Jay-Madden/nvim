@@ -15,8 +15,7 @@ return {
         function()
           require("telescope.builtin").find_files({
             hidden = true,
-            file_ignore_patterns = { "%.git/", "node_modules/" },
-            find_command = { "find", ".", "-type", "f", "-not", "-path", "*/.git/*", "-not", "-path", "*/node_modules/*" },
+            find_command = { "fdfind", "--type", "f", "--hidden", "--exclude", ".git", "--exclude", "node_modules" },
           })
         end,
         desc = "Find files",
@@ -27,8 +26,7 @@ return {
           require("telescope.builtin").find_files({ 
             cwd = require("telescope.utils").buffer_dir(),
             hidden = true,
-            file_ignore_patterns = { "%.git/", "node_modules/" },
-            find_command = { "find", ".", "-type", "f", "-not", "-path", "*/.git/*", "-not", "-path", "*/node_modules/*" },
+            find_command = { "fdfind", "--type", "f", "--hidden", "--exclude", ".git", "--exclude", "node_modules" },
           })
         end,
         desc = "Find files in current buffer directory",
@@ -252,8 +250,7 @@ return {
           require("telescope.builtin").find_files({
             cwd = require("telescope.utils").buffer_dir() .. backward_dir_nav,
             hidden = true,
-            file_ignore_patterns = { "%.git/", "node_modules/" },
-            find_command = { "find", ".", "-type", "f", "-not", "-path", "*/.git/*", "-not", "-path", "*/node_modules/*" },
+            find_command = { "fdfind", "--type", "f", "--hidden", "--exclude", ".git", "--exclude", "node_modules" },
           })
         end,
         desc = "Find files in buffer directory with" .. i .. " parent directories included",
