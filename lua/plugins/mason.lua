@@ -21,7 +21,7 @@ return {
       "golangci-lint",
       --------
       "bash-language-server",
-      "ts_ls",
+      "typescript-language-server",
       "html-lsp",
     }
 
@@ -29,8 +29,8 @@ return {
 
     require("mason-tool-installer").setup({
       ensure_installed = tools,
-      auto_update = true,
-      run_on_start = true,
+      auto_update = false,
+      run_on_start = false,
       start_delay = 3000,
     })
   end,
