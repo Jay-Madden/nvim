@@ -14,6 +14,12 @@ return {
       end,
     },
     {
+      "zm",
+      function()
+        require("ufo").closeFoldsWith(vim.v.count)
+      end,
+    },
+    {
       "zM",
       function()
         require("ufo").closeAllFolds()
