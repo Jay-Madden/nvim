@@ -134,19 +134,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
 
-    -- Only prevent the whitespace if the unnamed register is used. 
+    -- Only prevent the whitespace if the unnamed register is used.
     -- If a specific register is used the whitespace was probably intentional
-    if vim.v.event.regname == '' then
+    if vim.v.event.regname == "" then
       local val = vim.fn.getreg('"')
 
       if val:match("^%s*$") then
         vim.fn.setreg('"', prev_unnamed_reg)
-        vim.fn.setreg('+', prev_plus_reg)
-        vim.fn.setreg('*', prev_star_reg)
+        vim.fn.setreg("+", prev_plus_reg)
+        vim.fn.setreg("*", prev_star_reg)
       else
         prev_unnamed_reg = val
-        prev_plus_reg = vim.fn.getreg('+')
-        prev_star_reg = vim.fn.getreg('*')
+        prev_plus_reg = vim.fn.getreg("+")
+        prev_star_reg = vim.fn.getreg("*")
       end
     end
   end,

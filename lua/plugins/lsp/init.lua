@@ -29,7 +29,7 @@ return {
     -- Refer to :h vim.lsp.config() for more information.
     vim.lsp.config("*", {
       capabilities = vim.lsp.protocol.make_client_capabilities(),
-      root_markers = { '.git' },
+      root_markers = { ".git" },
     })
 
     require("neoconf").setup()
@@ -60,12 +60,17 @@ return {
     -----------
     vim.lsp.config("lua_ls", {
       -- Command and arguments to start the server.
-      cmd = { 'lua-language-server' },
+      cmd = { "lua-language-server" },
       -- Filetypes to automatically attach to.
-      filetypes = { 'lua' },
-      root_markers = { '.git', '*.rockspec' },
+      filetypes = { "lua" },
+      settings = {
+        Lua = {
+          root_markers = { ".git", "*.rockspec" },
+        },
+      },
     })
     vim.lsp.enable("lua_ls")
+
     vim.lsp.enable("yamlls")
     vim.lsp.enable("terraformls")
 
@@ -102,7 +107,8 @@ return {
     vim.lsp.enable("rust_analyzer")
 
     vim.lsp.config("gopls", {
-      cmd = { 'gopls' },
+      cmd = { "gopls" },
+      filetypes = { "go", "gomod", "gowork", "gotmpl" },
       settings = {
         gopls = {
           experimentalPostfixCompletions = true,
