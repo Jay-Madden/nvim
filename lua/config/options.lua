@@ -152,12 +152,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Remove trailing whitespace on buffer write
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  command = [[%s/\s\+$//e]],
-})
-
 -- Go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function(event)
