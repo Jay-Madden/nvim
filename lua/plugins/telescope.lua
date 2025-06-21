@@ -13,7 +13,17 @@ return {
       {
         "<leader>ff",
         function()
-          require("telescope.builtin").find_files()
+          local fd_cmd = {
+            "fd",
+            "--type",
+            "f",
+            "--color",
+            "never",
+            "--hidden",
+            "--exclude",
+            ".git",
+          }
+          require("telescope.builtin").find_files({find_command = fd_cmd})
         end,
         desc = "Find files",
       },
