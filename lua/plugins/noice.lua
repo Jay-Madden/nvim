@@ -12,14 +12,13 @@ return {
   },
 
   config = function()
-
     -- Put noice message in the bottom right so we dont block code
     require("notify").setup({
       stages = "fade_in_slide_out",
       background_colour = "FloatShadow",
       timeout = 3000,
       top_down = false,
-      merge_duplicates = true
+      merge_duplicates = true,
     })
 
     require("noice").setup({
