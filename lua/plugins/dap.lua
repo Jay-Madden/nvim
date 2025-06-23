@@ -183,6 +183,27 @@ M = {
         request = "launch",
         program = "./cmd/main.go",
       },
+      {
+        type = "delve",
+        name = "Debug Kustomize Work",
+        request = "launch",
+        program = "./kustomize/main.go",
+        args = { "build", "./testdata/gorilla"},
+      },
+      {
+        type = "delve",
+        name = "Debug Kustomize Fail",
+        request = "launch",
+        program = "./kustomize/main.go",
+        args = { "build", "./testdata/gorilla-fail"},
+      },
+      {
+        type = "delve",
+        name = "Debug Kustomize Allowed",
+        request = "launch",
+        program = "./kustomize/main.go",
+        args = { "build", "./testdata/gorilla-allowed"},
+      },
     }
 
     -- Setup rust
