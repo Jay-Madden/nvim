@@ -1,4 +1,6 @@
-return {
+local M = {}
+
+M = {
   "nvim-telescope/telescope.nvim",
 
   dependencies = {
@@ -14,17 +16,7 @@ return {
       {
         "<leader>ff",
         function()
-          local fd_cmd = {
-            "fd",
-            "--type",
-            "f",
-            "--color",
-            "never",
-            "--hidden",
-            "--exclude",
-            ".git",
-          }
-          require("telescope.builtin").find_files({ find_command = fd_cmd })
+          M.find_files()
         end,
         desc = "Find files",
       },
@@ -282,3 +274,22 @@ return {
     require('telescope').load_extension('fzf')
   end,
 }
+
+--- Find files using fd, excluding .git and vendor directories.
+function M.find_files()
+  local fd_cmd = {
+    "fd",
+    "--type",
+    "f",
+    "--color",
+    "never",
+    "--hidden",
+    "--exclude",
+    ".git",
+    "--exclude",
+    "vendor/",
+  }
+  require("telescope.builtin").find_files({ find_command = fd_cmd })
+end
+
+return M
