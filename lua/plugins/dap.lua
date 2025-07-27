@@ -185,10 +185,9 @@ M = {
       },
       {
         type = "delve",
-        name = "Debug Kustomize Work",
+        name = "Debug Aeris",
         request = "launch",
-        program = "./kustomize/main.go",
-        args = { "build", "./testdata/gorilla"},
+        program = "./cmd/tui/main.go",
       },
       {
         type = "delve",

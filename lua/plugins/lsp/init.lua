@@ -127,6 +127,8 @@ return {
       },
     })
     vim.lsp.enable("gopls")
+    vim.lsp.config("buf", {})
+    vim.lsp.enable("buf")
 
     require("lspconfig.ui.windows").default_options.border = "single"
 
