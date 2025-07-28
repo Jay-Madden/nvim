@@ -86,7 +86,6 @@ M = {
   config = function(_, opts)
     local dap = require("dap")
     local dapui = require("dapui")
-    local neotree = require("neo-tree")
 
     dapui.setup(opts)
 
@@ -242,11 +241,22 @@ M.query_current_file_ginkgo_tests = function(match_name)
   (call_expression
     function: (identifier) @name
     arguments: (argument_list
-    (interpreted_string_literal 
-      (interpreted_string_literal_content) @test_name)
+      (interpreted_string_literal 
+        (interpreted_string_literal_content) @test_name
+      )
+      (func_literal
+        body: (block
+          (expression_statement
+            (call_expression
+              function: (identifier) @nested_name
+              (#match? @nested_name"It")
+            ) @body
+          )
+        ) 
+      ) 
     ) 
     (#match? @name"When")
-  ) @body
+  )
   ]]
 
   local tree = vim.treesitter.get_parser():parse()[1]
@@ -275,7 +285,7 @@ M.debug_ginkgo_test = function(buffer_name, start_row, end_row)
   -- pass the current test file name and the offset of the treesitter query lines
   -- We add 1 and 2 respectively because treesitter parses the token for function_declaration to be the line ABOVE
   -- where it actually is in the file
-  local ginkgo_test_filter = original_filename .. ":" .. start_row + 1 .. "-" .. end_row + 2
+  local ginkgo_test_filter = original_filename .. ":" .. start_row .. "-" .. end_row
 
   local test_config = {
     type = "delve",
@@ -286,7 +296,7 @@ M.debug_ginkgo_test = function(buffer_name, start_row, end_row)
     args = { "--ginkgo.focus-file", ginkgo_test_filter },
   }
 
-  vim.notify("Executing debug config with args")
+  vim.notify("Executing debug config with args: " .. ginkgo_test_filter)
   dap.run(test_config)
 end
 
