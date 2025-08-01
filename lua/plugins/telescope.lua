@@ -51,7 +51,7 @@ M = {
       {
         "<leader>fg",
         function()
-          require("telescope.builtin").live_grep()
+          M.live_grep()
         end,
         desc = "Live grep",
       },
@@ -290,6 +290,13 @@ function M.find_files()
     "vendor/",
   }
   require("telescope.builtin").find_files({ find_command = fd_cmd })
+end
+
+--- Live grep using ripgrep, excluding .git and vendor directories.
+function M.live_grep()
+  require("telescope.builtin").live_grep({
+    glob_pattern = { "!.git/*", "!vendor/*" }
+  })
 end
 
 return M
