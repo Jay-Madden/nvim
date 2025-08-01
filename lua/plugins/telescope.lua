@@ -28,6 +28,13 @@ M = {
         desc = "Find files in current buffer directory",
       },
       {
+        "<Leader>ft",
+        function()
+          require("telescope.builtin").builtin()
+        end,
+      },
+      desc = "Find a builtin pickers",
+      {
         "<leader>fr",
         function()
           require("telescope.builtin").lsp_references()
@@ -68,7 +75,6 @@ M = {
 
           -- reverse the list
           local sorted_jumplist = {}
-          local entries = {}
           for i = #jumplist, 1, -1 do
             if vim.api.nvim_buf_is_valid(jumplist[i].bufnr) then
               local text = vim.api.nvim_buf_get_lines(
@@ -169,7 +175,7 @@ M = {
         desc = "Find Projects",
       },
       {
-        "<Leader>ft",
+        "<Leader>fT",
         function()
           if vim.bo.filetype ~= "go" then
             vim.notify("Can not find ginkgo tests in non go file")
