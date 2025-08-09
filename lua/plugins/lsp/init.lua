@@ -69,10 +69,10 @@ return {
         },
       },
     })
-    vim.lsp.enable("lua_ls")
-
-    vim.lsp.enable("yamlls")
-    vim.lsp.enable("terraformls")
+    -- vim.lsp.enable("lua_ls")
+    --
+    -- vim.lsp.enable("yamlls")
+    -- vim.lsp.enable("terraformls")
 
     vim.lsp.config("pyright", {
       settings = {
@@ -83,10 +83,10 @@ return {
     })
     vim.lsp.enable("pyright")
 
-    vim.lsp.enable("tsserver")
-    vim.lsp.enable("html")
-    vim.lsp.enable("clangd")
-    vim.lsp.enable("bashls")
+    -- vim.lsp.enable("tsserver")
+    -- vim.lsp.enable("html")
+    -- vim.lsp.enable("clangd")
+    -- vim.lsp.enable("bashls")
 
     vim.lsp.config("rust_analyzer", {
       settings = {
