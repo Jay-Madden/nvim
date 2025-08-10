@@ -277,7 +277,7 @@ M = {
       },
     })
     require("telescope").load_extension("ui-select")
-    require('telescope').load_extension('fzf')
+    require("telescope").load_extension("fzf")
   end,
 }
 
@@ -301,7 +301,7 @@ end
 --- Live grep using ripgrep, excluding .git and vendor directories.
 function M.live_grep()
   require("telescope.builtin").live_grep({
-    glob_pattern = { "!.git/*", "!vendor/*" }
+    glob_pattern = { "!.git/*", "!vendor/*" },
   })
 end
 

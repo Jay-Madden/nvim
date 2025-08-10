@@ -193,14 +193,14 @@ M = {
         name = "Debug Kustomize Fail",
         request = "launch",
         program = "./kustomize/main.go",
-        args = { "build", "./testdata/gorilla-fail"},
+        args = { "build", "./testdata/gorilla-fail" },
       },
       {
         type = "delve",
         name = "Debug Kustomize Allowed",
         request = "launch",
         program = "./kustomize/main.go",
-        args = { "build", "./testdata/gorilla-allowed"},
+        args = { "build", "./testdata/gorilla-allowed" },
       },
     }
 
