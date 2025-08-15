@@ -83,7 +83,18 @@ return {
     })
     vim.lsp.enable("pyright")
 
-    -- vim.lsp.enable("tsserver")
+    vim.lsp.config("tsserver", {
+      cmd = { "typescript-language-server", "--stdio" },
+      filetypes = {
+          "typescript",
+          "typescriptreact",
+          "typescript.tsx",
+          "javascript",
+          "javascriptreact",
+          "javascript.jsx",
+        }
+    })
+    vim.lsp.enable("tsserver")
     -- vim.lsp.enable("html")
     -- vim.lsp.enable("clangd")
     -- vim.lsp.enable("bashls")
