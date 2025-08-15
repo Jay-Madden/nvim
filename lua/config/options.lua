@@ -132,7 +132,7 @@ local prev_star_reg = ""
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
-    -- vim.highlight.on_yank()
+    vim.highlight.on_yank()
 
     -- Only prevent the whitespace if the unnamed register is used.
     -- If a specific register is used the whitespace was probably intentional
