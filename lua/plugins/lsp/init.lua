@@ -3,6 +3,7 @@ return {
 
   cmd = { "MasonToolsUpdate", "LspInfo", "LspStart", "LspStop", "LspRestart", "LspLog" },
   event = "BufReadPost",
+  lazy = false,
 
   dependencies = {
     "mason-org/mason.nvim",
