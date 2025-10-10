@@ -253,7 +253,7 @@ M = {
             cwd = require("telescope.utils").buffer_dir() .. backward_dir_nav,
           })
         end,
-        desc = "Find files in buffer directory with" .. i .. " parent directories included",
+        desc = "Find files in buffer directory with " .. i .. " parent directories included",
       }
       table.insert(keymaps, keymap)
     end
