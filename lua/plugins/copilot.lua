@@ -1,7 +1,6 @@
 return {
   "zbirenbaum/copilot.lua",
   event = { "InsertEnter" },
-  commit = "f693e2169df70b0a166ac2cc09ed6c1cb94ac897",
   enabled = true,
   config = function()
     require("copilot").setup({
