@@ -51,5 +51,17 @@ return {
       -- Only show the definition name for a given context instead of everything
       multiline_threshold = 1,
     })
+
+    -- Setup language detection for tmpl files
+    vim.filetype.add({
+      extension = {
+        gotmpl = 'gotmpl',
+      },
+      pattern = {
+        [".*%.tm?pl"] = "helm",
+        [".*%.ya?ml"] = "helm",
+        ["helmfile.*%.ya?ml"] = "helm",
+      },
+    })
   end,
 }
