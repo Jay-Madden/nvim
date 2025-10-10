@@ -32,8 +32,8 @@ M = {
         function()
           require("telescope.builtin").builtin()
         end,
+        desc = "View builtin pickers",
       },
-      desc = "Find a builtin pickers",
       {
         "<leader>fr",
         function()
@@ -114,7 +114,7 @@ M = {
             symbol_width = 50,
           })
         end,
-        desc = "Find all symbols in current document",
+        desc = "Find all symbols in the current document",
       },
       {
         "<Leader>fS",
@@ -124,7 +124,7 @@ M = {
             query = "all",
           })
         end,
-        desc = "Find all symbols in current document",
+        desc = "Find all symbols in the current workspace",
       },
       {
         "<Leader>fb",
