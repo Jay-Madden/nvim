@@ -15,8 +15,8 @@ return {
         },
       },
       logger = {
-          file_log_level = vim.log.levels.TRACE,
-      }
+        file_log_level = vim.log.levels.TRACE,
+      },
     })
   end,
 }

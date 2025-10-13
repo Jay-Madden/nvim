@@ -16,6 +16,14 @@ return {
     {
       "<Leader>?",
       function()
+        vim.diagnostic.config({
+          float = {
+            show_header = true,
+            source = "if_many",
+            border = "rounded",
+            focusable = false,
+          },
+        })
         vim.diagnostic.open_float()
       end,
       desc = "Show line diagnostic",
@@ -87,13 +95,13 @@ return {
     vim.lsp.config("tsserver", {
       cmd = { "typescript-language-server", "--stdio" },
       filetypes = {
-          "typescript",
-          "typescriptreact",
-          "typescript.tsx",
-          "javascript",
-          "javascriptreact",
-          "javascript.jsx",
-        }
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+      },
     })
     vim.lsp.enable("tsserver")
     -- vim.lsp.enable("html")

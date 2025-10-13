@@ -55,7 +55,7 @@ return {
     -- Setup language detection for tmpl files
     vim.filetype.add({
       extension = {
-        gotmpl = 'gotmpl',
+        gotmpl = "gotmpl",
       },
       pattern = {
         [".*%.tm?pl"] = "helm",
