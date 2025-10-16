@@ -61,6 +61,13 @@ return {
       end,
       desc = "LazyGit",
     },
+    {
+      "<leader>nt",
+      function()
+        Snacks.explorer.open()
+      end,
+      desc = "File explorer",
+    },
   },
   ---@type snacks.Config
   opts = {

@@ -15,14 +15,14 @@ M = {
     local keymaps = {
       -- ##### Temporary fallback binding while we test out snacks pickers #####
       {
-        "<leader>tt",
+        "<leader>ss",
         function()
           M.find_files()
         end,
         desc = "Find files",
       },
       {
-        "<leader>tg",
+        "<leader>sg",
         function()
           M.live_grep()
         end,

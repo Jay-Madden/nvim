@@ -1,5 +1,3 @@
-local utils = require("utils")
-
 return {
   "nvim-neo-tree/neo-tree.nvim",
 
@@ -10,14 +8,14 @@ return {
   },
 
   keys = {
-    {
-      "<leader>nt",
-      function()
-        local neotree_command = require("neo-tree.command")
-        neotree_command.execute({ toggle = true })
-      end,
-      desc = "Move window left",
-    },
+    -- {
+    --   "<leader>nt",
+    --   function()
+    --     local neotree_command = require("neo-tree.command")
+    --     neotree_command.execute({ toggle = true })
+    --   end,
+    --   desc = "Move window left",
+    -- },
   },
 
   config = function()
