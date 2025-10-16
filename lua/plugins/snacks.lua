@@ -44,6 +44,16 @@ return {
       end,
       desc = "LazyGit",
     },
+    {
+      "<leader>ss",
+      function()
+        Snacks.picker.files({
+          hidden = true,
+          ignore = true,
+        })
+      end,
+      desc = "Test out snacks picker",
+    },
   },
   ---@type snacks.Config
   opts = {
@@ -62,6 +72,25 @@ return {
         easing = "linear",
       },
     },
+    -- picker = {
+    --   layout = {
+    --     reverse = true,
+    --     layout = {
+    --       box = "horizontal",
+    --       width = 0.8,
+    --       min_width = 120,
+    --       height = 0.85,
+    --       {
+    --         box = "vertical",
+    --         border = "rounded",
+    --         title = "{title} {live} {flags}",
+    --         { win = "list", border = "none" },
+    --         { win = "input", height = 1, border = "top" },
+    --       },
+    --       { win = "preview", title = "{preview}", border = "rounded", width = 0.5 },
+    --     },
+    --   },
+    -- },
     statuscolumn = { enabled = false },
     words = { enabled = false },
     dashboard = {
@@ -90,6 +119,7 @@ return {
             desc = "Find Text",
             action = function()
               require("plugins.telescope").live_grep()
+              Snacks.picker.git_files()
             end,
           },
           {
