@@ -38,21 +38,28 @@ return {
   ---
   keys = {
     {
-      "<leader>lg",
-      function()
-        Snacks.lazygit.open()
-      end,
-      desc = "LazyGit",
-    },
-    {
-      "<leader>ss",
+      "<leader>ff",
       function()
         Snacks.picker.files({
           hidden = true,
           ignore = true,
         })
       end,
-      desc = "Test out snacks picker",
+      desc = "Find files",
+    },
+    {
+      "<leader>fg",
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = "Live grep",
+    },
+    {
+      "<leader>lg",
+      function()
+        Snacks.lazygit.open()
+      end,
+      desc = "LazyGit",
     },
   },
   ---@type snacks.Config
@@ -110,7 +117,10 @@ return {
             key = "f",
             desc = "Find File",
             action = function()
-              require("plugins.telescope").find_files()
+              Snacks.picker.files({
+                hidden = true,
+                ignore = true,
+              })
             end,
           },
           { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
@@ -119,8 +129,7 @@ return {
             key = "g",
             desc = "Find Text",
             action = function()
-              require("plugins.telescope").live_grep()
-              Snacks.picker.git_files()
+              Snacks.picker.grep()
             end,
           },
           {

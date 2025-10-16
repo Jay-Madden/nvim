@@ -13,13 +13,22 @@ M = {
 
   keys = function()
     local keymaps = {
+      -- ##### Temporary fallback binding while we test out snacks pickers #####
       {
-        "<leader>ff",
+        "<leader>tt",
         function()
           M.find_files()
         end,
         desc = "Find files",
       },
+      {
+        "<leader>tg",
+        function()
+          M.live_grep()
+        end,
+        desc = "Live grep",
+      },
+      -- ##########
       {
         "<leader>fc",
         function()
@@ -54,13 +63,6 @@ M = {
           require("telescope.builtin").marks()
         end,
         desc = "View marks",
-      },
-      {
-        "<leader>fg",
-        function()
-          M.live_grep()
-        end,
-        desc = "Live grep",
       },
       {
         "<leader>fj",
