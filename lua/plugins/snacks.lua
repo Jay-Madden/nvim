@@ -74,7 +74,8 @@ return {
   opts = {
     bigfile = { enabled = true },
     indent = { enabled = false },
-    input = { enabled = false },
+    input = { enabled = true},
+    image = { enabled = true},
     lazygit = {
       enabled = true,
     },
@@ -87,8 +88,14 @@ return {
         easing = "linear",
       },
     },
+    picker = {
+      formatters = {
+        file = {
+          filename_first = true,
+          truncate = 80,
+        }
+      }
     -- More custom telescope like layout, to be used if we can not get used to the top bar layout
-    -- picker = {
     --   layout = {
     --     reverse = true,
     --     layout = {
@@ -106,7 +113,7 @@ return {
     --       { win = "preview", title = "{preview}", border = "rounded", width = 0.5 },
     --     },
     --   },
-    -- },
+    },
     statuscolumn = {
       enabled =true,
       left = { "sign", "mark"},
