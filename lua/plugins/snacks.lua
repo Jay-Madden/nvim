@@ -107,7 +107,14 @@ return {
     --     },
     --   },
     -- },
-    statuscolumn = { enabled = false },
+    statuscolumn = {
+      enabled =true,
+      left = { "sign", "mark"},
+      folds = {
+        open = true,
+        git_hl = true,
+      },
+    },
     words = { enabled = false },
     dashboard = {
       enabled = true,
