@@ -40,7 +40,8 @@ return {
     {
       "<leader>ff",
       function()
-        Snacks.picker.files({
+        Snacks.picker.smart({
+          multi = { "files" },
           hidden = true,
           ignore = true,
         })
