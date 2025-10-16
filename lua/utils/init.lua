@@ -1,5 +1,9 @@
 local M = {}
 
+function M.buffer_dir()
+  return vim.fn.expand "%:p:h"
+end
+
 function M.map(mode, lhs, rhs, opts)
   vim.tbl_deep_extend("force", { buffer = buffer, silent = true, noremap = true }, opts)
   vim.keymap.set(mode, lhs, rhs, opts)

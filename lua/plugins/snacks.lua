@@ -1,3 +1,4 @@
+local utils = require "utils"
 -- Taken from https://gitlab.com/dwt1/shell-color-scripts/-/blob/master/colorscripts/square
 local colorscript_square_cmd = [[
 esc=""
@@ -62,6 +63,18 @@ return {
         })
       end,
       desc = "Find files",
+    },
+    {
+      "<leader>fc",
+      function()
+        Snacks.picker.smart({
+          multi = { "files" },
+          cwd = utils.buffer_dir(),
+          hidden = true,
+          ignore = true,
+        })
+      end,
+      desc = "Find files in the current directory",
     },
     {
       "<leader>fg",

@@ -30,7 +30,7 @@ M = {
       },
       -- ##########
       {
-        "<leader>fc",
+        "<leader>sc",
         function()
           require("telescope.builtin").find_files({ cwd = require("telescope.utils").buffer_dir() })
         end,
