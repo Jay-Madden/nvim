@@ -72,6 +72,7 @@ return {
         easing = "linear",
       },
     },
+    -- More custom telescope like layout, to be used if we can not get used to the top bar layout
     -- picker = {
     --   layout = {
     --     reverse = true,
