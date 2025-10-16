@@ -1,5 +1,5 @@
 -- Taken from https://gitlab.com/dwt1/shell-color-scripts/-/blob/master/colorscripts/square
-local colorscript_square = [[
+local colorscript_square_cmd = [[
 esc=""
 
 blackf="${esc}[30m";   redf="${esc}[31m";    greenf="${esc}[32m"
@@ -31,6 +31,21 @@ EOF
 
 ]]
 
+local header_cmd = [[
+esc=""
+color="${esc}[94m"
+reset="${esc}[0m"
+
+cat << EOF
+             ${color}██${reset}╗      ${color}██${reset}╗   ${color}██${reset}╗${color}██${reset}╗${color}███${reset}╗   ${color}███${reset}╗
+             ${color}██${reset}║      ${color}██${reset}║   ${color}██${reset}║${color}██${reset}║${color}████${reset}╗ ${color}████${reset}║
+             ${color}██${reset}║${color}█████${reset}╗╚${color}██${reset}╗ ${color}██${reset}╔╝${color}██${reset}║${color}██${reset}╔${color}████${reset}╔${color}██${reset}║
+        ${color}██${reset}╗  ${color}██${reset}║╚════╝ ╚${color}████${reset}╔╝ ${color}██${reset}║${color}██${reset}║╚${color}██${reset}╔╝${color}██${reset}║
+        ╚${color}█████${reset}╔╝        ╚${color}██${reset}╔╝  ${color}██${reset}║${color}██${reset}║ ╚═╝ ${color}██${reset}║
+         ╚════╝          ╚═╝   ╚═╝╚═╝     ╚═╝
+EOF
+
+]]
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -126,13 +141,7 @@ return {
     dashboard = {
       enabled = true,
       preset = {
-        header = [[
-             ██╗      ██╗   ██╗██╗███╗   ███╗
-             ██║      ██║   ██║██║████╗ ████║
-             ██║█████╗╚██╗ ██╔╝██║██╔████╔██║
-        ██╗  ██║╚════╝ ╚████╔╝ ██║██║╚██╔╝██║
-        ╚█████╔╝        ╚██╔╝  ██║██║ ╚═╝ ██║
-         ╚════╝          ╚═╝   ╚═╝╚═╝     ╚═╝]],
+        header = "",
         keys = {
           {
             icon = " ",
@@ -178,11 +187,16 @@ return {
         },
       },
       sections = {
-        { section = "header" },
+        {
+          section = "terminal",
+          cmd = header_cmd,
+          height = 6,
+          padding = 1,
+        },
         {
           pane = 2,
           section = "terminal",
-          cmd = colorscript_square,
+          cmd = colorscript_square_cmd,
           height = 5,
           padding = 1,
         },
