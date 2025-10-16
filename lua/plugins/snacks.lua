@@ -1,4 +1,4 @@
-local utils = require "utils"
+local utils = require("utils")
 -- Taken from https://gitlab.com/dwt1/shell-color-scripts/-/blob/master/colorscripts/square
 local colorscript_square_cmd = [[
 esc=""
@@ -102,8 +102,8 @@ return {
   opts = {
     bigfile = { enabled = true },
     indent = { enabled = false },
-    input = { enabled = true},
-    image = { enabled = true},
+    input = { enabled = true },
+    image = { enabled = true },
     lazygit = {
       enabled = true,
     },
@@ -121,30 +121,30 @@ return {
         file = {
           filename_first = true,
           truncate = 80,
-        }
-      }
-    -- More custom telescope like layout, to be used if we can not get used to the top bar layout
-    --   layout = {
-    --     reverse = true,
-    --     layout = {
-    --       box = "horizontal",
-    --       width = 0.8,
-    --       min_width = 120,
-    --       height = 0.85,
-    --       {
-    --         box = "vertical",
-    --         border = "rounded",
-    --         title = "{title} {live} {flags}",
-    --         { win = "list", border = "none" },
-    --         { win = "input", height = 1, border = "top" },
-    --       },
-    --       { win = "preview", title = "{preview}", border = "rounded", width = 0.5 },
-    --     },
-    --   },
+        },
+      },
+      -- More custom telescope like layout, to be used if we can not get used to the top bar layout
+      --   layout = {
+      --     reverse = true,
+      --     layout = {
+      --       box = "horizontal",
+      --       width = 0.8,
+      --       min_width = 120,
+      --       height = 0.85,
+      --       {
+      --         box = "vertical",
+      --         border = "rounded",
+      --         title = "{title} {live} {flags}",
+      --         { win = "list", border = "none" },
+      --         { win = "input", height = 1, border = "top" },
+      --       },
+      --       { win = "preview", title = "{preview}", border = "rounded", width = 0.5 },
+      --     },
+      --   },
     },
     statuscolumn = {
-      enabled =true,
-      left = { "sign", "mark"},
+      enabled = true,
+      left = { "sign", "mark" },
       folds = {
         open = true,
         git_hl = true,

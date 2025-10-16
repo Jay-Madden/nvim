@@ -8,14 +8,11 @@ return {
         auto_trigger = false,
         auto_refresh = true,
         keymap = {
-          accept = "<leader>ca",
-          next = "<leader>cn",
-          prev = "<leader>cp",
-          dismiss = "<leader>cd",
+          accept = "<leader>ia",
+          next = "<leader>in",
+          prev = "<leader>ip",
+          dismiss = "<leader>id",
         },
-      },
-      logger = {
-        file_log_level = vim.log.levels.TRACE,
       },
     })
   end,

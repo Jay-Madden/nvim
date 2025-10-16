@@ -67,6 +67,9 @@ return {
       },
     })
     -----------
+
+    vim.lsp.enable("copilot", true)
+
     vim.lsp.config("lua_ls", {
       -- Command and arguments to start the server.
       cmd = { "lua-language-server" },

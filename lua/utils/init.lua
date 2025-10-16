@@ -1,11 +1,11 @@
 local M = {}
 
 function M.buffer_dir()
-  return vim.fn.expand "%:p:h"
+  return vim.fn.expand("%:p:h")
 end
 
 function M.map(mode, lhs, rhs, opts)
-  vim.tbl_deep_extend("force", { buffer = buffer, silent = true, noremap = true }, opts)
+  opts = vim.tbl_deep_extend("force", { silent = true, noremap = true }, opts or {})
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
