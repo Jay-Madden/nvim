@@ -32,21 +32,6 @@ EOF
 
 ]]
 
-local header_cmd = [[
-esc=""
-color="${esc}[94m"
-reset="${esc}[0m"
-
-cat << EOF
-             ${color}██${reset}╗      ${color}██${reset}╗   ${color}██${reset}╗${color}██${reset}╗${color}███${reset}╗   ${color}███${reset}╗
-             ${color}██${reset}║      ${color}██${reset}║   ${color}██${reset}║${color}██${reset}║${color}████${reset}╗ ${color}████${reset}║
-             ${color}██${reset}║${color}█████${reset}╗╚${color}██${reset}╗ ${color}██${reset}╔╝${color}██${reset}║${color}██${reset}╔${color}████${reset}╔${color}██${reset}║
-        ${color}██${reset}╗  ${color}██${reset}║╚════╝ ╚${color}████${reset}╔╝ ${color}██${reset}║${color}██${reset}║╚${color}██${reset}╔╝${color}██${reset}║
-        ╚${color}█████${reset}╔╝        ╚${color}██${reset}╔╝  ${color}██${reset}║${color}██${reset}║ ╚═╝ ${color}██${reset}║
-         ╚════╝          ╚═╝   ╚═╝╚═╝     ╚═╝
-EOF
-
-]]
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -154,7 +139,13 @@ return {
     dashboard = {
       enabled = true,
       preset = {
-        header = "",
+        header = [[
+             ██╗      ██╗   ██╗██╗███╗   ███╗
+             ██║      ██║   ██║██║████╗ ████║
+             ██║█████╗╚██╗ ██╔╝██║██╔████╔██║
+        ██╗  ██║╚════╝ ╚████╔╝ ██║██║╚██╔╝██║
+        ╚█████╔╝        ╚██╔╝  ██║██║ ╚═╝ ██║
+         ╚════╝          ╚═╝   ╚═╝╚═╝     ╚═╝]],
         keys = {
           {
             icon = " ",
@@ -200,12 +191,7 @@ return {
         },
       },
       sections = {
-        {
-          section = "terminal",
-          cmd = header_cmd,
-          height = 6,
-          padding = 1,
-        },
+        { section = "header" },
         {
           pane = 2,
           section = "terminal",
