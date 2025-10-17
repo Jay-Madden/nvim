@@ -47,18 +47,21 @@ return {
         lualine_a = {
           { "mode", separator = { left = "" }, right_padding = 2 },
         },
-        lualine_b = { "branch", "filename", "diagnostics" },
-        lualine_c = {
+        lualine_b = { "branch", "filename", "diagnostics",
           {
+            separator = { right = "" },
             function()
-              return " "
+              return ""
             end,
             color = function()
               local status = require("sidekick.status").get()
               if status then
-                return status.kind == "Error" and "DiagnosticError"
-                  or status.busy and "DiagnosticWarn"
-                  or "Special"
+                if status.kind == "Error" then
+                  return { bg = palette_colors.autumnRed }
+                end
+
+                -- return nil to use the default bg color
+                return nil
               end
             end,
             cond = function()
@@ -67,6 +70,7 @@ return {
             end,
           },
         },
+        lualine_c = {},
         lualine_x = {},
         lualine_y = { "fileformat", "filetype", "progress" },
         lualine_z = {
