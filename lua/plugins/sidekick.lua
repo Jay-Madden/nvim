@@ -1,5 +1,6 @@
 return {
   "folke/sidekick.nvim",
+  enabled = true,
   keys = {
     {
       "<leader>ca",
@@ -20,18 +21,18 @@ return {
       mode = { "n", "x", "i" },
     },
     {
+      "<leader>cd",
+      function()
+        require("sidekick.nes").clear()
+      end,
+      desc = "Clear copilot suggestions",
+    },
+    {
       "<leader>aa",
       function()
         require("sidekick.cli").toggle()
       end,
       desc = "Sidekick Toggle CLI",
-    },
-    {
-      "<leader>ac",
-      function()
-        require("sidekick.nes").clear()
-      end,
-      desc = "Clear copilot suggestions",
     },
     {
       "<leader>as",
@@ -46,7 +47,7 @@ return {
       function()
         require("sidekick.cli").close()
       end,
-      desc = "Detach a CLI Session",
+      desc = "",
     },
     {
       "<leader>at",

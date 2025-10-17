@@ -68,7 +68,13 @@ return {
     })
     -----------
 
-    vim.lsp.enable("copilot", true)
+    -- Currently copilot.lua embeds a language server config
+    -- so we dont need this here, but leaving this as a config example
+    -- vim.lsp.config("copilot_ls", {
+    --   -- Command and arguments to start the server.
+    --   cmd = { "node", "/Users/jcox/.local/share/nvim/lazy/copilot.lua/copilot/js/language-server.js", "--stdio" },
+    -- })
+    -- vim.lsp.enable("copilot_ls", true)
 
     vim.lsp.config("lua_ls", {
       -- Command and arguments to start the server.
