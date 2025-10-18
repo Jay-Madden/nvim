@@ -3,16 +3,16 @@ return {
   enabled = true,
   keys = {
     {
-      "<leader>ca",
+      "<leader>cca",
       function()
         require("sidekick").nes_jump_or_apply()
       end,
       expr = true,
       desc = "Goto/Apply Previous Edit Suggestion",
-      mode = { "n", "x", "i" },
+      mode = { "n", "i" },
     },
     {
-      "<leader>cn",
+      "<leader>ccn",
       function()
         require("sidekick.nes").update()
       end,
@@ -21,7 +21,7 @@ return {
       mode = { "n", "x", "i" },
     },
     {
-      "<leader>cd",
+      "<leader>ccd",
       function()
         require("sidekick.nes").clear()
       end,
@@ -91,6 +91,11 @@ return {
       default = "cursor",
     },
     nes = {
+      trigger = {
+        -- Disable all trigger events as they are annoying, defaults left for reference
+        -- events = { "ModeChanged *:n", "TextChanged", "User SidekickNesDone" },
+        events = {  "User SidekickNesDone" },
+      },
       enabled = true,
     },
   },

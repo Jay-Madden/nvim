@@ -190,17 +190,10 @@ M = {
       },
       {
         type = "delve",
-        name = "Debug Kustomize Fail",
+        name = "Debug alloy tests",
         request = "launch",
-        program = "./kustomize/main.go",
-        args = { "build", "./testdata/gorilla-fail" },
-      },
-      {
-        type = "delve",
-        name = "Debug Kustomize Allowed",
-        request = "launch",
-        program = "./kustomize/main.go",
-        args = { "build", "./testdata/gorilla-allowed" },
+        mode = "test",
+        program = "./autotest-temp/functional",
       },
     }
 

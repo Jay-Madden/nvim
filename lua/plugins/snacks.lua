@@ -82,6 +82,20 @@ return {
       end,
       desc = "File explorer",
     },
+    {
+      "<leader>fp",
+      function()
+        Snacks.picker.pick()
+      end,
+      desc = "Snacks Pickers",
+    },
+    {
+      "<leader>fh",
+      function()
+        Snacks.picker.command_history()
+      end,
+      desc = "Command History",
+    },
   },
   ---@type snacks.Config
   opts = {

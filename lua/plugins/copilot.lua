@@ -8,8 +8,8 @@ return {
         auto_trigger = false,
         auto_refresh = true,
         keymap = {
-          accept = "<leader>cca",
-          next = "<leader>ccn",
+          accept = "<leader>ca",
+          next = "<leader>cn",
           prev = "<leader>ccp",
           dismiss = "<leader>ccd",
         },
