@@ -27,28 +27,28 @@ M = {
       function()
         require("dapui").eval()
       end,
-      desc = "show values under cursor",
+      desc = "Show value",
     },
     {
       "<Leader>di",
       function()
         require("dap").step_into()
       end,
-      desc = "step into function",
-    },
-    {
-      "<leader>dn",
-      function()
-        require("dap").step_over()
-      end,
-      desc = "step over to next line",
+      desc = "Step in",
     },
     {
       "<leader>do",
       function()
         require("dap").step_out()
       end,
-      desc = "step out to calling function",
+      desc = "Step out",
+    },
+    {
+      "<leader>dn",
+      function()
+        require("dap").step_over()
+      end,
+      desc = "Step over",
     },
     {
       "<leader>dq",
@@ -56,7 +56,7 @@ M = {
         require("dap").close()
         require("dapui").close()
       end,
-      desc = "step the debugger",
+      desc = "Quit debugging",
     },
     {
       "<leader>dt",
@@ -72,14 +72,7 @@ M = {
           end
         end
       end,
-      desc = "debug current ginkgo test under cursor",
-    },
-    {
-      "<Leader>dc",
-      function()
-        require("dapui").close()
-      end,
-      desc = "Close debugging window",
+      desc = "Debug current ginkgo test",
     },
   },
 
