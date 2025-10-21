@@ -194,6 +194,8 @@ M = {
         request = "launch",
         mode = "test",
         program = "./autotest-temp/functional",
+        -- Disable go test caching
+        args = {"-test.count=1"}
       },
     }
 
