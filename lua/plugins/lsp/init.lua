@@ -34,13 +34,6 @@ return {
     vim.opt.rtp:append(vim.fn.stdpath("config") .. "/nvim-lspconfig")
     vim.opt.rtp:append(vim.fn.stdpath("config") .. "/mason.nvim")
 
-    -- Add the same capabilities to ALL server configurations.
-    -- Refer to :h vim.lsp.config() for more information.
-    vim.lsp.config("*", {
-      capabilities = vim.lsp.protocol.make_client_capabilities(),
-      root_markers = { ".git" },
-    })
-
     require("neoconf").setup()
 
     -- Define the virtual text diagnostic signs
@@ -76,19 +69,8 @@ return {
     -- })
     -- vim.lsp.enable("copilot_ls", true)
 
-    vim.lsp.config("lua_ls", {
-      -- Command and arguments to start the server.
-      cmd = { "lua-language-server" },
-      -- Filetypes to automatically attach to.
-      filetypes = { "lua" },
-      settings = {
-        Lua = {
-          root_markers = { ".git", "*.rockspec" },
-        },
-      },
-    })
     vim.lsp.enable("lua_ls")
-    --
+
     -- vim.lsp.enable("yamlls")
     -- vim.lsp.enable("terraformls")
 
@@ -113,9 +95,11 @@ return {
       },
     })
     vim.lsp.enable("tsserver")
+
     -- vim.lsp.enable("html")
     -- vim.lsp.enable("clangd")
-    -- vim.lsp.enable("bashls")
+
+    vim.lsp.enable("bashls")
 
     vim.lsp.config("rust_analyzer", {
       settings = {
@@ -155,6 +139,7 @@ return {
         usePlaceholders = false,
       },
     })
+
     vim.lsp.enable("gopls")
     vim.lsp.config("buf", {})
     vim.lsp.enable("buf")
