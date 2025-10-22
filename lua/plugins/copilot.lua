@@ -1,7 +1,7 @@
 return {
   "zbirenbaum/copilot.lua",
   event = { "InsertEnter" },
-  enabled = true,
+  enabled = function() vim.fn.executable("copilot-language-server") end,
   config = function()
     require("copilot").setup({
       suggestion = {
