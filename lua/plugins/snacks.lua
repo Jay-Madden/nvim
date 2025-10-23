@@ -78,7 +78,10 @@ return {
     {
       "<leader>nt",
       function()
-        Snacks.explorer.open()
+        Snacks.explorer.open({
+          hidden = true,
+          ignored = true,
+        })
       end,
       desc = "File explorer",
     },
