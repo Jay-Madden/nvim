@@ -47,7 +47,10 @@ return {
         lualine_a = {
           { "mode", separator = { left = "" }, right_padding = 2 },
         },
-        lualine_b = { "branch", "filename", "diagnostics",
+        lualine_b = {
+          "branch",
+          "filename",
+          "diagnostics",
           {
             separator = { right = "" },
             function()

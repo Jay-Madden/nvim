@@ -94,7 +94,7 @@ return {
       trigger = {
         -- Disable all trigger events as they are annoying, defaults left for reference
         -- events = { "ModeChanged *:n", "TextChanged", "User SidekickNesDone" },
-        events = {  "User SidekickNesDone" },
+        events = { "User SidekickNesDone" },
       },
       enabled = true,
     },

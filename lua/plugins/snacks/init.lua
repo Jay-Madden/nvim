@@ -1,7 +1,7 @@
-local modules = { 
+local modules = {
   require("plugins.snacks.features"),
   require("plugins.snacks.picker"),
-  require("plugins.snacks.dashboard") 
+  require("plugins.snacks.dashboard"),
 }
 
 -- Collect all keys from feature files
