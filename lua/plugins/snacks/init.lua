@@ -1,17 +1,20 @@
-local features = require("plugins.snacks.features")
-local picker = require("plugins.snacks.picker")
-local dashboard = require("plugins.snacks.dashboard")
+local modules = { 
+  require("plugins.snacks.features"),
+  require("plugins.snacks.picker"),
+  require("plugins.snacks.dashboard") 
+}
 
 -- Collect all keys from feature files
 local all_keys = {}
-vim.list_extend(all_keys, features.keys or {})
-vim.list_extend(all_keys, picker.keys or {})
 
--- Collect all opts from feature files
+for _, mod in ipairs(modules) do
+  vim.list_extend(all_keys, mod.keys or {})
+end
+
 local all_opts = {}
-vim.tbl_deep_extend("force", all_opts, features.opts)
-all_opts.picker = picker.opts
-all_opts.dashboard = dashboard.opts
+for _, mod in ipairs(modules) do
+  all_opts = vim.tbl_deep_extend("error", all_opts, mod.opts)
+end
 
 return {
   "folke/snacks.nvim",
