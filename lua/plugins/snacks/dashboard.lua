@@ -44,7 +44,7 @@ return {
      ╚════╝          ╚═╝   ╚═╝╚═╝     ╚═╝]],
     keys = {
       {
-        icon = " ",
+        icon = " ",
         key = "f",
         desc = "Find File",
         action = function()
@@ -54,9 +54,9 @@ return {
           })
         end,
       },
-      { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+        { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
       {
-        icon = " ",
+            icon = " ",
         key = "g",
         desc = "Find Text",
         action = function()
@@ -64,26 +64,26 @@ return {
         end,
       },
       {
-        icon = " ",
+            icon = " ",
         key = "r",
         desc = "Recent Files",
         action = ":lua Snacks.dashboard.pick('oldfiles')",
       },
       {
-        icon = " ",
+            icon = " ",
         key = "c",
         desc = "Config",
         action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
       },
-      { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
       {
-        icon = " ",
+            icon = "󰒲 ",
         key = "L",
         desc = "Lazy",
         action = ":Lazy",
         enabled = package.loaded.lazy ~= nil,
       },
-      { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
     },
   },
   sections = {
@@ -98,7 +98,7 @@ return {
     { section = "keys", gap = 1, padding = 1 },
     {
       pane = 2,
-      icon = " ",
+          icon = " ",
       desc = "Browse Repo",
       padding = 1,
       key = "b",
@@ -108,14 +108,14 @@ return {
     },
     {
       pane = 2,
-      icon = " ",
+          icon = " ",
       title = "Recent Files",
       section = "recent_files",
       indent = 2,
       padding = 1,
     },
     {
-      icon = " ",
+          icon = " ",
       pane = 2,
       title = "Git Tree",
       section = "terminal",
@@ -129,7 +129,7 @@ return {
     },
     {
       pane = 2,
-      icon = " ",
+          icon = " ",
       title = "Git Status",
       section = "terminal",
       enabled = function()
