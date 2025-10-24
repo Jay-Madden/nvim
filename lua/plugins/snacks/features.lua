@@ -1,0 +1,48 @@
+return {
+  keys = {
+    {
+      "<leader>lg",
+      function()
+        Snacks.lazygit.open()
+      end,
+      desc = "LazyGit",
+    },
+    {
+      "<leader>nt",
+      function()
+        Snacks.explorer.open({
+          hidden = true,
+          ignored = true,
+        })
+      end,
+      desc = "File explorer",
+    },
+  },
+  opts = {
+    bigfile = { enabled = true },
+    indent = { enabled = false },
+    input = { enabled = true },
+    image = { enabled = true },
+    lazygit = {
+      enabled = true,
+    },
+    notifier = { enabled = false },
+    quickfile = { enabled = true },
+    scroll = {
+      enabled = true,
+      animate = {
+        duration = { step = 5, total = 50 },
+        easing = "linear",
+      },
+    },
+    statuscolumn = {
+      enabled = true,
+      left = { "sign", "mark" },
+      folds = {
+        open = true,
+        git_hl = true,
+      },
+    },
+    words = { enabled = false },
+  },
+}
