@@ -60,7 +60,7 @@ return {
 
     -- Generate keymaps for opening a snacks picker that selects all files in
     -- the current directory + N number of parent directories
-    for i = 0, 9 do
+    for i = 0, 5 do
       local backward_dir_nav = ""
       for _ = 1, i do
         backward_dir_nav = backward_dir_nav .. "/.."
