@@ -46,6 +46,27 @@ return {
       end,
       desc = "Command History",
     },
+    {
+      "<leader>fr",
+      function()
+        Snacks.picker.lsp_references()
+      end,
+      desc = "Command History",
+    },
+    {
+      "<leader>fs",
+      function()
+        Snacks.picker.lsp_symbols()
+      end,
+      desc = "Command History",
+    },
+    {
+      "<leader>fS",
+      function()
+        Snacks.picker.lsp_workspace_symbols()
+      end,
+      desc = "Command History",
+    },
   },
   opts = {
     picker = {

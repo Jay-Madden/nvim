@@ -28,7 +28,6 @@ M = {
         end,
         desc = "Live grep",
       },
-      -- ##########
       {
         "<leader>sc",
         function()
@@ -36,20 +35,7 @@ M = {
         end,
         desc = "Find files in current buffer directory",
       },
-      {
-        "<Leader>ft",
-        function()
-          require("telescope.builtin").builtin()
-        end,
-        desc = "View builtin pickers",
-      },
-      {
-        "<leader>fr",
-        function()
-          require("telescope.builtin").lsp_references()
-        end,
-        desc = "Find references",
-      },
+      -- ##########
       {
         "<leader>fR",
         function()
@@ -110,37 +96,11 @@ M = {
         desc = "View the jump list",
       },
       {
-        "<Leader>fs",
-        function()
-          require("telescope.builtin").lsp_document_symbols({
-            symbol_width = 50,
-          })
-        end,
-        desc = "Find all symbols in the current document",
-      },
-      {
-        "<Leader>fS",
-        function()
-          require("telescope.builtin").lsp_workspace_symbols({
-            symbol_width = 50,
-            query = "all",
-          })
-        end,
-        desc = "Find all symbols in the current workspace",
-      },
-      {
         "<Leader>fb",
         function()
           require("telescope.builtin").buffers()
         end,
         desc = "Browse buffers",
-      },
-      {
-        "<Leader>fv",
-        function()
-          require("telescope").extensions.file_browser.file_browser()
-        end,
-        desc = "Browse files",
       },
       {
         "<Leader>fT",
