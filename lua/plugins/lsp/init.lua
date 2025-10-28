@@ -83,7 +83,7 @@ return {
     })
     vim.lsp.enable("pyright")
 
-    vim.lsp.enable("tsserver")
+    vim.lsp.enable("vtsls")
 
     -- vim.lsp.enable("html")
     -- vim.lsp.enable("clangd")
