@@ -8,12 +8,20 @@ local modules = {
 local all_keys = {}
 
 for _, mod in ipairs(modules) do
-  vim.list_extend(all_keys, mod.keys or {})
+  local keys = mod.keys
+  if type(keys) == "function" then
+    keys = keys()
+  end
+  vim.list_extend(all_keys, keys or {})
 end
 
 local all_opts = {}
 for _, mod in ipairs(modules) do
-  all_opts = vim.tbl_deep_extend("error", all_opts, mod.opts)
+  local opts = mod.opts
+  if type(opts) == "function" then
+    opts = opts()
+  end
+  all_opts = vim.tbl_deep_extend("error", all_opts, opts or {})
 end
 
 return {
