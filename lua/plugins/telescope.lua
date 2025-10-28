@@ -166,26 +166,6 @@ M = {
       },
     }
 
-    -- Generate keymaps for opening a telescope picker that selects all files in
-    -- N number of parent directories
-    for i = 1, 9 do
-      local backward_dir_nav = ""
-      for _ = 1, i do
-        backward_dir_nav = backward_dir_nav .. "/.."
-      end
-
-      local keymap = {
-        "<leader>f" .. i,
-        function()
-          require("telescope.builtin").find_files({
-            cwd = require("telescope.utils").buffer_dir() .. backward_dir_nav,
-          })
-        end,
-        desc = "Find files in buffer directory with " .. i .. " parent directories included",
-      }
-      table.insert(keymaps, keymap)
-    end
-
     return keymaps
   end,
 
