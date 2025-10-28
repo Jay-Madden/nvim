@@ -1,7 +1,34 @@
 local utils = require("utils")
 
+local function generate_parent_directory_keys()
+  local keys = {}
+
+  -- Generate keymaps for 1-9 parent directories
+  for i = 1, 5 do
+    local backward_dir_nav = ""
+    for _ = 1, i do
+      backward_dir_nav = backward_dir_nav .. "/.."
+    end
+
+    table.insert(keys, {
+      "<leader>f" .. i,
+      function()
+        Snacks.picker.smart({
+          multi = { "files" },
+          cwd = utils.buffer_dir() .. backward_dir_nav,
+          hidden = true,
+          ignore = true,
+        })
+      end,
+      desc = "Find files in buffer directory with " .. i .. " parent directories included",
+    })
+  end
+
+  return keys
+end
+
 return {
-  keys = {
+  keys = vim.list_extend({
     {
       "<leader>ff",
       function()
@@ -12,18 +39,6 @@ return {
         })
       end,
       desc = "Find files",
-    },
-    {
-      "<leader>fc",
-      function()
-        Snacks.picker.smart({
-          multi = { "files" },
-          cwd = utils.buffer_dir(),
-          hidden = true,
-          ignore = true,
-        })
-      end,
-      desc = "Find files in the current directory",
     },
     {
       "<leader>fg",
@@ -67,7 +82,7 @@ return {
       end,
       desc = "Command History",
     },
-  },
+  }, generate_parent_directory_keys()),
   opts = {
     picker = {
       exclude = {
