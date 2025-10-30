@@ -19,9 +19,13 @@ return {
     },
   },
   opts = {
+    explorer = {
+      replace_netrw = true,
+      trash = true,
+    },
     bigfile = { enabled = true },
     indent = { enabled = false },
-    input = { enabled = true },
+    input = { },
     image = { enabled = true },
     lazygit = {
       enabled = true,
