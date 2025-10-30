@@ -3,17 +3,17 @@ return {
   keys = {
     {
       "<leader>es",
-      "<cmd>Trouble diagnostics toggle<cr>",
+      function() Snacks.picker.diagnostics() end,
       desc = "Diagnostics (Trouble)",
     },
     {
       "<leader>eS",
-      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+      function() Snacks.picker.diagnostics_buffer() end,
       desc = "Buffer Diagnostics (Trouble)",
     },
     {
       "<leader>eq",
-      "<cmd>Trouble qflist toggle<cr>",
+      function() Snacks.picker.qflist() end,
       desc = "Quickfix List (Trouble)",
     },
   },
