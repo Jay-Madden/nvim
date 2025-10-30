@@ -17,7 +17,9 @@ return {
       {
         "<leader>fg",
         function()
-          Snacks.picker.grep()
+          Snacks.picker.grep({
+            hidden = true,
+          })
         end,
         desc = "Live grep",
       },
