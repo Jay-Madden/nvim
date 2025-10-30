@@ -6,8 +6,13 @@ end
 _G.bt = function()
   Snacks.debug.backtrace()
 end
-vim.print = _G.dd
------------------------------------
+if vim.fn.has("nvim-0.11") == 1 then
+  vim._print = function(_, ...)
+    dd(...)
+  end
+else
+  vim.print = dd
+end-----------------------------------
 
 -- Temp fix for 0.10.3 regression with :inspect command
 -- https://github.com/neovim/neovim/issues/31675#issuecomment-2558405042
