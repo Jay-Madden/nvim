@@ -82,7 +82,6 @@ return {
     },
   },
   opts = {
-    debug = true,
     cli = {
       mux = {
         backend = "tmux",
