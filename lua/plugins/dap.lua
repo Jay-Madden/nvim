@@ -186,7 +186,7 @@ M = {
         name = "Debug alloy tests",
         request = "launch",
         mode = "test",
-        program = "./autotest-temp/functional",
+        program = "./tests/functional",
         -- Disable go test caching
         args = { "-test.count=1" },
       },
