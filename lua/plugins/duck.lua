@@ -11,16 +11,9 @@ return {
     {
       "<leader>dk",
       function()
-        require("duck").cook()
-      end,
-      desc = "Remove one duck",
-    },
-    {
-      "<leader>da",
-      function()
         require("duck").cook_all()
       end,
-      desc = "Remove all ducks",
+      desc = "Remove one duck",
     },
   },
 }
