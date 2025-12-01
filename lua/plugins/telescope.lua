@@ -96,13 +96,6 @@ M = {
         desc = "View the jump list",
       },
       {
-        "<Leader>fb",
-        function()
-          require("telescope.builtin").buffers()
-        end,
-        desc = "Browse buffers",
-      },
-      {
         "<Leader>fT",
         function()
           if vim.bo.filetype ~= "go" then

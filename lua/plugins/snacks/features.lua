@@ -33,7 +33,6 @@ return {
     notifier = { enabled = false },
     quickfile = { enabled = true },
     scroll = {
-      enabled = true,
       animate = {
         duration = { step = 5, total = 50 },
         easing = "linear",

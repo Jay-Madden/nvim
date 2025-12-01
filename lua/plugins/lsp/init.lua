@@ -67,21 +67,59 @@ return {
     --   -- Command and arguments to start the server.
     --   cmd = { "node", "/Users/jcox/.local/share/nvim/lazy/copilot.lua/copilot/js/language-server.js", "--stdio" },
     -- })
-    -- vim.lsp.enable("copilot_ls", true)
+    -- vim.lsp.enable("copilot_ls")
 
     vim.lsp.enable("lua_ls")
 
     -- vim.lsp.enable("yamlls")
-    -- vim.lsp.enable("terraformls")
+    vim.lsp.enable("terraformls")
 
-    vim.lsp.config("pyright", {
-      settings = {
-        pyright = {
-          venv = ".venv",
-        },
-      },
+    -- ##### Python #####
+
+    -- Custom lsp aucmd to support pep723 inline script metadata
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "python",
+      callback = function(_)
+        local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] or ""
+        local has_inline_metadata = first_line:match("^# /// script")
+
+        local cmd, name, root_dir
+        if has_inline_metadata then
+          local filepath = vim.fn.expand("%:p")
+          local filename = vim.fn.fnamemodify(filepath, ":t")
+
+          -- Set a unique name for the server instance based on the filename
+          -- so we get a new client for new scripts
+          name = "ty-" .. filename
+
+          local relpath = vim.fn.fnamemodify(filepath, ":.")
+
+          cmd = { "uvx", "--with-requirements", relpath, "ty", "server" }
+          root_dir = vim.fn.getcwd()
+        else
+          name = "ty"
+          cmd = { "uvx", "ty", "server" }
+          root_dir = vim.fs.root(0, { 'ty.toml', 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', '.git' })
+        end
+
+        vim.lsp.start({
+          name = name,
+          cmd = cmd,
+          root_dir = root_dir,
+        })
+      end,
     })
-    vim.lsp.enable("pyright")
+
+    -- Old pyright configuration
+    -- vim.lsp.config("pyright", {
+    --   settings = {
+    --     pyright = {
+    --       venv = ".venv",
+    --     },
+    --   },
+    -- })
+    -- vim.lsp.enable("pyright")
+    -- #####
 
     vim.lsp.enable("vtsls")
 

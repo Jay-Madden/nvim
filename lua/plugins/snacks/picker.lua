@@ -15,6 +15,13 @@ return {
         desc = "Find files",
       },
       {
+        "<leader>fb",
+        function()
+          Snacks.picker.buffers()
+        end,
+        desc = "Find files",
+      },
+      {
         "<leader>fg",
         function()
           Snacks.picker.grep({
