@@ -95,7 +95,7 @@ return {
           local relpath = vim.fn.fnamemodify(filepath, ":.")
 
           cmd = { "uvx", "--with-requirements", relpath, "ty", "server" }
-          root_dir = vim.fn.getcwd()
+          root_dir = vim.fn.fnamemodify(filepath, ":h")
         else
           name = "ty"
           cmd = { "uvx", "ty", "server" }
