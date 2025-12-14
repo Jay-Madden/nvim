@@ -65,6 +65,17 @@ return {
         end,
         desc = "Command History",
       },
+      {
+        "<leader>fc",
+        function()
+          Snacks.picker.files({
+            cwd = utils.buffer_dir(),
+            hidden = true,
+            ignore = true,
+          })
+        end,
+        desc = "Find files in current buffer directory",
+      },
     }
 
     -- Generate keymaps for opening a snacks picker that selects all files in
