@@ -130,16 +130,12 @@ return {
 
     vim.lsp.config("rust_analyzer", {
       settings = {
-        rust_analyzer = {
-          cargo = {
-            extraEnv = { CARGO_PROFILE_RUST_ANALYZER_INHERITS = "dev" },
-            extraArgs = { "--profile", "rust-analyzer" },
-          },
-          -- Add clippy lints for Rust.
-          checkOnSave = {
-            allFeatures = true,
+        ['rust-analyzer'] = {
+          checkOnSave = true,
+          check = {
             command = "clippy",
-            extraArgs = { "--no-deps" },
+            workspace = true,
+            -- features = "all",
           },
         },
       },

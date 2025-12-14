@@ -9,7 +9,7 @@ return {
   config = function()
     local tools = {
       "lua-language-server",
-      "rust-analyzer",
+      -- "rust-analyzer",
       "terraform-ls",
       -- Rust debugger
       "codelldb",
