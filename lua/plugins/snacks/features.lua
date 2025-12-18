@@ -25,7 +25,7 @@ return {
     },
     bigfile = { enabled = true },
     indent = { enabled = false },
-    input = { },
+    input = {},
     image = { enabled = true },
     lazygit = {
       enabled = true,

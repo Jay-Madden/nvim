@@ -25,4 +25,7 @@
     ```
     brew install ripgrep
     ```
-* Ensure `gcc/clang` is installed for treesitter parser compiling
+* Ensure `gcc/clang` and `tree-sitter-cli` is installed for treesitter parser compiling
+    ```
+    brew install tree-sitter-cli
+    ```

@@ -99,7 +99,10 @@ return {
         else
           name = "ty"
           cmd = { "uvx", "ty", "server" }
-          root_dir = vim.fs.root(0, { 'ty.toml', 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', '.git' })
+          root_dir = vim.fs.root(
+            0,
+            { "ty.toml", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" }
+          )
         end
 
         vim.lsp.start({
@@ -130,7 +133,7 @@ return {
 
     vim.lsp.config("rust_analyzer", {
       settings = {
-        ['rust-analyzer'] = {
+        ["rust-analyzer"] = {
           checkOnSave = true,
           check = {
             command = "clippy",

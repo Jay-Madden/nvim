@@ -47,8 +47,6 @@ vim.o.foldcolumn = "1" -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
--- vim.o.foldmethod = "manual"
--- vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- Only show virtual text for current lines
 if vim.fn.has("nvim-0.11.0") == 1 then
@@ -109,10 +107,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 
 -- Enable smooth scrolling
 vim.opt.smoothscroll = true
-
-if vim.fn.has("nvim-0.9.0") == 1 then
-  --vim.opt.statuscolumn = [[%!v:lua.require'utils'.statuscolumn()]]
-end
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function()
