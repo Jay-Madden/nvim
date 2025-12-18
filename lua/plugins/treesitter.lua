@@ -4,7 +4,7 @@ return {
   build = ":TSUpdate",
 
   config = function()
-    languages = {
+    local languages = {
       "go",
       "rust",
       "lua",
