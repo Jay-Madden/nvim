@@ -18,6 +18,19 @@ utils.map("n", "K", function()
 end, { desc = "Show information" })
 
 utils.map("n", "<leader>r", function()
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+  local has_rename = false
+  for _, client in ipairs(clients) do
+    if client.server_capabilities.renameProvider then
+      has_rename = true
+      break
+    end
+  end
+  if not has_rename then
+    vim.notify("No LSP with rename capability", vim.log.levels.WARN)
+    return
+  end
+
   local Input = require("nui.input")
   local event = require("nui.utils.autocmd").event
 

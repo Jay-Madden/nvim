@@ -183,6 +183,12 @@ M = {
       },
       {
         type = "delve",
+        name = "Debug main.go",
+        request = "launch",
+        program = "main.go",
+      },
+      {
+        type = "delve",
         name = "Debug alloy tests",
         request = "launch",
         mode = "test",
