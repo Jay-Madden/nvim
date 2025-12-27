@@ -170,6 +170,9 @@ return {
     vim.lsp.config("buf", {})
     vim.lsp.enable("buf")
 
+    vim.lsp.config("jdtls", {})
+    vim.lsp.enable('jdtls')
+
     require("lspconfig.ui.windows").default_options.border = "single"
 
     -- Bootstrap lsp keymappings
