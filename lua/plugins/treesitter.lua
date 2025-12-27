@@ -3,6 +3,10 @@ return {
   lazy = false,
   build = ":TSUpdate",
 
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter-context",
+  },
+
   config = function()
     local languages = {
       "go",
@@ -11,6 +15,8 @@ return {
       "python",
       "c",
       "cpp",
+      "java",
+      "wgsl",
       "javascript",
       "typescript",
       "bash",
