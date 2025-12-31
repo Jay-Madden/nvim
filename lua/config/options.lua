@@ -48,6 +48,8 @@ vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decr
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
+vim.g.health = { style = 'float' }
+
 -- Only show virtual text for current lines
 if vim.fn.has("nvim-0.11.0") == 1 then
   vim.diagnostic.config({

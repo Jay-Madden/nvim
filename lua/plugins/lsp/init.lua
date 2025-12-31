@@ -6,6 +6,7 @@ return {
   lazy = false,
 
   dependencies = {
+    "Jay-Madden/tylsp-pep723.nvim",
     "mason-org/mason.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     "folke/neoconf.nvim",
@@ -75,43 +76,7 @@ return {
     vim.lsp.enable("terraformls")
 
     -- ##### Python #####
-
-    -- Custom lsp aucmd to support pep723 inline script metadata
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "python",
-      callback = function(_)
-        local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] or ""
-        local has_inline_metadata = first_line:match("^# /// script")
-
-        local cmd, name, root_dir
-        if has_inline_metadata then
-          local filepath = vim.fn.expand("%:p")
-          local filename = vim.fn.fnamemodify(filepath, ":t")
-
-          -- Set a unique name for the server instance based on the filename
-          -- so we get a new client for new scripts
-          name = "ty-" .. filename
-
-          local relpath = vim.fn.fnamemodify(filepath, ":.")
-
-          cmd = { "uvx", "--with-requirements", relpath, "ty", "server" }
-          root_dir = vim.fn.fnamemodify(filepath, ":h")
-        else
-          name = "ty"
-          cmd = { "uvx", "ty", "server" }
-          root_dir = vim.fs.root(
-            0,
-            { "ty.toml", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" }
-          )
-        end
-
-        vim.lsp.start({
-          name = name,
-          cmd = cmd,
-          root_dir = root_dir,
-        })
-      end,
-    })
+    require("tylsp-pep723").setup({})
 
     -- Old pyright configuration
     -- vim.lsp.config("pyright", {
@@ -169,6 +134,7 @@ return {
     vim.lsp.enable("gopls")
     vim.lsp.config("buf", {})
     vim.lsp.enable("buf")
+
 
     vim.lsp.config("jdtls", {})
     vim.lsp.enable('jdtls')
