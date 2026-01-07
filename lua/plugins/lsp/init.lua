@@ -135,6 +135,8 @@ return {
     vim.lsp.config("buf", {})
     vim.lsp.enable("buf")
 
+    vim.lsp.config("wgsl_analyzer", {})
+    vim.lsp.enable("wgsl_analyzer")
 
     vim.lsp.config("jdtls", {})
     vim.lsp.enable('jdtls')
