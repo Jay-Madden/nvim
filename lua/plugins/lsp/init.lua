@@ -139,7 +139,7 @@ return {
     vim.lsp.enable("wgsl_analyzer")
 
     vim.lsp.config("jdtls", {})
-    vim.lsp.enable('jdtls')
+    vim.lsp.enable("jdtls")
 
     require("lspconfig.ui.windows").default_options.border = "single"
 
