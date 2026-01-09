@@ -77,6 +77,8 @@ return {
 
     -- ##### Python #####
     require("tylsp-pep723").setup({})
+    -- vim.lsp.config("ruff", {})
+    -- vim.lsp.enable("ruff")
 
     -- Old pyright configuration
     -- vim.lsp.config("pyright", {

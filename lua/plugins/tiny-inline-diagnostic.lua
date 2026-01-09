@@ -6,7 +6,6 @@ return {
   config = function()
     require("tiny-inline-diagnostic").setup({
       options = {
-        -- https://github.com/rachartier/tiny-inline-diagnostic.nvim/issues/168
         set_arrow_to_diag_color = true,
         show_source = {
           enabled = false,
