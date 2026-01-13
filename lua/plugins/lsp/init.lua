@@ -91,6 +91,7 @@ return {
     -- vim.lsp.enable("pyright")
     -- #####
 
+    vim.lsp.config("vtsls", {})
     vim.lsp.enable("vtsls")
 
     -- vim.lsp.enable("html")
