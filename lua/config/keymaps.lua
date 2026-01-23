@@ -3,6 +3,7 @@
 local utils = require("utils")
 
 -- Base mappings
+utils.map("i", "jk", "<Esc>", { desc = "'jk' for normal mode" })
 utils.map("i", "jj", "<Esc>", { desc = "Double tap 'j' for normal mode" })
 
 -- better up/down
