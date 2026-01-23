@@ -76,6 +76,13 @@ return {
         end,
         desc = "Find files in current buffer directory",
       },
+      {
+        "<leader>fm",
+        function()
+          Snacks.picker.marks()
+        end,
+        desc = "View marks",
+      },
     }
 
     -- Generate keymaps for opening a snacks picker that selects all files in

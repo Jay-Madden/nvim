@@ -44,7 +44,7 @@ M = {
         desc = "View registers",
       },
       {
-        "<leader>fm",
+        "<leader>sm",
         function()
           require("telescope.builtin").marks()
         end,

@@ -27,6 +27,13 @@ return {
     }
     require("nvim-treesitter").install(languages)
 
+    require("treesitter-context").setup({
+      multiwindow = true,
+      multiline_threshold = 5,
+      trim_scope = "outer",
+      separator = "─"
+    })
+
     vim.api.nvim_create_autocmd("FileType", {
       pattern = languages,
       callback = function()
