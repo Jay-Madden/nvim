@@ -16,6 +16,7 @@ return {
       "c",
       "cpp",
       "java",
+      "c_sharp",
       "wgsl",
       "javascript",
       "typescript",
