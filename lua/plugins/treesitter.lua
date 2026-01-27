@@ -5,6 +5,7 @@ return {
 
   dependencies = {
     "nvim-treesitter/nvim-treesitter-context",
+    "grafana/vim-alloy",
   },
 
   config = function()
