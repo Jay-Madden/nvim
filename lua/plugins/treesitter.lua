@@ -48,5 +48,15 @@ return {
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end,
     })
+    vim.filetype.add({
+      extension = {
+        gotmpl = 'gotmpl',
+      },
+      pattern = {
+        [".*%.tm?pl"] = "helm",
+        [".*%.ya?ml"] = "helm",
+        ["helmfile.*%.ya?ml"] = "helm",
+      },
+    })
   end,
 }
