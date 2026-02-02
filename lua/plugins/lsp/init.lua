@@ -144,6 +144,11 @@ return {
     vim.lsp.config("jdtls", {})
     vim.lsp.enable("jdtls")
 
+    vim.lsp.config("tilt_ls", {
+      filetypes = { 'tiltfile', 'Tiltfile' },
+    })
+    vim.lsp.enable("tilt_ls")
+
     require("lspconfig.ui.windows").default_options.border = "single"
 
     -- Bootstrap lsp keymappings
