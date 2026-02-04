@@ -145,7 +145,7 @@ return {
     vim.lsp.enable("jdtls")
 
     vim.lsp.config("tilt_ls", {
-      filetypes = { 'tiltfile', 'Tiltfile' },
+      filetypes = { "tiltfile", "Tiltfile" },
     })
     vim.lsp.enable("tilt_ls")
 

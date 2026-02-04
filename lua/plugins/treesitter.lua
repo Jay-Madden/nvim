@@ -33,7 +33,7 @@ return {
       multiwindow = true,
       multiline_threshold = 5,
       trim_scope = "outer",
-      separator = "─"
+      separator = "─",
     })
 
     vim.api.nvim_create_autocmd("FileType", {
@@ -50,7 +50,7 @@ return {
     })
     vim.filetype.add({
       extension = {
-        gotmpl = 'gotmpl',
+        gotmpl = "gotmpl",
       },
       pattern = {
         [".*%.tm?pl"] = "helm",
