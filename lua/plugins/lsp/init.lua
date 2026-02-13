@@ -135,8 +135,8 @@ return {
     })
 
     vim.lsp.enable("gopls")
-    vim.lsp.config("buf", {})
-    vim.lsp.enable("buf")
+    -- vim.lsp.config("buf", {})
+    -- vim.lsp.enable("buf")
 
     vim.lsp.config("wgsl_analyzer", {})
     vim.lsp.enable("wgsl_analyzer")
@@ -145,7 +145,7 @@ return {
     vim.lsp.enable("jdtls")
 
     vim.lsp.config("tilt_ls", {
-      filetypes = { "tiltfile", "Tiltfile" },
+      filetypes = { "tiltfile" },
     })
     vim.lsp.enable("tilt_ls")
 

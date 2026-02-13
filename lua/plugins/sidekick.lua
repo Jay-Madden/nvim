@@ -37,10 +37,9 @@ return {
     {
       "<leader>as",
       function()
-        require("sidekick.cli").select({ filter = { installed = true } })
+        require("sidekick.cli").focus()
       end,
-      -- Or to select only installed tools:
-      desc = "Select CLI",
+      desc = "Focus Sidekick",
     },
     {
       "<leader>ad",

@@ -26,6 +26,7 @@ return {
       "yaml",
       "markdown",
       "helm",
+      "tiltfile",
     }
     require("nvim-treesitter").install(languages)
 
@@ -35,6 +36,9 @@ return {
       trim_scope = "outer",
       separator = "─",
     })
+
+    -- starlark is python-based
+    vim.treesitter.language.register("python", "tiltfile")
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = languages,
@@ -52,10 +56,15 @@ return {
       extension = {
         gotmpl = "gotmpl",
       },
+      filename = {
+        ["Tiltfile"] = "tiltfile",
+        ["tiltfile"] = "tiltfile",
+      },
       pattern = {
         [".*%.tm?pl"] = "helm",
         [".*%.ya?ml"] = "helm",
         ["helmfile.*%.ya?ml"] = "helm",
+        ["[Tt]iltfile%-.*"] = "tiltfile",
       },
     })
   end,
