@@ -7,6 +7,12 @@ end, { desc = "Go to implementation" })
 
 utils.map("n", "gd", function()
   vim.lsp.buf.definition()
+  vim.api.nvim_create_autocmd("CursorMoved", {
+    once = true,
+    callback = function()
+      vim.cmd("normal! zz")
+    end,
+  })
 end, { desc = "Go to definition" })
 
 utils.map("n", "gD", function()
