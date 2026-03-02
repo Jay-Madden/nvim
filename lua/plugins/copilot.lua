@@ -21,10 +21,10 @@ return {
       -- if we use the npm install version as of this commit it works.
       -- https://github.com/zbirenbaum/copilot.lua/issues/591
       -- TODO: Remove this
-      server = {
-        type = "binary",
-        custom_server_filepath = "/opt/homebrew/bin/copilot-language-server",
-      },
+      -- server = {
+      --   type = "binary",
+      --   custom_server_filepath = "/opt/homebrew/bin/copilot-language-server",
+      -- },
     })
   end,
 }

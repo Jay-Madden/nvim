@@ -121,9 +121,9 @@ return {
           experimentalPostfixCompletions = true,
           analyses = {
             unusedparams = true,
-            shadow = true,
+            shadow = false,
           },
-          staticcheck = true,
+          staticcheck = false,
           gofumpt = true,
           semanticTokens = true,
           completeUnimported = true,
