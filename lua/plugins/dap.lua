@@ -193,9 +193,6 @@ M = {
       },
     }
 
-    -- Setup rust
-    -- local codelldb_path = require("mason-registry").get_package("codelldb"):get_install_path()
-    --   .. "/extension/adapter/codelldb"
     -- dap.adapters.codelldb = {
     --   type = "server",
     --   host = "127.0.0.1",

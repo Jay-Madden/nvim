@@ -1,13 +1,11 @@
 return {
   "neovim/nvim-lspconfig",
 
-  cmd = { "MasonToolsUpdate", "LspInfo", "LspStart", "LspStop", "LspRestart", "LspLog" },
+  cmd = { "LspInfo", "LspStart", "LspStop", "LspRestart", "LspLog" },
   event = "BufReadPost",
 
   dependencies = {
     "Jay-Madden/tylsp-pep723.nvim",
-    "mason-org/mason.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
     "folke/neoconf.nvim",
   },
 
@@ -32,7 +30,6 @@ return {
 
   config = function()
     vim.opt.rtp:append(vim.fn.stdpath("config") .. "/nvim-lspconfig")
-    vim.opt.rtp:append(vim.fn.stdpath("config") .. "/mason.nvim")
 
     require("neoconf").setup()
 
