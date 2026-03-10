@@ -3,24 +3,10 @@ return {
   event = "VeryLazy",
 
   dependencies = {
-    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
     "MunifTanjim/nui.nvim",
-    -- OPTIONAL:
-    --   `nvim-notify` is only needed, if you want to use the notification view.
-    --   If not available, we use `mini` as the fallback
-    "rcarriga/nvim-notify",
   },
 
   config = function()
-    -- Put noice message in the bottom right so we dont block code
-    require("notify").setup({
-      stages = "fade_in_slide_out",
-      background_colour = "FloatShadow",
-      timeout = 3000,
-      top_down = false,
-      merge_duplicates = true,
-    })
-
     require("noice").setup({
       cmdline = {
         format = {

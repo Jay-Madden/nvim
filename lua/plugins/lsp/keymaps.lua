@@ -23,6 +23,8 @@ utils.map("n", "K", function()
   vim.lsp.buf.hover()
 end, { desc = "Show information" })
 
+utils.map("n", "<leader>hh", vim.lsp.buf.code_action, { desc = "Code Actions" })
+
 utils.map("n", "<leader>r", function()
   local clients = vim.lsp.get_clients({ bufnr = 0 })
   local has_rename = false

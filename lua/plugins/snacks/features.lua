@@ -1,3 +1,6 @@
+---@type table<string, snacks.win?>
+local active_terminals = {}
+
 return {
   keys = {
     {
@@ -30,7 +33,12 @@ return {
     lazygit = {
       enabled = true,
     },
-    notifier = { enabled = false },
+    notifier = {
+      enabled = true,
+      timeout = 3000,
+      top_down = false,
+      style = "fancy",
+    },
     quickfile = { enabled = true },
     scroll = {
       animate = {
@@ -46,6 +54,7 @@ return {
         git_hl = true,
       },
     },
+    terminal = {},
     words = { enabled = false },
   },
 }
