@@ -2,6 +2,7 @@ return {
   "neovim/nvim-lspconfig",
 
   cmd = { "LspInfo", "LspStart", "LspStop", "LspRestart", "LspLog" },
+  event = "BufEnter",
 
   dependencies = {
     "Jay-Madden/tylsp-pep723.nvim",
