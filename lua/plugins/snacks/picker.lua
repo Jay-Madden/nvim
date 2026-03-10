@@ -49,21 +49,21 @@ return {
         function()
           Snacks.picker.lsp_references()
         end,
-        desc = "Command History",
+        desc = "LSP References",
       },
       {
         "<leader>fs",
         function()
           Snacks.picker.lsp_symbols()
         end,
-        desc = "Command History",
+        desc = "LSP Symbols",
       },
       {
         "<leader>fS",
         function()
           Snacks.picker.lsp_workspace_symbols()
         end,
-        desc = "Command History",
+        desc = "LSP Workspace Symbols",
       },
       {
         "<leader>fc",
@@ -108,6 +108,28 @@ return {
       }
       table.insert(keymaps, keymap)
     end
+
+    table.insert(keymaps, {
+      "<leader>es",
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      desc = "Diagnostics",
+    })
+    table.insert(keymaps, {
+      "<leader>eS",
+      function()
+        Snacks.picker.diagnostics_buffer()
+      end,
+      desc = "Buffer Diagnostics",
+    })
+    table.insert(keymaps, {
+      "<leader>eq",
+      function()
+        Snacks.picker.qflist()
+      end,
+      desc = "Quickfix List",
+    })
 
     return keymaps
   end,

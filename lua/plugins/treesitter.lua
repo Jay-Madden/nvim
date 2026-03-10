@@ -1,6 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  lazy = false,
+  event = "BufReadPost",
   build = ":TSUpdate",
 
   dependencies = {
@@ -62,8 +62,6 @@ return {
       },
       pattern = {
         [".*%.tm?pl"] = "helm",
-        [".*%.ya?ml"] = "helm",
-        ["helmfile.*%.ya?ml"] = "helm",
         ["[Tt]iltfile%-.*"] = "tiltfile",
       },
     })

@@ -3,7 +3,6 @@ return {
 
   cmd = { "MasonToolsUpdate", "LspInfo", "LspStart", "LspStop", "LspRestart", "LspLog" },
   event = "BufReadPost",
-  lazy = false,
 
   dependencies = {
     "Jay-Madden/tylsp-pep723.nvim",
@@ -51,7 +50,7 @@ return {
           if diagnostic.severity == vim.diagnostic.severity.ERROR then
             return signs["Error"]
           elseif diagnostic.severity == vim.diagnostic.severity.WARN then
-            return signs["Warning"]
+            return signs["Warn"]
           elseif diagnostic.severity == vim.diagnostic.severity.INFO then
             return signs["Hint"]
           else
@@ -133,10 +132,14 @@ return {
         usePlaceholders = false,
       },
     })
-
     vim.lsp.enable("gopls")
-    -- vim.lsp.config("buf", {})
-    -- vim.lsp.enable("buf")
+
+    -- Swift lsp support
+    vim.lsp.config("sourcekit", {})
+    vim.lsp.enable("sourcekit")
+
+    vim.lsp.config("buf_ls", {})
+    vim.lsp.enable("buf_ls")
 
     vim.lsp.config("wgsl_analyzer", {})
     vim.lsp.enable("wgsl_analyzer")

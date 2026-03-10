@@ -91,16 +91,11 @@ M = {
       { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" }
     )
 
-    -- Configure the dap event handlers
-    -- make sure we close neotree before we start debugging as neotree takes up
-    -- screen space
     dap.listeners.before.attach.dapui_config = function()
-      require("neo-tree.command").execute({ action = "close" })
       dapui.open()
     end
 
     dap.listeners.before.launch.dapui_config = function()
-      require("neo-tree.command").execute({ action = "close" })
       dapui.open()
     end
 

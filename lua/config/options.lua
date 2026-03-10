@@ -63,8 +63,8 @@ vim.api.nvim_create_user_command("GhLink", function()
   local origin = vim.fn.system("git config --get remote.origin.url")
   origin = origin:gsub("[\n\r]", "")
 
-  local current_rev = vim.fn.system("git rev-parse main")
-  current_rev = current_rev:gsub("[\n\r]", "")
+  local current_rev = vim.fn.system("git symbolic-ref refs/remotes/origin/HEAD")
+  current_rev = current_rev:gsub("[\n\r]", ""):gsub("^refs/remotes/origin/", "")
 
   local relative_path = vim.fn.expand("%:.")
   local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
@@ -100,9 +100,9 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.commentstring = "# %s"
   end,
 })
--- Automatically reload files when then change externally
+-- Automatically reload files when they change externally
 vim.o.autoread = true
-vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained", "TermClose", "TermLeave" }, {
   command = "if mode() != 'c' | checktime | endif",
   pattern = { "*" },
 })
@@ -120,10 +120,6 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   end,
 })
 
--- Check if we need to reload the file when it changed
-vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-  command = "checktime",
-})
 
 -- Highlight on yank and do not set registers if the yanked text is all whitespace
 local prev_unnamed_reg = ""
