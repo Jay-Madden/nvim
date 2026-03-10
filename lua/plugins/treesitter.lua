@@ -28,8 +28,6 @@ return {
       "helm",
       "tiltfile",
     }
-    require("nvim-treesitter").install(languages)
-
     require("treesitter-context").setup({
       multiwindow = true,
       multiline_threshold = 5,
@@ -43,6 +41,8 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = languages,
       callback = function()
+        -- install() isn't available during lazy-loaded config; call it per-filetype instead
+        require("nvim-treesitter").install(vim.bo.filetype)
         -- syntax highlighting, provided by Neovim
         vim.treesitter.start()
         -- folds, provided by Neovim
