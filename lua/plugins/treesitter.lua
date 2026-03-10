@@ -26,6 +26,8 @@ return {
       "markdown",
       "helm",
       "tiltfile",
+      -- For actions-preview picker
+      "diff",
     }
     require("treesitter-context").setup({
       multiwindow = true,
