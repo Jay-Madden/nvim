@@ -43,7 +43,6 @@ return {
 
           -- Highlight rust string placeholders
           ["@lsp.type.formatSpecifier.rust"] = { fg = theme.syn.keyword },
-
         }
       end,
     })

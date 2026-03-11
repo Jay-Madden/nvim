@@ -102,10 +102,13 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 -- Automatically reload files when they change externally
 vim.o.autoread = true
-vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained", "TermClose", "TermLeave" }, {
-  command = "if mode() != 'c' | checktime | endif",
-  pattern = { "*" },
-})
+vim.api.nvim_create_autocmd(
+  { "BufEnter", "CursorHold", "CursorHoldI", "FocusGained", "TermClose", "TermLeave" },
+  {
+    command = "if mode() != 'c' | checktime | endif",
+    pattern = { "*" },
+  }
+)
 
 -- Enable smooth scrolling
 vim.opt.smoothscroll = true
@@ -119,7 +122,6 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     require("lint").try_lint()
   end,
 })
-
 
 -- Highlight on yank and do not set registers if the yanked text is all whitespace
 local prev_unnamed_reg = ""

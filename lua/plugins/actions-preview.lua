@@ -4,7 +4,7 @@ return {
 
   config = function()
     require("actions-preview").setup({
-      backend = {"snacks"},
+      backend = { "snacks" },
 
       snacks = {
         layout = { preset = "dropdown" },

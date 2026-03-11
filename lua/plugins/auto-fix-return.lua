@@ -9,7 +9,6 @@ return {
   config = function()
     require("auto-fix-return").setup({
       enabled = true,
-      log_level = vim.log.levels.DEBUG,
     })
   end,
 }
