@@ -10,6 +10,8 @@ return {
   config = function()
     local languages = {
       "go",
+      "gomod",
+      "gosum",
       "rust",
       "lua",
       "python",
