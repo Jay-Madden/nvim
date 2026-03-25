@@ -58,21 +58,43 @@ vim.g.health = { style = "float" }
 --   })
 -- end
 
--- TODO: make this an actual plugin or something
-vim.api.nvim_create_user_command("GhLink", function()
-  local origin = vim.fn.system("git config --get remote.origin.url")
-  origin = origin:gsub("[\n\r]", "")
+vim.api.nvim_create_user_command("GitLink", function()
+  local origin = vim.fn.system("git config --get remote.origin.url"):gsub("[\n\r]", "")
+
+  local base_url, host, path
+  if origin:match("^ssh://git@") then
+    -- ssh://git@host:port/path.git
+    host, path = origin:match("^ssh://git@([^:/]+)[:%d]*/(.+)$")
+    path = path:gsub("%.git$", "")
+    base_url = "https://" .. host .. "/" .. path
+  elseif origin:match("^git@") then
+    -- git@host:org/repo.git
+    host, path = origin:match("^git@([^:]+):(.+)$")
+    path = path:gsub("%.git$", "")
+    base_url = "https://" .. host .. "/" .. path
+  else
+    host = origin:match("^https?://([^/]+)/")
+    base_url = origin:gsub("%.git$", "")
+  end
+
+  local is_gitlab = host and host:match("gitlab")
+  local blob_prefix = is_gitlab and "/-/blob/" or "/blob/"
+
+  local relative_path = vim.fn.expand("%:.")
+  if relative_path == "" or relative_path == "." then
+    vim.fn.setreg("+", base_url)
+    vim.print(base_url .. " copied to system clipboard")
+    return
+  end
 
   local current_rev = vim.fn.system("git symbolic-ref refs/remotes/origin/HEAD")
   current_rev = current_rev:gsub("[\n\r]", ""):gsub("^refs/remotes/origin/", "")
 
-  local relative_path = vim.fn.expand("%:.")
   local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+  local permalink = base_url .. blob_prefix .. current_rev .. "/" .. relative_path .. "#L" .. row
 
-  local gh_permalink = origin .. "/blob/" .. current_rev .. "/" .. relative_path .. "#L" .. row
-
-  vim.fn.setreg("+", gh_permalink)
-  vim.print(gh_permalink .. " copied to system clipboard")
+  vim.fn.setreg("+", permalink)
+  vim.print(permalink .. " copied to system clipboard")
 end, {})
 
 -- Neovide configuration options
