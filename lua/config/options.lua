@@ -173,8 +173,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- When nvim is started with piped stdin, try to parse the buffer as YAML
--- and set the filetype accordingly. Requires a meaningful structure (mapping
--- or sequence) so bare text doesn't get misdetected as a YAML scalar.
+-- and set the filetype accordingly.
 vim.api.nvim_create_autocmd("StdinReadPost", {
   callback = function(event)
     local buf = event.buf
