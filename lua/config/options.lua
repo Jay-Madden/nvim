@@ -172,6 +172,54 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- When nvim is started with piped stdin, try to parse the buffer as YAML
+-- and set the filetype accordingly. Requires a meaningful structure (mapping
+-- or sequence) so bare text doesn't get misdetected as a YAML scalar.
+vim.api.nvim_create_autocmd("StdinReadPost", {
+  callback = function(event)
+    local buf = event.buf
+    if vim.bo[buf].filetype ~= "" then
+      return
+    end
+
+    local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+    local content = table.concat(lines, "\n")
+    if content:match("^%s*$") then
+      return
+    end
+
+    if not pcall(vim.treesitter.language.add, "yaml") then
+      return
+    end
+
+    local ok, parser = pcall(vim.treesitter.get_string_parser, content, "yaml")
+    if not ok or not parser then
+      return
+    end
+
+    local parse_ok, trees = pcall(function()
+      return parser:parse()
+    end)
+    if not parse_ok or not trees or not trees[1] then
+      return
+    end
+
+    local root = trees[1]:root()
+    if root:has_error() then
+      return
+    end
+
+    local query = vim.treesitter.query.parse(
+      "yaml",
+      "[(block_mapping) (block_sequence) (flow_mapping) (flow_sequence)] @structure"
+    )
+    for _ in query:iter_captures(root, content) do
+      vim.bo[buf].filetype = "yaml"
+      return
+    end
+  end,
+})
+
 -- Go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function(event)
