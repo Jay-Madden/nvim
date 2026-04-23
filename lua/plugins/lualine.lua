@@ -49,7 +49,7 @@ return {
         },
         lualine_b = {
           "branch",
-          "filename",
+          { "filename", path = 1 },
           "diagnostics",
           {
             separator = { right = "" },
