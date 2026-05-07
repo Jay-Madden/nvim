@@ -138,6 +138,7 @@ return {
       exclude = {
         ".git",
         "node_modules",
+        ".envtest_slot*",
       },
       formatters = {
         file = {
