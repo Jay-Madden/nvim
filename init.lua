@@ -22,3 +22,6 @@ require("config.keymaps")
 
 -- Initialize lazy.nvim
 require("config.lazy")
+
+-- Filesystem watcher for external file edits (vendored from sidekick.nvim)
+require("config.file-watch")

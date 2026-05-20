@@ -82,7 +82,7 @@ return {
   },
   opts = {
     cli = {
-      watch = true,
+      watch = false,
     },
     nes = {
       trigger = {
