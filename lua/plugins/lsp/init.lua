@@ -1,7 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
 
-  cmd = { "LspInfo", "LspStart", "LspStop", "LspRestart", "LspLog" },
+  cmd = { "LspStart", "LspStop", "LspRestart", "LspLog" },
   event = "BufEnter",
 
   dependencies = {
@@ -10,7 +10,6 @@ return {
   },
 
   keys = {
-    { "<Leader>li", "<CMD>LspInfo<CR>", desc = "LSP info" },
     {
       "<Leader>?",
       function()

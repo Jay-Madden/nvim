@@ -82,11 +82,7 @@ return {
   },
   opts = {
     cli = {
-      mux = {
-        backend = "tmux",
-        enabled = true,
-      },
-      default = "cursor",
+      watch = true,
     },
     nes = {
       trigger = {
