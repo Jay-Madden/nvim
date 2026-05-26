@@ -120,12 +120,12 @@ return {
           },
           staticcheck = false,
           gofumpt = true,
-          semanticTokens = true,
           completeUnimported = true,
         },
       },
       init_options = {
         usePlaceholders = false,
+        semanticTokens = true,
       },
     })
     vim.lsp.enable("gopls")
