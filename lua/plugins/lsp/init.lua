@@ -130,6 +130,40 @@ return {
     })
     vim.lsp.enable("gopls")
 
+    -- gopls rejects full semanticTokens for files >100KB, so Neovim falls
+    -- back to range requests per viewport. Pad the range so small scrolls
+    -- stay inside the already-fetched window and don't flash.
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if not client or client.name ~= "gopls" then
+          return
+        end
+        if client._semtok_range_padded then
+          return
+        end
+        client._semtok_range_padded = true
+
+        local PAD = 300
+        local orig_request = client.request
+        client.request = function(self, method, params, handler, req_bufnr)
+          if
+            method == "textDocument/semanticTokens/range"
+            and type(params) == "table"
+            and params.range
+          then
+            local bufnr = req_bufnr or vim.api.nvim_get_current_buf()
+            local line_count = vim.api.nvim_buf_line_count(bufnr)
+            params.range["start"].line = math.max(0, params.range["start"].line - PAD)
+            params.range["start"].character = 0
+            params.range["end"].line = math.min(line_count - 1, params.range["end"].line + PAD)
+            params.range["end"].character = 0
+          end
+          return orig_request(self, method, params, handler, req_bufnr)
+        end
+      end,
+    })
+
     -- Swift lsp support
     vim.lsp.config("sourcekit", {})
     vim.lsp.enable("sourcekit")
