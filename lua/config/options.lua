@@ -58,7 +58,7 @@ vim.g.health = { style = "float" }
 --   })
 -- end
 
-vim.api.nvim_create_user_command("GitLink", function()
+local function build_git_link(rev)
   local origin = vim.fn.system("git config --get remote.origin.url"):gsub("[\n\r]", "")
 
   local base_url, host, path
@@ -95,14 +95,22 @@ vim.api.nvim_create_user_command("GitLink", function()
     return
   end
 
-  local current_rev = vim.fn.system("git symbolic-ref refs/remotes/origin/HEAD")
-  current_rev = current_rev:gsub("[\n\r]", ""):gsub("^refs/remotes/origin/", "")
-
   local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
-  local permalink = base_url .. blob_prefix .. current_rev .. "/" .. relative_path .. "#L" .. row
+  local permalink = base_url .. blob_prefix .. rev .. "/" .. relative_path .. "#L" .. row
 
   vim.fn.setreg("+", permalink)
   vim.print(permalink .. " copied to system clipboard")
+end
+
+vim.api.nvim_create_user_command("GitLink", function()
+  local rev = vim.fn.system("git symbolic-ref refs/remotes/origin/HEAD")
+  rev = rev:gsub("[\n\r]", ""):gsub("^refs/remotes/origin/", "")
+  build_git_link(rev)
+end, {})
+
+vim.api.nvim_create_user_command("GitLinkBranch", function()
+  local rev = vim.fn.system("git rev-parse --abbrev-ref HEAD"):gsub("[\n\r]", "")
+  build_git_link(rev)
 end, {})
 
 -- Neovide configuration options
