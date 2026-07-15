@@ -5,6 +5,7 @@ local utils = require("utils")
 -- Base mappings
 utils.map("i", "jk", "<Esc>", { desc = "'jk' for normal mode" })
 utils.map("i", "jj", "<Esc>", { desc = "Double tap 'j' for normal mode" })
+utils.map("n", "nhl", "<cmd>nohlsearch<cr>", { desc = "Clear search highlights" })
 
 -- better up/down
 utils.map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
