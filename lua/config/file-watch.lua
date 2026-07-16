@@ -21,6 +21,30 @@ local function debounce(fn, ms)
   end
 end
 
+---@param buf number
+local function refresh_lsp(buf)
+  if not vim.api.nvim_buf_is_valid(buf) or vim.bo[buf].modified then
+    return
+  end
+
+  local uri = vim.uri_from_bufnr(buf)
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = buf })) do
+    local namespace = vim.lsp.diagnostic.get_namespace(client.id)
+    vim.diagnostic.reset(namespace, buf)
+
+    if client:supports_method("textDocument/didSave", buf) then
+      local params = {
+        textDocument = { uri = uri },
+      }
+      local save = vim.tbl_get(client.server_capabilities, "textDocumentSync", "save")
+      if type(save) == "table" and save.includeText then
+        params.text = vim.lsp._buf_get_full_text(buf)
+      end
+      client:notify("textDocument/didSave", params)
+    end
+  end
+end
+
 function M.refresh()
   vim.cmd.checktime()
   M.changes = {}
@@ -35,8 +59,8 @@ function M.start(path)
   local ok, err = watch:start(path, {}, function(_, file)
     if file then
       M.changes[path .. "/" .. file] = true
-      M.refresh()
     end
+    M.refresh()
   end)
   if not ok then
     vim.notify("file-watch: failed to watch " .. path .. ": " .. tostring(err), vim.log.levels.WARN)
@@ -106,10 +130,22 @@ function M.enable()
     return
   end
   M.enabled = true
+  local group = vim.api.nvim_create_augroup("user.file-watch", { clear = true })
+
   vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete", "BufWipeout", "BufReadPost" }, {
-    group = vim.api.nvim_create_augroup("user.file-watch", { clear = true }),
+    group = group,
     callback = M.update,
   })
+
+  vim.api.nvim_create_autocmd("FileChangedShellPost", {
+    group = group,
+    callback = function(event)
+      vim.schedule(function()
+        refresh_lsp(event.buf)
+      end)
+    end,
+  })
+
   M.update()
 end
 
