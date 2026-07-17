@@ -22,7 +22,8 @@ local function header_padding(dashboard)
       key_count = key_count + (dashboard:enabled(key) and 1 or 0)
     end
 
-    local readme_height = math.min(#vim.fn.readfile(path) + 5, vim.api.nvim_win_get_height(0))
+    local available_height = math.max(vim.api.nvim_win_get_height(0) - 10, 1)
+    local readme_height = math.min(#vim.fn.readfile(path) + 5, available_height)
     local header_height = #vim.split(dashboard.opts.preset.header, "\n", { plain = true }) + 2
     local keys_height = key_count * 2 + 1
     local startup_height = 1
@@ -47,7 +48,8 @@ local function root_readme()
   end
 
   local lines = vim.fn.readfile(path)
-  local height = math.min(#lines + 4, vim.api.nvim_win_get_height(0))
+  local available_height = math.max(vim.api.nvim_win_get_height(0) - 10, 1)
+  local height = math.min(#lines + 4, available_height)
   if vim.fn.executable("glow") == 1 then
     return {
       pane = 2,
