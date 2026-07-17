@@ -1,18 +1,22 @@
 ```
-                                 ██╗      ██╗   ██╗██╗███╗   ███╗
-                                 ██║      ██║   ██║██║████╗ ████║
-                                 ██║█████╗╚██╗ ██╔╝██║██╔████╔██║
-                            ██╗  ██║╚════╝ ╚████╔╝ ██║██║╚██╔╝██║
-                            ╚█████╔╝        ╚██╔╝  ██║██║ ╚═╝ ██║
-                             ╚════╝          ╚═╝   ╚═╝╚═╝     ╚═╝
+     ██╗      ██╗   ██╗██╗███╗   ███╗
+     ██║      ██║   ██║██║████╗ ████║
+     ██║█████╗╚██╗ ██╔╝██║██╔████╔██║
+██╗  ██║╚════╝ ╚████╔╝ ██║██║╚██╔╝██║
+╚█████╔╝        ╚██╔╝  ██║██║ ╚═╝ ██║
+ ╚════╝          ╚═╝   ╚═╝╚═╝     ╚═╝
 ```
 
 ### Dependencies
+* Ensure `glow` is installed for rendering the project README on the launch screen
+    ```
+    brew install glow
+    ```
 * Ensure `fd` is installed so that telescope ignoring `.gitignore` files will work correctly
     ```
     brew install fd
     ```
-* For golang debugging ensure that delve is installed 
+* For golang debugging ensure that delve is installed
     ```
     go install github.com/go-delve/delve/cmd/dlv@latest
     ```
