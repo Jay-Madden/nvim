@@ -65,6 +65,43 @@ return {
     -- })
     -- vim.lsp.enable("copilot_ls")
 
+    vim.lsp.config("lua_ls", {
+      settings = {
+        Lua = {
+          diagnostics = {
+            groupFileStatus = {
+              ambiguity = "Any",
+              duplicate = "Any",
+              global = "Any",
+              luadoc = "Any",
+              redefined = "Any",
+              ["type-check"] = "Any",
+              unbalanced = "Any",
+
+              await = "Opened",
+              strict = "Opened",
+              unused = "Opened",
+
+              codestyle = "None",
+              conventions = "None",
+              strong = "None",
+            },
+            workspaceEvent = "OnChange",
+            workspaceDelay = 200,
+            workspaceRate = 100,
+          },
+          workspace = {
+            checkThirdParty = false,
+            -- Keep project files diagnostic-enabled while loading external API types.
+            library = {
+              vim.env.VIMRUNTIME,
+              vim.fn.stdpath("data") .. "/lazy/luvit-meta/library",
+              vim.fn.stdpath("data") .. "/lazy/snacks.nvim/lua",
+            },
+          },
+        },
+      },
+    })
     vim.lsp.enable("lua_ls")
 
     -- vim.lsp.enable("yamlls")
@@ -114,6 +151,9 @@ return {
       settings = {
         gopls = {
           experimentalPostfixCompletions = true,
+          fileWatcher = "fsnotify",
+          diagnosticsTrigger = "Edit",
+          diagnosticsDelay = "200ms",
           analyses = {
             unusedparams = true,
             shadow = false,

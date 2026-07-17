@@ -46,8 +46,15 @@ local function refresh_lsp(buf)
 end
 
 function M.refresh()
-  vim.cmd.checktime()
+  local changes = M.changes
   M.changes = {}
+
+  for path in pairs(changes) do
+    local buf = vim.fn.bufnr(path)
+    if buf ~= -1 and vim.api.nvim_buf_is_loaded(buf) then
+      vim.cmd.checktime(buf)
+    end
+  end
 end
 
 ---@param path string
