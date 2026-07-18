@@ -13,6 +13,7 @@ return {
       "gomod",
       "gosum",
       "rust",
+      "zig",
       "lua",
       "python",
       "c",

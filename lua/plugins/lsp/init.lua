@@ -131,6 +131,15 @@ return {
 
     vim.lsp.enable("bashls")
 
+    vim.lsp.config("zls", {
+      settings = {
+        zls = {
+          build_on_save_args = { "-fincremental" },
+        },
+      },
+    })
+    vim.lsp.enable("zls")
+
     vim.lsp.config("rust_analyzer", {
       settings = {
         ["rust-analyzer"] = {
