@@ -42,6 +42,9 @@ return {
     -- starlark is python-based
     vim.treesitter.language.register("python", "tiltfile")
 
+    -- just register all yaml files as helm its easier
+    vim.treesitter.language.register("helm", "yaml")
+
     vim.api.nvim_create_autocmd("FileType", {
       pattern = languages,
       callback = function()
