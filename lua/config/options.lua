@@ -155,11 +155,11 @@ vim.opt.smoothscroll = true
 -- E.G makes daw work on _foobar_ properly
 vim.opt.iskeyword:remove("_")
 
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  callback = function()
-    require("lint").try_lint()
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--   callback = function()
+--     require("lint").try_lint()
+--   end,
+-- })
 
 -- Highlight on yank and do not set registers if the yanked text is all whitespace
 local prev_unnamed_reg = ""

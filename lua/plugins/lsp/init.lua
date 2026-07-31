@@ -179,9 +179,9 @@ return {
     })
     vim.lsp.enable("gopls")
 
-    -- gopls rejects full semanticTokens for files >100KB, so Neovim falls
-    -- back to range requests per viewport. Pad the range so small scrolls
-    -- stay inside the already-fetched window and don't flash.
+    -- gopls rejects full semanticTokens for files >100KB so Neovim falls
+    -- back to range requests per viewport
+    -- Pad the range so small scrolls stay inside the already-fetched window and don't flicker
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id)
