@@ -227,9 +227,9 @@ function M.setup()
     callback = write_comments,
   })
 
-  vim.api.nvim_create_user_command("Diff", function(opts)
-    if #opts.fargs > 2 then
-      vim.notify("Diff accepts a previous file and optional comments file", vim.log.levels.ERROR)
+  function M.diff(previous_file, comments_file)
+    if type(previous_file) ~= "string" or previous_file == "" then
+      vim.notify("Diff requires a previous file", vim.log.levels.ERROR)
       return
     end
 
@@ -240,7 +240,7 @@ function M.setup()
       return
     end
 
-    local output_file = opts.fargs[2]
+    local output_file = comments_file
     if output_file then
       output_file = vim.fn.fnamemodify(vim.fn.expand(output_file), ":p")
     else
@@ -248,7 +248,7 @@ function M.setup()
     end
     vim.b[bufnr].no_index_diff_comments_file = output_file
 
-    vim.system({ "git", "diff", "--no-index", "--unified=0", "--", opts.fargs[1], current_file }, { text = true }, vim.schedule_wrap(function(result)
+    vim.system({ "git", "diff", "--no-index", "--unified=0", "--", previous_file, current_file }, { text = true }, vim.schedule_wrap(function(result)
       if result.code ~= 0 and result.code ~= 1 then
         vim.notify(result.stderr, vim.log.levels.ERROR)
         return
@@ -326,13 +326,21 @@ function M.setup()
         end
       end
     end))
+  end
+
+  vim.api.nvim_create_user_command("Diff", function(opts)
+    if #opts.fargs > 2 then
+      vim.notify("Diff accepts a previous file and optional comments file", vim.log.levels.ERROR)
+      return
+    end
+    M.diff(opts.fargs[1], opts.fargs[2])
   end, {
     nargs = "+",
     complete = "file",
     force = true,
   })
 
-  vim.api.nvim_create_user_command("DiffComment", function(opts)
+  function M.add_comment(text)
     local bufnr = vim.api.nvim_get_current_buf()
     local line_number = vim.api.nvim_win_get_cursor(0)[1]
     local added_lines = vim.b[bufnr].no_index_diff_added_lines or {}
@@ -342,15 +350,19 @@ function M.setup()
     end
 
     local comments = vim.b[bufnr].no_index_diff_comments or {}
-    comments[line_number] = opts.args
+    comments[line_number] = text
     vim.b[bufnr].no_index_diff_comments = comments
     render_comments(bufnr)
+  end
+
+  vim.api.nvim_create_user_command("DiffComment", function(opts)
+    M.add_comment(opts.args)
   end, {
     nargs = "+",
     force = true,
   })
 
-  vim.api.nvim_create_user_command("DiffCommentDelete", function()
+  function M.delete_comment()
     local bufnr = vim.api.nvim_get_current_buf()
     local line_number = vim.api.nvim_win_get_cursor(0)[1]
     local comments = vim.b[bufnr].no_index_diff_comments or {}
@@ -362,6 +374,10 @@ function M.setup()
     comments[line_number] = nil
     vim.b[bufnr].no_index_diff_comments = comments
     render_comments(bufnr)
+  end
+
+  vim.api.nvim_create_user_command("DiffCommentDelete", function()
+    M.delete_comment()
   end, {
     nargs = 0,
     force = true,
