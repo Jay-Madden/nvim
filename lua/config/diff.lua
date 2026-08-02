@@ -113,14 +113,14 @@ local function render_comments(bufnr)
       local width = vim.api.nvim_win_get_width(winid) - wininfo.textoff
       local content_width = math.min(width - 4, math.max(math.floor(width / 2) - 4, vim.fn.strdisplaywidth(text)))
       local box_lines = {
-        { { vim.fn.nr2char(0x256D) .. string.rep(horizontal, content_width + 2) .. vim.fn.nr2char(0x256E), "Comment" } },
+        { { vim.fn.nr2char(0x256D) .. string.rep(horizontal, content_width + 2) .. vim.fn.nr2char(0x256E), "DiffAdd" } },
       }
       for _, line in ipairs(word_wrap(text, content_width)) do
         local padding = string.rep(" ", math.max(content_width - vim.fn.strdisplaywidth(line), 0))
-        table.insert(box_lines, { { vertical .. " " .. line .. padding .. " " .. vertical, "Comment" } })
+        table.insert(box_lines, { { vertical .. " " .. line .. padding .. " " .. vertical, "DiffAdd" } })
       end
       table.insert(box_lines, {
-        { vim.fn.nr2char(0x2570) .. string.rep(horizontal, content_width + 2) .. vim.fn.nr2char(0x256F), "Comment" },
+        { vim.fn.nr2char(0x2570) .. string.rep(horizontal, content_width + 2) .. vim.fn.nr2char(0x256F), "DiffAdd" },
       })
 
       vim.api.nvim_buf_set_extmark(bufnr, comment_namespace, line_number - 1, 0, {
