@@ -310,6 +310,21 @@ function M.setup()
 
       render_hunks(bufnr, hunks)
       render_comments(bufnr)
+
+      local first_hunk = hunks[1]
+      if first_hunk then
+        local added_line = first_hunk.added[1]
+        local line_number = added_line and added_line.line_number or first_hunk.new_start
+        line_number = math.min(math.max(line_number, 1), vim.api.nvim_buf_line_count(bufnr))
+
+        local winid = vim.fn.bufwinid(bufnr)
+        if winid ~= -1 then
+          vim.api.nvim_win_set_cursor(winid, { line_number, 0 })
+          vim.api.nvim_win_call(winid, function()
+            vim.cmd("normal! zz")
+          end)
+        end
+      end
     end))
   end, {
     nargs = "+",
