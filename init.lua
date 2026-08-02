@@ -20,8 +20,6 @@ require("config.options")
 -- Initialize keymappings
 require("config.keymaps")
 
-require("config.diff").setup()
-
 -- Initialize lazy.nvim
 require("config.lazy")
 
