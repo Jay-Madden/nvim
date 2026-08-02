@@ -102,6 +102,10 @@ end
 local function render_comments(bufnr)
   vim.api.nvim_buf_clear_namespace(bufnr, comment_namespace, 0, -1)
 
+  local info = vim.api.nvim_get_hl(0, { name = "DiagnosticSignInfo", link = false })
+  local diff_add = vim.api.nvim_get_hl(0, { name = "DiffAdd", link = false })
+  vim.api.nvim_set_hl(0, "DiffCommentBorder", { fg = info.fg, bg = diff_add.bg })
+
   local comments = vim.b[bufnr].no_index_diff_comments or {}
   local added_lines = vim.b[bufnr].no_index_diff_added_lines or {}
   for line_number, text in pairs(comments) do
@@ -112,15 +116,25 @@ local function render_comments(bufnr)
       local wininfo = vim.fn.getwininfo(winid)[1]
       local width = vim.api.nvim_win_get_width(winid) - wininfo.textoff
       local content_width = math.min(width - 4, math.max(math.floor(width / 2) - 4, vim.fn.strdisplaywidth(text)))
+      local trailing_padding = string.rep(" ", math.max(width - content_width - 4, 0))
       local box_lines = {
-        { { vim.fn.nr2char(0x256D) .. string.rep(horizontal, content_width + 2) .. vim.fn.nr2char(0x256E), "DiffAdd" } },
+        {
+          { vim.fn.nr2char(0x256D) .. string.rep(horizontal, content_width + 2) .. vim.fn.nr2char(0x256E), "DiffCommentBorder" },
+          { trailing_padding, "DiffAdd" },
+        },
       }
       for _, line in ipairs(word_wrap(text, content_width)) do
         local padding = string.rep(" ", math.max(content_width - vim.fn.strdisplaywidth(line), 0))
-        table.insert(box_lines, { { vertical .. " " .. line .. padding .. " " .. vertical, "DiffAdd" } })
+        table.insert(box_lines, {
+          { vertical, "DiffCommentBorder" },
+          { " " .. line .. padding .. " ", "DiffAdd" },
+          { vertical, "DiffCommentBorder" },
+          { trailing_padding, "DiffAdd" },
+        })
       end
       table.insert(box_lines, {
-        { vim.fn.nr2char(0x2570) .. string.rep(horizontal, content_width + 2) .. vim.fn.nr2char(0x256F), "DiffAdd" },
+        { vim.fn.nr2char(0x2570) .. string.rep(horizontal, content_width + 2) .. vim.fn.nr2char(0x256F), "DiffCommentBorder" },
+        { trailing_padding, "DiffAdd" },
       })
 
       vim.api.nvim_buf_set_extmark(bufnr, comment_namespace, line_number - 1, 0, {
