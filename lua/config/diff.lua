@@ -142,7 +142,6 @@ local function write_comments()
   for line_number, text in pairs(vim.b[bufnr].no_index_diff_comments or {}) do
     if type(text) == "string" then
       table.insert(comments, {
-        file = file,
         suggested_change = vim.api.nvim_buf_get_lines(bufnr, tonumber(line_number) - 1, tonumber(line_number), false)[1],
         line = tonumber(line_number),
         comment = text,

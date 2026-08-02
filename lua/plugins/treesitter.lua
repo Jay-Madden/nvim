@@ -28,6 +28,7 @@ return {
       "yaml",
       "markdown",
       "helm",
+      "vhs",
       "tiltfile",
       -- For actions-preview picker
       "diff",
