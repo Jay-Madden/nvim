@@ -153,7 +153,7 @@ vim.opt.smoothscroll = true
 
 -- Treat underscore as a word delimiter
 -- E.G makes daw work on _foobar_ properly
-vim.opt.iskeyword:remove("_")
+-- vim.opt.iskeyword:remove("_")
 
 -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 --   callback = function()

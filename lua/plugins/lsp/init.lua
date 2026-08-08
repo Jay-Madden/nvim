@@ -155,7 +155,7 @@ return {
     vim.lsp.enable("rust_analyzer")
 
     vim.lsp.config("gopls", {
-      cmd = { "gopls" },
+      cmd = { "gopls", "-remote=auto" },
       filetypes = { "go", "gomod", "gowork", "gotmpl" },
       settings = {
         gopls = {
