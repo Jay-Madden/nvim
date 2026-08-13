@@ -193,6 +193,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("StdinReadPost", {
   callback = function(event)
     local buf = event.buf
+    vim.bo[buf].modified = false
+
     if vim.bo[buf].filetype ~= "" then
       return
     end
