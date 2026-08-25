@@ -188,6 +188,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+local hidden_yaml_keys = {
+  "kubectl.kubernetes.io/last-applied-configuration",
+}
+
 -- When nvim is started with piped stdin, try to parse the buffer as YAML
 -- and set the filetype accordingly.
 vim.api.nvim_create_autocmd("StdinReadPost", {
@@ -232,6 +236,38 @@ vim.api.nvim_create_autocmd("StdinReadPost", {
     )
     for _ in query:iter_captures(root, content) do
       vim.bo[buf].filetype = "yaml"
+
+      if vim.fn.executable("yq") == 1 then
+        local output = content
+        local removed_keys = {}
+
+        for _, key in ipairs(hidden_yaml_keys) do
+          local input_size = #output
+          local result = vim
+            .system({
+              "yq",
+              string.format('del(.. | select(tag == "!!map") | .[%q])', key),
+            }, { stdin = output, text = true })
+            :wait()
+
+          if result.code == 0 then
+            output = result.stdout
+            if #output < input_size then
+              table.insert(removed_keys, key)
+            end
+          end
+        end
+
+        if #removed_keys > 0 then
+          output = output:gsub("\n$", "")
+          vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(output, "\n", { plain = true }))
+          vim.bo[buf].modified = false
+          vim.schedule(function()
+            vim.notify("Hidden YAML keys: " .. table.concat(removed_keys, ", "), vim.log.levels.INFO)
+          end)
+        end
+      end
+
       return
     end
   end,
