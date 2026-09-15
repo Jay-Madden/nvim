@@ -78,7 +78,7 @@ local function build_git_link(rev)
   end
 
   local is_gitlab = host and host:match("gitlab")
-  local is_forgejo = host and (host:match("codeberg") or host:match("gitea") or host:match("forgejo"))
+  local is_forgejo = host and (host:match("codeberg") or host:match("gitea") or host:match("forgejo") or host:match("git%.jm"))
   local blob_prefix
   if is_gitlab then
     blob_prefix = "/-/blob/"
