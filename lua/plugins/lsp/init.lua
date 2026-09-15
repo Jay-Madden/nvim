@@ -123,8 +123,8 @@ return {
     -- vim.lsp.enable("pyright")
     -- #####
 
-    vim.lsp.config("vtsls", {})
-    vim.lsp.enable("vtsls")
+    vim.lsp.config("ts_ls", {})
+    vim.lsp.enable("ts_ls")
 
     -- vim.lsp.enable("html")
     -- vim.lsp.enable("clangd")

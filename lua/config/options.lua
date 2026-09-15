@@ -133,7 +133,7 @@ end
 
 -- Add # as the comment string for terraform files
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "terraform",
+  pattern = { "terraform", "terraform-vars" },
   callback = function()
     vim.bo.commentstring = "# %s"
   end,

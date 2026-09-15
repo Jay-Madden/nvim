@@ -9,7 +9,7 @@ return {
           Snacks.picker.smart({
             multi = { "files" },
             hidden = true,
-            ignore = true,
+            ignored = true,
           })
         end,
         desc = "Find files",
@@ -26,6 +26,7 @@ return {
         function()
           Snacks.picker.grep({
             hidden = true,
+            ignored = true,
           })
         end,
         desc = "Live grep",
@@ -71,7 +72,7 @@ return {
           Snacks.picker.files({
             cwd = utils.buffer_dir(),
             hidden = true,
-            ignore = true,
+            ignored = true,
           })
         end,
         desc = "Find files in current buffer directory",
@@ -100,7 +101,7 @@ return {
             multi = { "files" },
             cwd = utils.buffer_dir() .. backward_dir_nav,
             hidden = true,
-            ignore = true,
+            ignored = true,
           })
         end,
         desc = i == 0 and "Find files in current directory"
