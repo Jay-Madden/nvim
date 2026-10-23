@@ -58,8 +58,20 @@ vim.g.health = { style = "float" }
 --   })
 -- end
 
-local function build_git_link(rev)
-  local origin = vim.fn.system("git config --get remote.origin.url"):gsub("[\n\r]", "")
+local function git_remote_url(directory)
+  local origin = vim.fn.system({
+    "git",
+    "-C",
+    directory or vim.fn.getcwd(),
+    "config",
+    "--get",
+    "remote.origin.url",
+  })
+  if vim.v.shell_error ~= 0 then
+    vim.notify("Could not get Git origin URL", vim.log.levels.ERROR)
+    return
+  end
+  origin = origin:gsub("[\n\r]", "")
 
   local base_url, host, path
   if origin:match("^ssh://git@") then
@@ -75,6 +87,15 @@ local function build_git_link(rev)
   else
     host = origin:match("^https?://([^/]+)/")
     base_url = origin:gsub("%.git$", "")
+  end
+
+  return base_url, host
+end
+
+local function build_git_link(rev)
+  local base_url, host = git_remote_url()
+  if not base_url then
+    return
   end
 
   local is_gitlab = host and host:match("gitlab")
@@ -111,6 +132,51 @@ end, {})
 vim.api.nvim_create_user_command("GitLinkBranch", function()
   local rev = vim.fn.system("git rev-parse --abbrev-ref HEAD"):gsub("[\n\r]", "")
   build_git_link(rev)
+end, {})
+
+vim.api.nvim_create_user_command("GitPatchLink", function()
+  local file = vim.api.nvim_buf_get_name(0)
+  if file == "" or vim.bo.buftype ~= "" then
+    vim.notify("GitPatchLink requires a file buffer", vim.log.levels.WARN)
+    return
+  end
+
+  local directory = vim.fn.fnamemodify(file, ":h")
+  local row = vim.api.nvim_win_get_cursor(0)[1]
+  local contents = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
+    .. (vim.bo.endofline and "\n" or "")
+  local blame = vim.fn.system({
+    "git",
+    "-C",
+    directory,
+    "blame",
+    "--porcelain",
+    "-L",
+    row .. "," .. row,
+    "--contents",
+    "-",
+    "--",
+    vim.fn.fnamemodify(file, ":t"),
+  }, contents)
+  if vim.v.shell_error ~= 0 then
+    vim.notify("Git blame failed: " .. blame, vim.log.levels.ERROR)
+    return
+  end
+
+  local rev = blame:match("^(%x+)")
+  if not rev or rev:match("^0+$") then
+    vim.notify("This line has not been committed yet", vim.log.levels.WARN)
+    return
+  end
+
+  local base_url, host = git_remote_url(directory)
+  if not base_url then
+    return
+  end
+  local commit_prefix = host and host:match("gitlab") and "/-/commit/" or "/commit/"
+  local permalink = base_url .. commit_prefix .. rev
+  vim.fn.setreg("+", permalink)
+  vim.print(permalink .. " copied to system clipboard")
 end, {})
 
 -- Neovide configuration options
