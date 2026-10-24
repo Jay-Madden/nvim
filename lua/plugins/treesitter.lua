@@ -30,6 +30,7 @@ return {
       "helm",
       "vhs",
       "tiltfile",
+      "qasm",
       -- For actions-preview picker
       "diff",
     }
@@ -45,12 +46,18 @@ return {
 
     -- just register all yaml files as helm its easier
     vim.treesitter.language.register("helm", "yaml")
-
+    vim.treesitter.language.register("asm", "qasm")
+    vim.treesitter.query.set(
+      "asm",
+      "highlights",
+      table.concat(vim.fn.readfile(vim.fn.stdpath("config") .. "/queries/qasm/highlights.scm"), "\n")
+    )
     vim.api.nvim_create_autocmd("FileType", {
       pattern = languages,
       callback = function()
         -- install() isn't available during lazy-loaded config; call it per-filetype instead
-        require("nvim-treesitter").install(vim.bo.filetype)
+        local language = vim.treesitter.language.get_lang(vim.bo.filetype) or vim.bo.filetype
+        require("nvim-treesitter").install(language)
         -- syntax highlighting, provided by Neovim
         vim.treesitter.start()
         -- folds, provided by Neovim

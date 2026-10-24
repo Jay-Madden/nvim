@@ -1,6 +1,6 @@
 return {
   "Pocco81/auto-save.nvim",
-  enabled = true,
+  enabled = not require("utils").is_container(),
 
   config = function()
     require("auto-save").setup({

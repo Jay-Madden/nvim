@@ -1,5 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
+  enabled = not require("utils").is_container(),
 
   cmd = { "LspStart", "LspStop", "LspRestart", "LspLog" },
   event = "BufEnter",

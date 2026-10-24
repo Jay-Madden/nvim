@@ -1,5 +1,7 @@
 M = {
   "mfussenegger/nvim-dap",
+  enabled = not require("utils").is_container(),
+
   event = "VeryLazy",
 
   dependencies = {

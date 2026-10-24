@@ -1,5 +1,9 @@
 local M = {}
 
+function M.is_container()
+  return vim.env.DOTFILES_CONTAINER == "1"
+end
+
 function M.buffer_dir()
   return vim.fn.expand("%:p:h")
 end

@@ -1,6 +1,7 @@
 return {
   "folke/sidekick.nvim",
-  enabled = true,
+  enabled = not require("utils").is_container(),
+
   keys = {
     {
       "<leader>cca",
