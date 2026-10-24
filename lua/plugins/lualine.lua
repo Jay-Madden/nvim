@@ -8,64 +8,51 @@ return {
     local kanagawa_colors = require("kanagawa.colors").setup()
     local palette_colors = kanagawa_colors.palette
 
-    local colors = {
-      blue = "#80a0ff",
-      cyan = "#79dac8",
-      black = "#080808",
-      white = "#c6c6c6",
-      red = "#ff5189",
-      violet = "#d183e8",
-      grey = "#303030",
-    }
+    local muted = { fg = palette_colors.fujiGray, bg = palette_colors.sumiInk3 }
 
-    local bubbles_theme = {
+    local theme = {
       normal = {
-        a = { fg = colors.black, bg = palette_colors.springGreen },
-        b = { fg = colors.white, bg = colors.grey },
-        c = { fg = colors.black, bg = palette_colors.sumiInk3 },
+        a = { fg = palette_colors.springGreen, bg = muted.bg },
+        b = muted,
+        c = muted,
+        z = muted,
       },
-
-      insert = { a = { fg = colors.black, bg = palette_colors.crystalBlue } },
-      visual = { a = { fg = colors.black, bg = palette_colors.sakuraPink } },
-      replace = { a = { fg = colors.black, bg = colors.red } },
-
+      insert = {
+        a = { fg = palette_colors.crystalBlue, bg = muted.bg },
+        z = muted,
+      },
+      visual = {
+        a = { fg = palette_colors.sakuraPink, bg = muted.bg },
+        z = muted,
+      },
+      replace = {
+        a = { fg = "#ff5189", bg = muted.bg },
+        z = muted,
+      },
       inactive = {
-        a = { fg = colors.white, bg = colors.black },
-        b = { fg = colors.white, bg = colors.black },
-        c = { fg = colors.black, bg = colors.black },
+        a = muted,
+        b = muted,
+        c = muted,
+        z = muted,
       },
     }
 
     lualine.setup({
       options = {
-        theme = bubbles_theme,
+        theme = theme,
         component_separators = "|",
-        section_separators = { left = "", right = "" },
+        section_separators = "",
         disabled_filetypes = { "snacks_dashboard", "Alpha", "NVimTree" },
       },
       sections = {
-        lualine_a = {
-          { "mode", separator = { left = "" }, right_padding = 2 },
-        },
+        lualine_a = { "mode" },
         lualine_b = {
           "branch",
           { "filename", path = 1 },
-          "diagnostics",
+          { "diagnostics", colored = false },
           {
-            separator = { right = "" },
             function()
               return ""
-            end,
-            color = function()
-              local status = require("sidekick.status").get()
-              if status then
-                if status.kind == "Error" then
-                  return { bg = palette_colors.autumnRed }
-                end
-
-                -- return nil to use the default bg color
-                return nil
-              end
             end,
             cond = function()
               local status = require("sidekick.status")
@@ -75,10 +62,8 @@ return {
         },
         lualine_c = {},
         lualine_x = {},
-        lualine_y = { "fileformat", "filetype", "progress" },
-        lualine_z = {
-          { "location", separator = { right = "" }, left_padding = 2 },
-        },
+        lualine_y = { "fileformat", { "filetype", colored = false }, "progress" },
+        lualine_z = { "location" },
       },
       inactive_sections = {
         lualine_a = { "filename" },
