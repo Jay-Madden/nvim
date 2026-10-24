@@ -8,7 +8,7 @@ return {
     local kanagawa_colors = require("kanagawa.colors").setup()
     local palette_colors = kanagawa_colors.palette
 
-    local muted = { fg = palette_colors.fujiGray, bg = palette_colors.sumiInk3 }
+    local muted = { fg = kanagawa_colors.theme.ui.nontext, bg = palette_colors.sumiInk3 }
 
     local theme = {
       normal = {
