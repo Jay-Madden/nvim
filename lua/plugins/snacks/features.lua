@@ -18,7 +18,14 @@ return {
         Snacks.explorer.open({
           hidden = true,
           ignored = true,
-          layout = { layout = { width = default_width } },
+          layout = {
+            layout = { width = default_width },
+            config = function(layout)
+              for _, win in ipairs(layout.layout) do
+                win.wo = { winhighlight = "NormalFloat:Normal,FloatBorder:SnacksExplorerBorder" }
+              end
+            end,
+          },
           win = {
             list = { keys = { ["<c-e>"] = "toggle_width" } },
             input = { keys = { ["<c-e>"] = { "toggle_width", mode = { "n", "i" } } } },

@@ -25,7 +25,7 @@ return {
       },
       overrides = function(colors)
         local theme = colors.theme
-        local popup_bg = theme.ui.bg_p1
+        local popup_bg = colors.palette.sumiInk2
         return {
           -- Handle floating windows correctly
           NormalFloat = { bg = "none" },
@@ -46,6 +46,7 @@ return {
           SnacksPickerBorder = { bg = popup_bg, fg = popup_bg },
           SnacksPickerInputBorder = { bg = popup_bg, fg = popup_bg },
           SnacksPickerCursorLine = { bg = theme.ui.bg_p2 },
+          SnacksExplorerBorder = { bg = theme.ui.bg, fg = theme.ui.bg },
           SnacksNotifierTrace = { bg = popup_bg, fg = theme.ui.fg },
           SnacksNotifierBorderTrace = { bg = popup_bg, fg = popup_bg },
           SnacksNotifierDebug = { bg = popup_bg, fg = theme.ui.fg },
