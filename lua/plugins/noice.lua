@@ -13,6 +13,13 @@ return {
           cmdline = { title = "" },
         },
       },
+      views = {
+        cmdline_popupmenu = {
+          win_options = {
+            winhighlight = { Normal = "NoicePopupmenu" },
+          },
+        },
+      },
       routes = {
         {
           view = "notify",

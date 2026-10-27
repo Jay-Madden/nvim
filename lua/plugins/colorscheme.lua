@@ -25,6 +25,7 @@ return {
       },
       overrides = function(colors)
         local theme = colors.theme
+        local popup_bg = theme.ui.bg_p1
         return {
           -- Handle floating windows correctly
           NormalFloat = { bg = "none" },
@@ -41,6 +42,31 @@ return {
           -- set their background accordingly if you wish to keep them dark and borderless
           LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
           MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+          SnacksPicker = { bg = popup_bg, fg = theme.ui.fg_dim },
+          SnacksPickerBorder = { bg = popup_bg, fg = popup_bg },
+          SnacksPickerInputBorder = { bg = popup_bg, fg = popup_bg },
+          SnacksPickerCursorLine = { bg = theme.ui.bg_p2 },
+          SnacksNotifierTrace = { bg = popup_bg, fg = theme.ui.fg },
+          SnacksNotifierBorderTrace = { bg = popup_bg, fg = popup_bg },
+          SnacksNotifierDebug = { bg = popup_bg, fg = theme.ui.fg },
+          SnacksNotifierBorderDebug = { bg = popup_bg, fg = popup_bg },
+          SnacksNotifierInfo = { bg = popup_bg, fg = theme.ui.fg },
+          SnacksNotifierBorderInfo = { bg = popup_bg, fg = popup_bg },
+          SnacksNotifierWarn = { bg = popup_bg, fg = theme.ui.fg },
+          SnacksNotifierBorderWarn = { bg = popup_bg, fg = popup_bg },
+          SnacksNotifierError = { bg = popup_bg, fg = theme.diag.error },
+          SnacksNotifierBorderError = { bg = popup_bg, fg = popup_bg },
+          NoiceCmdline = { link = "SnacksPicker" },
+          NoiceCmdlinePopup = { link = "SnacksPicker" },
+          NoiceCmdlinePopupBorder = { bg = popup_bg, fg = popup_bg },
+          NoiceCmdlinePopupBorderSearch = { bg = popup_bg, fg = popup_bg },
+          NoicePopup = { bg = popup_bg, fg = theme.ui.fg_dim },
+          NoicePopupBorder = { bg = popup_bg, fg = popup_bg },
+          NoicePopupmenu = { bg = popup_bg, fg = theme.ui.fg_dim },
+          NoicePopupmenuBorder = { bg = popup_bg, fg = popup_bg },
+          NoicePopupmenuSelected = { bg = theme.ui.bg_p2, fg = theme.ui.fg },
+          NoiceConfirm = { bg = popup_bg, fg = theme.ui.fg_dim },
+          NoiceConfirmBorder = { bg = popup_bg, fg = popup_bg },
 
           -- Highlight rust string placeholders
           ["@lsp.type.formatSpecifier.rust"] = { fg = theme.syn.keyword },

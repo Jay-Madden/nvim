@@ -35,7 +35,7 @@ vim.o.cursorlineopt = "both"
 -- https://github.com/nvim-telescope/telescope.nvim/issues/3436
 -- https://github.com/folke/lazy.nvim/issues/1951
 -- So for now we will disable it
-vim.o.winborder = "none"
+vim.o.winborder = "single"
 
 -- sync buffers automatically
 vim.opt.autoread = true

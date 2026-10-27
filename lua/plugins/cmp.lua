@@ -49,7 +49,9 @@ return {
       },
 
       window = {
-        completion = cmp.config.window.bordered({ border = "rounded" }),
+        completion = cmp.config.window.bordered({
+          winhighlight = "Normal:SnacksPicker,FloatBorder:SnacksPickerBorder,CursorLine:Visual,Search:None",
+        }),
         documentation = cmp.config.window.bordered({ border = "rounded" }),
       },
 
