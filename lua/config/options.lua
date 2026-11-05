@@ -58,17 +58,18 @@ vim.g.health = { style = "float" }
 --   })
 -- end
 
-local function git_remote_url(directory)
+local function git_remote_url(directory, remote)
+  remote = remote or "origin"
   local origin = vim.fn.system({
     "git",
     "-C",
     directory or vim.fn.getcwd(),
     "config",
     "--get",
-    "remote.origin.url",
+    "remote." .. remote .. ".url",
   })
   if vim.v.shell_error ~= 0 then
-    vim.notify("Could not get Git origin URL", vim.log.levels.ERROR)
+    vim.notify("Could not get Git " .. remote .. " URL", vim.log.levels.ERROR)
     return
   end
   origin = origin:gsub("[\n\r]", "")
@@ -92,8 +93,21 @@ local function git_remote_url(directory)
   return base_url, host
 end
 
-local function build_git_link(rev)
-  local base_url, host = git_remote_url()
+-- WARNING: VIBESLOP BELOW
+-- its ugly af
+local function build_git_link(current_branch)
+  local file = vim.api.nvim_buf_get_name(0)
+  local directory = file ~= "" and vim.fn.fnamemodify(file, ":h") or vim.fn.getcwd()
+  local prefix = vim.fn.system({ "git", "-C", directory, "rev-parse", "--show-prefix" })
+  if vim.v.shell_error ~= 0 then
+    vim.notify("Could not find Git repository for current buffer", vim.log.levels.ERROR)
+    return
+  end
+
+  local remotes = vim.fn.systemlist({ "git", "-C", directory, "remote" })
+  local remote = not current_branch and vim.tbl_contains(remotes, "upstream") and "upstream"
+    or "origin"
+  local base_url, host = git_remote_url(directory, remote)
   if not base_url then
     return
   end
@@ -109,13 +123,25 @@ local function build_git_link(rev)
     blob_prefix = "/blob/"
   end
 
-  local relative_path = vim.fn.expand("%:.")
-  if relative_path == "" or relative_path == "." then
+  if file == "" then
     vim.fn.setreg("+", base_url)
     vim.print(base_url .. " copied to system clipboard")
     return
   end
 
+  local rev_args = current_branch and { "rev-parse", "--abbrev-ref", "HEAD" }
+    or { "symbolic-ref", "--short", "refs/remotes/" .. remote .. "/HEAD" }
+  local rev = vim.fn.system(vim.list_extend({ "git", "-C", directory }, rev_args))
+  if vim.v.shell_error ~= 0 then
+    vim.notify("Could not get Git revision: " .. rev, vim.log.levels.ERROR)
+    return
+  end
+  rev = rev:gsub("[\n\r]", "")
+  if not current_branch then
+    rev = rev:sub(#remote + 2)
+  end
+
+  local relative_path = prefix:gsub("[\n\r]", "") .. vim.fn.fnamemodify(file, ":t")
   local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
   local permalink = base_url .. blob_prefix .. rev .. "/" .. relative_path .. "#L" .. row
 
@@ -124,14 +150,11 @@ local function build_git_link(rev)
 end
 
 vim.api.nvim_create_user_command("GitLink", function()
-  local rev = vim.fn.system("git symbolic-ref refs/remotes/origin/HEAD")
-  rev = rev:gsub("[\n\r]", ""):gsub("^refs/remotes/origin/", "")
-  build_git_link(rev)
+  build_git_link(false)
 end, {})
 
 vim.api.nvim_create_user_command("GitLinkBranch", function()
-  local rev = vim.fn.system("git rev-parse --abbrev-ref HEAD"):gsub("[\n\r]", "")
-  build_git_link(rev)
+  build_git_link(true)
 end, {})
 
 vim.api.nvim_create_user_command("GitPatchLink", function()
