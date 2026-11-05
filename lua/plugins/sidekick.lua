@@ -31,9 +31,9 @@ return {
     {
       "<leader>aa",
       function()
-        require("sidekick.cli").toggle()
+        require("sidekick.cli").toggle({ name = "pi", focus = true })
       end,
-      desc = "Sidekick Toggle CLI",
+      desc = "Sidekick Toggle Pi",
     },
     {
       "<leader>as",
